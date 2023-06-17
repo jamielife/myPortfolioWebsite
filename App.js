@@ -2,6 +2,7 @@ import {Text, Link, HStack, Center, Heading, Switch, useColorMode, NativeBasePro
 import NativeBaseIcon from "./components/NativeBaseIcon";
 import { Platform, LogBox } from "react-native";
 import Work from './screens/Work';
+import Appbar from "./components/Appbar";
 
 // Define the config
 const config = {
@@ -9,21 +10,37 @@ const config = {
   initialColorMode: "dark",
 };
 
+const colors = {
+  primary: {
+    50: '#ddf8ff',
+    100: '#b5e6fb',
+    200: '#89d4f4',
+    300: '#5dc2ee',
+    400: '#35b1e9',
+    500: '#1e98cf',
+    600: '#1176a2',
+    700: '#045475',
+    800: '#003448',
+    900: '#00131d',
+   }
+}
+
 // extend the theme
-export const theme = extendTheme({ config });
+export const theme = extendTheme({ config, colors });
 
 export default function App() {
   return (
     <NativeBaseProvider theme={theme}>
+      <Appbar />
       <Center
-        _dark={{ bg: "blueGray.900" }}
-        _light={{ bg: "blueGray.50" }}
+        _dark={{ bg: "trueGray.900" }}
+        _light={{ bg: "primary.50" }}
         px={4}
         flex={1}
       >
-        <VStack space={5} alignItems="center">
+        <VStack space={5} alignItems="center" flex={1}>
           <NativeBaseIcon />
-          <Heading size="lg">Welcome to NativeBase</Heading>
+          <Heading size="lg">Jamie Taylor's Portfolio</Heading>
           <HStack space={2} alignItems="center">
             <Text>Edit</Text>
             <Box

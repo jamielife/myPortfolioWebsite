@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useRef } from "react";
 import { LogBox } from "react-native";
-import { Text, FlatList, Pressable, View, Link, HStack, Center, Heading, Switch, useColorMode, NativeBaseProvider, extendTheme, VStack, Box, Column, ZStack} from "native-base";
+import { Text, FlatList, Pressable, View, Link, Box } from "native-base";
 import supabase from "../supabase";
 
 const Work = () => {
+
     const [todos, setTodos] = useState([]);
     const componentMounted = useRef(true);
-
     useEffect(() => {
         const fetchTodos = async () => {
             const {data, error} = await supabase.from('work').select('*').order('id', {ascending: false});
@@ -26,14 +26,20 @@ const Work = () => {
     }, []);
 
     return ( 
-        <View flex={1}> 
+        <View> 
             <FlatList 
                 showsVerticalScrollIndicator={false}
                 data={Object.keys(todos)}
-                renderItem={({ item }) => <Box>{todos[item].name}</Box>}
+                renderItem={({ item }) => 
+                    <Pressable _hover={{ bg: "primary.50" }} >
+                        <Box w={[64, 72, 96]} bg="primary.300" p={4} m={4}>
+                            <Text bold>{todos[item].name}</Text>
+                            <Text>{todos[item].blurb}</Text>
+                        </Box>
+                    </Pressable>}
                 keyExtractor={(item) => todos[item].id}
             />
-            <Box>{ console.log(todos) }</Box>
+            {/* <Box>{ console.log(todos) }</Box> *extendTheme* */}
         </View>
     );
 }
