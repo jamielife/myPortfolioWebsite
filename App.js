@@ -1,16 +1,7 @@
-import {decode, encode} from 'base-64'
-if (!global.btoa) { global.btoa = encode; }
-if (!global.atob) { global.atob = decode; }
-import React, { useEffect, useState } from "react";
 import {Text, Link, HStack, Center, Heading, Switch, useColorMode, NativeBaseProvider, extendTheme, VStack, Box } from "native-base";
 import NativeBaseIcon from "./components/NativeBaseIcon";
 import { Platform, LogBox } from "react-native";
 import Work from './screens/Work';
-
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "./firebase";
-LogBox.ignoreLogs(['Setting a timer']);
-
 
 // Define the config
 const config = {
@@ -22,18 +13,6 @@ const config = {
 export const theme = extendTheme({ config });
 
 export default function App() {
-
-  useEffect(() => {
-    const getCollection = async () => {
-      const querySnapshot = await getDocs(collection(db, "work"));
-      querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data());
-      }); 
-    };
-    getCollection();
-  }, []);
-
   return (
     <NativeBaseProvider theme={theme}>
       <Center

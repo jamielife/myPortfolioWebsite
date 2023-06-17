@@ -1,24 +1,41 @@
-import {
-    Text, View, Link, HStack, Center, Heading, Switch, useColorMode, NativeBaseProvider, extendTheme, VStack, Box, Column, ZStack
-} from "native-base";
+import React, { useEffect, useState, useRef } from "react";
+import { LogBox } from "react-native";
+import { Text, FlatList, Pressable, View, Link, HStack, Center, Heading, Switch, useColorMode, NativeBaseProvider, extendTheme, VStack, Box, Column, ZStack} from "native-base";
+import supabase from "../supabase";
 
 const Work = () => {
-    return (
-    <Box>
-        <Box alignSelf="center">
-            This is a box.
-        </Box>
-        <Center h="40">
-            <Box mt="-32">
-                <ZStack mt="3" ml={-50}>
-                    <Box bg="primary.700" size="20" rounded="lg" shadow={3} />
-                    <Box bg="primary.500" mt="5" ml="5" size="20" rounded="lg" shadow={5} />
-                    <Box bg="primary.300" mt="10" ml="10" size="20" rounded="lg" shadow={7} />
-                </ZStack>
-            </Box>
-        </Center>
-    </Box>    
+    const [todos, setTodos] = useState([]);
+    const componentMounted = useRef(true);
+
+    useEffect(() => {
+        const fetchTodos = async () => {
+            const {data, error} = await supabase.from('work').select('*').order('id', {ascending: false});
+            if (error) {
+                console.log('error', error);
+            } else {
+                setTodos(data);
+            }
+        };
+        if (componentMounted.current) {
+            fetchTodos();
+        }
+
+        return () => {
+            componentMounted.current = false; 
+        };
+    }, []);
+
+    return ( 
+        <View flex={1}> 
+            <FlatList 
+                showsVerticalScrollIndicator={false}
+                data={Object.keys(todos)}
+                renderItem={({ item }) => <Box>{todos[item].name}</Box>}
+                keyExtractor={(item) => todos[item].id}
+            />
+            <Box>{ console.log(todos) }</Box>
+        </View>
     );
 }
-
+ 
 export default Work;
