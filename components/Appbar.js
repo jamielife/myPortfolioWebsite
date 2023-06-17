@@ -15,8 +15,10 @@ function Appbar() {
                 </Text>
             </HStack>
             <HStack>
-                <IconButton icon={<Icon as={MaterialIcons} name="favorite" size="lg" color="white" />} />
-                <IconButton icon={<Icon as={MaterialIcons} name="search" size="lg" color="white" />} />
+                <IconButton icon={<Icon as={MaterialIcons} name="wb-sunny" size="lg" color="white" />} />
+                <IconButton icon={<Icon as={MaterialIcons} name="nightlight-round" size="lg" color="white" />} />
+                <IconButton icon={<Icon as={MaterialIcons} name="lightbulb" size="lg" color="white" />} />
+                <IconButton icon={<Icon as={MaterialIcons} name="lightbulb-outline" size="lg" color="white" />} />
                 <IconButton icon={<Icon as={MaterialIcons} name="menu" size="xl" color="white" />} />
             </HStack>
         </HStack>
