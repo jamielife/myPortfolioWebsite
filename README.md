@@ -1,13 +1,15 @@
 # myPortfolioWebsite
 
-## Usage
-
+## Install
 ```sh
-expo init my-app --template @native-base/expo-template
+npx create-expo-app portfolio --template @native-base/expo-template --npm
+npm install @supabase/supabase-js
+npm install @supabase/supabase-react-native
 ```
 
 ## Gotchas
-Bug in node_module *react-native-url-polyfill* requires change to index.js
+ - Project foldername of length over 12(ish) causes issue with Expo. 
+ - Bug in node_module *react-native-url-polyfill* requires change to index.js
 ```
 5: const packageObj = require('./package.json');
 6: const name = packageObj.name;
