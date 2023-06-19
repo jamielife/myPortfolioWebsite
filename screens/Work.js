@@ -23,7 +23,7 @@ const Work = () => {
         return () => {
             componentMounted.current = false; 
         };
-    }, []);
+    }, []);8
 
     return ( 
         <View> 

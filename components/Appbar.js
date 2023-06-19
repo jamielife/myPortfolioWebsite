@@ -1,25 +1,55 @@
 import React from "react";
-import { VStack, HStack, Button, IconButton, Icon, Text, NativeBaseProvider, Center, Box } from "native-base";
+import { VStack, HStack, Flex, Pressable, Button, IconButton, Icon, Text, Hidden, useBreakpointValue, useColorMode, Switch, NativeBaseProvider, Center, Box } from "native-base";
 import { StatusBar } from 'react-native';
 import { MaterialIcons } from "@expo/vector-icons";
+import { useNavigation, DrawerActions } from '@react-navigation/native';
+
+// Color Switch Component
+function ToggleDarkMode() {
+    const { colorMode, toggleColorMode } = useColorMode();
+    return (
+        <HStack space={2} alignItems="center">
+            <Switch isChecked={colorMode === "light"} onToggle={toggleColorMode}
+                aria-label={ colorMode === "light" ? "switch to dark mode" : "switch to light mode" } />
+        </HStack>
+    );
+}
 
 function Appbar() {
+    const flexDir = useBreakpointValue({
+        base: "100%", sm: "100%",  lg: "60%",
+      });
+
+    const navigation = useNavigation();
     return <>
         <StatusBar backgroundColor="rgb(0, 52, 72)" barStyle="light-content" hidden={false} />
-        <Box bg="primary.600" />
-        <HStack bg="primary.800" p="1" justifyContent="space-between" alignItems="center" w="100%">
-            <HStack alignItems="center">
-                <IconButton icon={<Icon size="xl" as={MaterialIcons} name="ramen-dining" color="white" />} />
-                <Text color="white" fontSize="2xl" ml="-1">
-                    Jamie Taylor
-                </Text>
-            </HStack>
-            <HStack>
-                <IconButton icon={<Icon as={MaterialIcons} name="wb-sunny" size="lg" color="white" />} />
-                <IconButton icon={<Icon as={MaterialIcons} name="nightlight-round" size="lg" color="white" />} />
-                <IconButton icon={<Icon as={MaterialIcons} name="lightbulb" size="lg" color="white" />} />
-                <IconButton icon={<Icon as={MaterialIcons} name="lightbulb-outline" size="lg" color="white" />} />
-                <IconButton icon={<Icon as={MaterialIcons} name="menu" size="xl" color="white" />} />
+        <HStack bg="primary.800" w="100%" justifyContent="center" alignItems="center" >
+            <HStack  p="1" justifyContent="space-between" alignItems="center" w={flexDir}>
+                <HStack alignItems="center">
+                    <Pressable justifyContent="center" alignItems="center" bg="primary.800" _hover={{ bg: "primary.700" }}>
+                        <Flex direction="row" py={1} px={2} m={0} >
+                            <Icon size="xl" as={MaterialIcons} name="ramen-dining" color="white" mt={.5} mr={2} />
+                            <Text color="white" fontSize="xl" ml="0">
+                                Jamie Taylor
+                            </Text>
+                        </Flex>
+                    </Pressable>
+                    <Hidden from="sm" till="lg"  platform={['android','ios']}>
+                        <HStack space={3} ml={4} justifyContent="center">
+                            <Button borderRadius="none" bg="primary.800" _hover={{ bg: "primary.700" }}>Work</Button>
+                            <Button borderRadius="none" bg="primary.800" _hover={{ bg: "primary.700" }}>Posts</Button>
+                            <Button borderRadius="none" bg="primary.800" _hover={{ bg: "primary.700" }}>Resume</Button>
+                        </HStack>
+                    </Hidden>
+                </HStack>
+                <HStack>
+                    <ToggleDarkMode />                      
+                    <IconButton borderRadius="none" bg="primary.800" _hover={{ bg: "primary.700" }} icon={<Icon as={MaterialIcons} name="wb-sunny" size="lg" color="white" />} />
+                    {/* <IconButton borderRadius="none" bg="primary.800" _hover={{ bg: "primary.700" }} icon={<Icon as={MaterialIcons} name="nightlight-round" size="lg" color="white" />} />
+                    <IconButton borderRadius="none" bg="primary.800" _hover={{ bg: "primary.700" }} icon={<Icon as={MaterialIcons} name="lightbulb" size="lg" color="white" />} />
+                    <IconButton borderRadius="none" bg="primary.800" _hover={{ bg: "primary.700" }} icon={<Icon as={MaterialIcons} name="lightbulb-outline" size="lg"r color="white" />} /> */}
+                    <Hidden only={['lg', 'xl', '2xl', '3xl']}><IconButton borderRadius="none" bg="primary.800" _hover={{ bg: "primary.700" }} icon={<Icon as={MaterialIcons} name="menu" size="xl" color="white" />} onPress={() => navigation.dispatch(DrawerActions.toggleDrawer()) } /></Hidden>
+                </HStack>
             </HStack>
         </HStack>
       </>;

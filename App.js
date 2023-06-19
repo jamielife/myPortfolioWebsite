@@ -1,8 +1,9 @@
-import {Text, Link, HStack, Center, Heading, Switch, useColorMode, NativeBaseProvider, extendTheme, VStack, Box } from "native-base";
-import NativeBaseIcon from "./components/NativeBaseIcon";
-import { Platform, LogBox } from "react-native";
+import 'react-native-gesture-handler';
+import {Text, View, Button, Link, HStack, Center, Heading, Switch, useColorMode, NativeBaseProvider, extendTheme, VStack, Box, useColorModeValue } from "native-base";
 import Work from './screens/Work';
 import Appbar from "./components/Appbar";
+import { NavigationContainer } from '@react-navigation/native';
+import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem, DrawerToggleButton  } from '@react-navigation/drawer';
 
 // Define the config
 const config = {
@@ -28,64 +29,70 @@ const colors = {
 // extend the theme
 export const theme = extendTheme({ config, colors });
 
-export default function App() {
+
+
+function Home({ navigation }) {
   return (
-    <NativeBaseProvider theme={theme}>
-      <Appbar />
-      <Center
-        _dark={{ bg: "trueGray.900" }}
-        _light={{ bg: "primary.50" }}
-        px={4}
-        flex={1}
-      >
-        <VStack space={5} alignItems="center" flex={1}>
-          <NativeBaseIcon />
-          <Heading size="lg">Jamie Taylor's Portfolio</Heading>
-          <HStack space={2} alignItems="center">
-            <Text>Edit</Text>
-            <Box
-              _web={{
-                _text: {
-                  fontFamily: "monospace",
-                  fontSize: "sm",
-                },
-              }}
-              px={2}
-              py={1}
-              _dark={{ bg: "blueGray.800" }}
-              _light={{ bg: "blueGray.200" }}
-            >
-              App.js
-            </Box>
-            <Text>and save to reload.</Text>
-          </HStack>
-          <Link href="https://docs.nativebase.io" isExternal>
-            <Text color="primary.500" underline fontSize={"xl"}>
-              Learn NativeBase
-            </Text>
-          </Link>
-          <ToggleDarkMode />
-          <Work />
-        </VStack>
-      </Center>
-    </NativeBaseProvider>
+    <View style={{justifyContent: 'center', alignItems: 'center', flex: 1,  }} _dark={{ bg: "trueGray.900" }} _light={{ bg: "primary.200" }} >    
+      <Text>Home Screen</Text>
+      <Button title="Open drawer" onPress={() => navigation.openDrawer()}>Open</Button>
+      <Button title="Toggle drawer" onPress={() => navigation.toggleDrawer()}>Toggle</Button>
+    </View >
   );
 }
 
-// Color Switch Component
-function ToggleDarkMode() {
-  const { colorMode, toggleColorMode } = useColorMode();
+function Notifications() {
   return (
-    <HStack space={2} alignItems="center">
-      <Text>Dark</Text>
-      <Switch
-        isChecked={colorMode === "light"}
-        onToggle={toggleColorMode}
-        aria-label={
-          colorMode === "light" ? "switch to dark mode" : "switch to light mode"
-        }
-      />
-      <Text>Light</Text>
-    </HStack>
+    <View style={{justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Notifications Screen</Text>
+    </View>
+  );
+}
+
+function CustomDrawerContent(props) {
+  return (
+    <DrawerContentScrollView {...props}>
+      <DrawerItemList {...props} />
+      <DrawerItem label="Close drawer"  onPress={() => props.navigation.closeDrawer()} />
+      <DrawerItem label="Toggle drawer" onPress={() => props.navigation.toggleDrawer()} />
+    </DrawerContentScrollView>
+  );
+}
+
+const Drawer = createDrawerNavigator();
+
+function MyDrawer({colors}) {
+  const bg = useColorModeValue("#fdead4", "#045475");  
+
+  return (
+    <Drawer.Navigator bg={bg} 
+            useLegacyImplementation 
+            screenOptions={{
+              headerShown: false,
+              //drawerActiveBackgroundColor: bg,
+              overlayColor: 'transparent',              
+              drawerPosition: 'right',
+              drawerStyle: {
+                backgroundColor: bg,
+              }              
+            }}      
+            drawerContent={(props) => <CustomDrawerContent {...props} />} 
+            _dark={{ bg: "blueGray.800" }}
+            _light={{ bg: "blueGray.200" }}            
+            >
+        <Drawer.Screen name="Home" component={Home} />
+        <Drawer.Screen name="Notifications" component={Notifications} />
+    </Drawer.Navigator>
+  );
+}
+
+export default function App() {
+  return (
+    <NativeBaseProvider theme={theme}>
+      <NavigationContainer>     
+        <Appbar />
+        <MyDrawer />
+      </NavigationContainer>
+    </NativeBaseProvider>
   );
 }
