@@ -1,6 +1,6 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import { StyleSheet, Animated, TouchableOpacity, Easing } from 'react-native';
-import { Text, Box, IconButton, Icon, useColorMode } from "native-base";
+import { useColorMode } from "native-base";
 import { IconFlagJapan, IconFlagUnitedStates} from '../assets/icon-flags';
 
 function ToggleLanguage() {
