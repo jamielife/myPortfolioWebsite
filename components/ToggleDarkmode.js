@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react';
-import { Text, View, StyleSheet, Animated, TouchableOpacity, Easing } from 'react-native';
+import React, { useRef } from 'react';
+import { Text, StyleSheet, Animated, TouchableOpacity, Easing } from 'react-native';
 import { Box, Icon, useColorMode } from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
 

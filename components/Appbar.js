@@ -3,7 +3,8 @@ import { VStack, HStack, Flex, Pressable, Button, IconButton, Icon, Text, Hidden
 import { StatusBar } from 'react-native';
 import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation, DrawerActions } from '@react-navigation/native';
-import Toggle from './Toggle';
+import ToggleDarkmode from './ToggleDarkmode';
+import ToggleLanguage from "./ToggleLanguage";
 
 function Appbar() {
     const flexDir = useBreakpointValue({
@@ -33,7 +34,8 @@ function Appbar() {
                     </Hidden>
                 </HStack>
                 <HStack>
-                    <Toggle />
+                    <ToggleDarkmode />
+                    <ToggleLanguage />
                     <Hidden only={['lg', 'xl', '2xl', '3xl']}><IconButton borderRadius="none" bg="primary.800" _hover={{ bg: "primary.700" }} icon={<Icon as={MaterialIcons} name="menu" size="xl" color="white" />} onPress={() => navigation.dispatch(DrawerActions.toggleDrawer()) } /></Hidden>
                 </HStack>
             </HStack>
