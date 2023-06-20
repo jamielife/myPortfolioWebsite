@@ -1,6 +1,7 @@
 import 'react-native-gesture-handler';
 import {Text, View, Button, Link, HStack, Center, Heading, Switch, useColorMode, NativeBaseProvider, extendTheme, VStack, Box, useColorModeValue } from "native-base";
 import Work from './screens/Work';
+import Home from './screens/Home';
 import Appbar from "./components/Appbar";
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem, DrawerToggleButton  } from '@react-navigation/drawer';
@@ -31,13 +32,11 @@ export const theme = extendTheme({ config, colors });
 
 
 
-function Home({ navigation }) {
+function HomeDrawer() {
   return (
-    <View style={{justifyContent: 'center', alignItems: 'center', flex: 1,  }} _dark={{ bg: "trueGray.900" }} _light={{ bg: "primary.200" }} >    
-      <Text>Home Screen</Text>
-      <Button title="Open drawer" onPress={() => navigation.openDrawer()}>Open</Button>
-      <Button title="Toggle drawer" onPress={() => navigation.toggleDrawer()}>Toggle</Button>
-    </View >
+    <View flex={1} alignItems="center" _dark={{ bg: "trueGray.900" }} _light={{ bg: "primary.200" }} >
+      <Home />
+    </View>
   );
 }
 
@@ -61,7 +60,7 @@ function CustomDrawerContent(props) {
 
 const Drawer = createDrawerNavigator();
 
-function MyDrawer({colors}) {
+function DrawerMenu({colors}) {
   const bg = useColorModeValue("#fdead4", "#045475");  
 
   return (
@@ -80,7 +79,7 @@ function MyDrawer({colors}) {
             _dark={{ bg: "blueGray.800" }}
             _light={{ bg: "blueGray.200" }}            
             >
-        <Drawer.Screen name="Home" component={Home} />
+        <Drawer.Screen name="Home" component={HomeDrawer} />
         <Drawer.Screen name="Notifications" component={Notifications} />
     </Drawer.Navigator>
   );
@@ -91,7 +90,7 @@ export default function App() {
     <NativeBaseProvider theme={theme}>
       <NavigationContainer>     
         <Appbar />
-        <MyDrawer />
+        <DrawerMenu />
       </NavigationContainer>
     </NativeBaseProvider>
   );
