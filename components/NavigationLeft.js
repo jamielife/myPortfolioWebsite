@@ -1,27 +1,26 @@
 import React from "react";
-import { HStack, Flex, Pressable, Button, Icon, Text, Hidden, useBreakpointValue } from "native-base";
+import { Linking } from "react-native";
+import { HStack, Flex, Pressable, Button, Icon, Text, Hidden, useBreakpointValue, Link } from "native-base";
+import { useNavigation, CommonActions  } from '@react-navigation/native';
 import { MaterialIcons } from "@expo/vector-icons";
 
 function LeftNav() {
-    const menuItemsHover = { bg: 'none', _text: { underline: true, _dark:{ color: "primary.400" }, _light: { color: "primary.900", bg: 'black' } } };
     const flexMargin = useBreakpointValue(navMargins);
-    console.log(flexMargin);
+    const navigation = useNavigation(); 
 
     return <>     
         <HStack alignItems="center" ml={flexMargin}>   
-            <Pressable justifyContent="center" alignItems="center" _hover={{ bg: "primary.700" }}>
-                <Flex direction="row" py={1} px={2} m={0} >
-                    <Icon size="xl" as={MaterialIcons} name="ramen-dining" color="white" mt={.5} mr={2} />
-                    <Text color="white" fontSize="xl" ml="0">
-                        Jamie Taylor
-                    </Text>
+            <Pressable justifyContent="center" alignItems="center" _hover={{ opacity: .5 }} onPress={() => navigation.dispatch( CommonActions.navigate({ name: 'Home' }))}>
+                <Flex direction="row" py={1} px={2} m={0}>
+                    <Icon size="xl" as={MaterialIcons} name="ramen-dining" color="white" mt={.5} mr={1} />
+                    <Text color="white" fontSize="xl"> Jamie Taylor </Text>
                 </Flex>
             </Pressable>
             <Hidden from="sm" till="lg"  platform={['android','ios']}>
-                <HStack space={3} ml={4} justifyContent="center">
-                    <Button borderRadius="none" bg="none" _hover={menuItemsHover}>Work</Button>
-                    <Button borderRadius="none" bg="none" _hover={menuItemsHover}>Posts</Button>
-                    <Button borderRadius="none" bg="none" _hover={menuItemsHover}>Resume</Button>
+                <HStack space={4} ml={6} justifyContent="center" alignItems="center">
+                    <Button m={0} mt={1} p={0} h={0} size={"lg"} bg="none" _hover={ menuItem.hover } _pressed={menuItem.pressed} onPress={() => navigation.dispatch( CommonActions.navigate({ name: 'Work' }))}>Work</Button>
+                    <Button m={0} mt={1} p={0} h={0} size={"lg"} bg="none" _hover={ menuItem.hover } _pressed={menuItem.pressed} onPress={() => navigation.dispatch( CommonActions.navigate({ name: 'Posts' }))}>Posts</Button>
+                    <Button m={0} mt={1} p={0} h={0} size={"lg"} bg="none" _hover={ menuItem.hover } _pressed={menuItem.pressed} onPress={ ()=>{ Linking.openURL(require('../assets/me.jpg'))}}>Resume</Button>
                 </HStack>
             </Hidden>
         </HStack>
@@ -29,3 +28,17 @@ function LeftNav() {
   }
   
   export default LeftNav;
+
+//Styles
+const menuItem = {
+    hover: {
+        bg: 'none', 
+        _text: { underline: true, 
+            _dark:  { color: "primary.400" }, 
+            _light: { color: "primary.900" } 
+        }
+    },
+    pressed: { 
+        bg:'none', _text: { underline: false } 
+    }
+};

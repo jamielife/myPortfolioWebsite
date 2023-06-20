@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import { StyleSheet, StatusBar } from 'react-native';
+import { StyleSheet, StatusBar, Linking } from 'react-native';
 import {Text, View, Button, Link, HStack, Center, Heading, Switch, useColorMode, NativeBaseProvider, extendTheme, VStack, Box, useColorModeValue } from "native-base";
 import Work from './screens/Work';
 import Home from './screens/Home';
@@ -20,6 +20,9 @@ const config = {
   background: 'transparent'
 };
 
+export const theme = extendTheme({ config, colors });
+
+
 const colors = {
   primary: {
     50: '#ddf8ff',
@@ -35,24 +38,26 @@ const colors = {
    }
 }
 
-// extend the theme
-export const theme = extendTheme({ config, colors });
-
-
-
 function HomeDrawer() {
   return (
-    <View  alignItems="center" _dark={{ bg: "trueGray.900" }} _light={{ bg: "primary.50" }} flexWrap={"wrap"}>
+    <View alignItems="center" _dark={{ bg: "trueGray.900" }} _light={{ bg: "primary.50" }}>
       <Home />
-      <HStack bg="primary.800:alpha.30" w="100%" m={-20}>test</HStack>
     </View>
   );
 }
 
-function Notifications() {
+function WorkDrawer() {
   return (
-    <View style={{justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Notifications Screen</Text>
+    <View alignItems="center" _dark={{ bg: "trueGray.900" }} _light={{ bg: "primary.50" }}>
+      <Work />
+    </View>
+  );
+}
+
+function PostsDrawer() {
+  return (
+    <View alignItems="center" _dark={{ bg: "trueGray.900" }} _light={{ bg: "primary.50" }}>
+      <Text>Posts</Text>
     </View>
   );
 }
@@ -61,8 +66,8 @@ function CustomDrawerContent(props) {
   return (
     <DrawerContentScrollView {...props}>
       <DrawerItemList {...props} />
+      <DrawerItem label="Resume" onPress={ ()=>{ Linking.openURL('https://htmyell.com')}} />      
       <DrawerItem label="Close drawer"  onPress={() => props.navigation.closeDrawer()} />
-      <DrawerItem label="Toggle drawer" onPress={() => props.navigation.toggleDrawer()} />
     </DrawerContentScrollView>
   );
 }
@@ -72,43 +77,31 @@ const Drawer = createDrawerNavigator();
 function DrawerMenu({colors}) {
   const bg = useColorModeValue("#fdead4", "#045475");  
 
+  const customDrawOptions = {
+    headerTransparent: true,
+    headerBackground: () => ( <BlurView tint="dark" intensity={30} style={StyleSheet.absoluteFill} /> ),
+    headerLeft: (props)  => ( <LeftNav /> ),
+    headerRight: (props) => (<RightNav /> ),
+    headerTitle: "",
+  }  
+
   return (
     <Drawer.Navigator bg={bg} 
-            useLegacyImplementation 
-            screenOptions={{
-              headerShown: true,
-              //drawerActiveBackgroundColor: bg,
-              //drawerInactiveBackgroundColor: bg,
-              overlayColor: 'transparent',              
-              drawerPosition: 'right',
-              drawerStyle: {
-                backgroundColor: bg,
-              },
-              headerStyle: {
-              }              
-            }}      
-            drawerContent={(props) => <CustomDrawerContent {...props} />} 
-            _dark={{ bg: "blueGray.800" }}
-            _light={{ bg: "blueGray.200" }}            
-            >
-        <Drawer.Screen 
-            name="Home" 
-            component={HomeDrawer} 
-            options={{
-                headerTransparent: true,
-                headerBackground: () => (
-                  <BlurView tint="dark" intensity={30} style={StyleSheet.absoluteFill} />
-                ),
-                headerLeft: (props) => (
-                  <LeftNav />                  
-                ),
-                headerRight: (props) => (
-                  <RightNav />                  
-                ),
-                headerTitle: "",
-            }}            
-        />
-        <Drawer.Screen name="Notifications" component={Notifications} />
+      useLegacyImplementation 
+      screenOptions={{
+        headerShown: true,
+        //drawerActiveBackgroundColor: bg,
+        //drawerInactiveBackgroundColor: bg,
+        overlayColor: 'transparent',              
+        drawerPosition: 'right',
+        drawerStyle: { backgroundColor: bg, },
+      }}      
+      drawerContent={(props) => <CustomDrawerContent {...props} />} 
+      _dark={{ bg: "blueGray.800" }}
+      _light={{ bg: "blueGray.200" }} >
+        <Drawer.Screen name="Home"  component={HomeDrawer}  options={customDrawOptions} />
+        <Drawer.Screen name="Work"  component={WorkDrawer}  options={customDrawOptions} />
+        <Drawer.Screen name="Posts" component={PostsDrawer} options={customDrawOptions} />        
     </Drawer.Navigator>
   );
 }
