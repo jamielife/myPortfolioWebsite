@@ -8,7 +8,7 @@ import ToggleLanguage from "./ToggleLanguage";
 function RightNav() {
     const flexMargin = useBreakpointValue(navMargins);
     const navigation = useNavigation();
-    
+
     return <>
         <HStack mr={flexMargin}>
             <ToggleDarkmode />

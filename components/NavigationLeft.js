@@ -12,7 +12,7 @@ function LeftNav() {
         <HStack alignItems="center" ml={flexMargin}>   
             <Pressable justifyContent="center" alignItems="center" _hover={{ opacity: .5 }} onPress={() => navigation.dispatch( CommonActions.navigate({ name: 'Home' }))}>
                 <Flex direction="row" py={1} px={2} m={0}>
-                    <Icon size="xl" as={MaterialIcons} name="ramen-dining" color="white" mt={.5} mr={1} />
+                    <Icon as={MaterialIcons} name="ramen-dining" color="white" size="xl"  mt={.5} mr={1} />
                     <Text color="white" fontSize="xl"> Jamie Taylor </Text>
                 </Flex>
             </Pressable>

@@ -53,8 +53,8 @@ function App() {
 
                 <Animated.View style={[styles.mainStyes, /* { backgroundColor:backgroundColorAnim }*/ ]} >
                     
-                    <Animated.View style={[styles.celestialObjects, { transform:[{ translateY: positionInterPol }], opacity: initialOpacityOff }]}>
-                        <Icon as={MaterialIcons} name="nightlight-round" size="xl" color="white" />
+                    <Animated.View style={[styles.celestialObjects, { transform:[{ translateY: positionInterPol }], opacity: initialOpacityOff }]}>                        
+                        <Icon as={MaterialIcons}  name="nightlight-round" size="xl" color="white" />
                         <Box  style={styles.glow}>.</Box>  
                         <Box style={styles.glow}>.</Box>                                                
                     </Animated.View>
