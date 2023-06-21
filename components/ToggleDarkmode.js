@@ -23,7 +23,7 @@ function App() {
             toValue:0,
             duration:500,
             easing:Easing.ease,
-            useNativeDriver:true
+            useNativeDriver:false
         }).start()
     };
 
@@ -32,7 +32,7 @@ function App() {
             toValue:1,
             duration:500,
             easing:Easing.ease,
-            useNativeDriver:true
+            useNativeDriver:false
         }).start()
     };
 

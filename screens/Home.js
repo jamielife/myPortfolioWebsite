@@ -1,14 +1,12 @@
-import {Text, Container, View, Image, Flex, Avatar, Button, Link, HStack, Center, Heading, VStack, Box, Stack } from "native-base";
+import {Text, Image, Container, View, Flex, Avatar, Button, Link, HStack, Center, Heading, VStack, Box, Stack } from "native-base";
 import { useNavigation, CommonActions  } from '@react-navigation/native';
 
 export default function Home() {
     const navigation = useNavigation();    
     return (
-        <View w={[480, 480, 640]} style={{ overflowx: "hidden" }}>
+        <View w={[400, 480, 640]} style={{ overflowx: "hidden" }}>
             <Box>                
-                <Image source={{
-                    uri: require('../assets/ramen.png') 
-                    }} alt="Bowl of Ramen" size={640} mt={-125} mb={-175} />
+                <Image size={640} mt={-125} mb={-175} source={ require('../assets/ramen.png') } alt="Bowl of Ramen" />
             </Box>
             <Flex alignItems="center">
                 <Center m={4} p={4} px={6} bg={"warmGray.700:alpha.30"} rounded="md">Hello! I'm am app developer based in Richmond, VA!</Center>
@@ -19,9 +17,9 @@ export default function Home() {
                     <Heading size={"xl"}>Jamie Taylor</Heading>
                     <Text fontSize={"md"}>Solution Architect ( Artist / Musician / Cyclist / Engineer )</Text>
                 </Container>
-                <Link href={require('../assets/me.jpg')} isExternal><Avatar borderWidth={2} mt={-3} alignSelf="center" size="xl" source={{
-                    uri: require("../assets/me.jpg")
-                }} > Jamie </Avatar></Link>
+                <Link href={require('../assets/me.jpg')} isExternal>
+                    <Avatar borderWidth={2} mt={-3} alignSelf="center" size="xl" source={ require("../assets/me.jpg")} > Jamie </Avatar>
+                </Link>
             </HStack>
 
             <VStack space={2} p={5} mt={10}  justifyContent={"space-between"}>

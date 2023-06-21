@@ -7,10 +7,12 @@ export const API_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmF
 
 // Create a single supabase client for interacting with your database
 const supabase = createClient(API_URL, API_KEY, { 
-    storage: AsyncStorage, 
-    autoRefreshToken: true, 
-    persistSession: false, 
-    detectSessionInUrl: false, 
-} );
+    auth: {
+        storage: AsyncStorage, 
+        autoRefreshToken: true, 
+        persistSession: false, 
+        detectSessionInUrl: false, 
+    }
+});
 
 export default supabase;
