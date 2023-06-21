@@ -1,8 +1,8 @@
 import React from "react";
 import { Linking } from "react-native";
-import { HStack, Flex, Pressable, Button, Icon, Text, Hidden, useBreakpointValue, Link } from "native-base";
+import { HStack, Flex, Pressable, Button, Icon, IconButton, Text, Hidden, useBreakpointValue, Link } from "native-base";
 import { useNavigation, CommonActions  } from '@react-navigation/native';
-import { MaterialIcons } from "@expo/vector-icons";
+import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
 
 function LeftNav() {
     const flexMargin = useBreakpointValue(navMargins);
@@ -21,13 +21,19 @@ function LeftNav() {
                     <Button m={0} mt={1} p={0} h={0} size={"lg"} bg="none" _hover={ menuItem.hover } _pressed={menuItem.pressed} onPress={() => navigation.dispatch( CommonActions.navigate({ name: 'Work' }))}>Work</Button>
                     <Button m={0} mt={1} p={0} h={0} size={"lg"} bg="none" _hover={ menuItem.hover } _pressed={menuItem.pressed} onPress={() => navigation.dispatch( CommonActions.navigate({ name: 'Posts' }))}>Posts</Button>
                     <Button m={0} mt={1} p={0} h={0} size={"lg"} bg="none" _hover={ menuItem.hover } _pressed={menuItem.pressed} onPress={ ()=>{ Linking.openURL(require('../assets/me.jpg'))}}>Resume</Button>
+                    <IconButton borderRadius="none" 
+                        _hover={{ bg: "primary.700" }} 
+                        icon={<Icon as={MaterialCommunityIcons} 
+                            name="github" size="xl" color="white" />} 
+                        onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
+                    />
                 </HStack>
             </Hidden>
         </HStack>
     </>;
-  }
+}
   
-  export default LeftNav;
+export default LeftNav;
 
 //Styles
 const menuItem = {

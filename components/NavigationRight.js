@@ -14,14 +14,17 @@ function RightNav() {
             <ToggleDarkmode />
             <ToggleLanguage />
             <Hidden only={['lg', 'xl', '2xl', '3xl']}>
-                <IconButton borderRadius="none" 
+                <IconButton 
+                    borderRadius="none" 
                     _hover={{ bg: "primary.700" }} 
                     icon={<Icon as={MaterialIcons} 
-                    name="menu" size="xl" color="white" 
-                />} 
-                onPress={() => navigation.dispatch(DrawerActions.toggleDrawer()) } /></Hidden>
+                        name="menu" size="xl" color="white" />
+                    } 
+                    onPress={() => navigation.dispatch(DrawerActions.toggleDrawer()) } 
+                />
+            </Hidden>
         </HStack>
     </>;
-  }
+}
   
-  export default RightNav;
+export default RightNav;
