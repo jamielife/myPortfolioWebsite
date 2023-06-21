@@ -16,7 +16,7 @@ function LeftNav() {
                     <Text color="white" fontSize="xl"> Jamie Taylor </Text>
                 </Flex>
             </Pressable>
-            <Hidden from="sm" till="lg"  platform={['android','ios']}>
+            <Hidden from="sm" till="lg" platform={['android','ios']}>
                 <HStack space={4} ml={6} justifyContent="center" alignItems="center">
                     <Button m={0} mt={1} p={0} h={0} size={"lg"} bg="none" _hover={ menuItem.hover } _pressed={menuItem.pressed} onPress={() => navigation.dispatch( CommonActions.navigate({ name: 'Work' }))}>Work</Button>
                     <Button m={0} mt={1} p={0} h={0} size={"lg"} bg="none" _hover={ menuItem.hover } _pressed={menuItem.pressed} onPress={() => navigation.dispatch( CommonActions.navigate({ name: 'Posts' }))}>Posts</Button>

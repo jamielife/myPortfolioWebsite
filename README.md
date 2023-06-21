@@ -15,6 +15,7 @@ npm install @supabase/supabase-react-native
 6: const name = packageObj.name;
 7: const version = packageObj.version;
 ```
+ - https://docs.expo.dev/versions/latest/sdk/reanimated/#installation
 
 ## To do
  - Theming
