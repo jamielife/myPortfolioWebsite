@@ -27,7 +27,7 @@ function Home() {
             {/* Work */}
             <VStack space={2} p={5} pt={0}  justifyContent={"space-between"}>
                 <Heading mt={headings.mt} mb={headings.mb} pb={headings.pb} size={headings.size} borderBottomWidth={headings.bbw} borderBottomColor={headings.bbc} alignSelf={"flex-start"} >
-                    Work
+                    About
                 </Heading>
 
                 <Text fontSize={16} textAlign={"justify"}>Hello! My name is Jamie and I'm full stack web and app developer based outta Richmond, VA. In my years in marketing I've worn a lot of hats, including designer, developer, systems engineer, photographer, videogropher, project manager, product manager, and solutions architect and I love every minute of it! When I'm not online, you can find me on my bike, on my drumset, or making something on the stove top.</Text>
@@ -58,7 +58,7 @@ function Home() {
 
 
                     <HStack alignItems={"baseline"} mb={timeline.mb}>
-                        <Heading size={"md"}>2008</Heading><Text fontSize={16} ml={timeline.ml}>Created <Link href="https://htmyell.com" isExternal>Htmyell Design and Development</Link> freelance company.</Text>
+                        <Heading size={"md"}>2008</Heading><Text fontSize={16} ml={timeline.ml}>Created <Link href="https://htmyell.com" isExternal>Htmyell Design and Development</Link> freelance company</Text>
                     </HStack>                    
                 </VStack>            
             </VStack>
@@ -81,8 +81,15 @@ function Home() {
                 <HStack justifyContent={"space-evenly"}><Button fontSize={18} px={4} alignSelf={"flex-start"}><Text><Icon as={MaterialCommunityIcons } name="github"    color="white" size="md"  mt={.5} mr={1} /> @jamielife</Text></Button>
                 <Button fontSize={18} px={4} alignSelf={"flex-start"}><Text><Icon as={MaterialCommunityIcons } name="instagram" color="white" size="md"  mt={.5} mr={1} /> @jamielife</Text></Button>
                 <Button fontSize={18} px={4} alignSelf={"flex-start"}><Text><Icon as={MaterialCommunityIcons } name="linkedin"  color="white" size="md"  mt={.5} mr={1} /> @jvptaylor</Text></Button></HStack>
-
             </VStack>
+
+            {/* Site */}
+            <VStack space={2} p={5} pt={0}  justifyContent={"space-between"}>
+                <Heading mt={headings.mt} mb={headings.mb} pb={headings.pb} size={headings.size} borderBottomWidth={headings.bbw} borderBottomColor={headings.bbc} alignSelf={"flex-start"} >
+                    Site
+                </Heading>            
+                <Text fontSize={16}>This website was lovingly built using React Native, NativeBase, Threejs, Expo, Supabase, and a few other technologies. You can see the entire source at <Link href="https://github.com/jamielife/portfolio" isExternal>Github</Link></Text>
+            </VStack>            
 
             <Center mt={8} mb={6}><Text fontSize={12} color={"warmGray.500"}>© {new Date().getFullYear()} Jamie Taylor. All rights reserved.</Text></Center>
 

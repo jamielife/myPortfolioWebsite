@@ -41,7 +41,7 @@ const colors = {
 function HomeDrawer() {
   return (
     <View alignItems="center" _dark={{ bg: "trueGray.900" }} _light={{ bg: "primary.50" }}>
-      <Home />
+      <Work />
     </View>
   );
 }
