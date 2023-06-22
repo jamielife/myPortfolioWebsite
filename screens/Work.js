@@ -41,11 +41,11 @@ const Work = () => {
 
             {/* Work Component */}
             <Center>
-                <HStack flex={1} flexWrap={"wrap"} flexDirection={"row"} justifyContent={["center", "center", "space-between"]} >
+                <Flex flex={1} flexWrap={"wrap"} flexDirection={"row"} justifyContent={["center", "center", "space-between"]} >
                     {works.map((work, index) => (  
                         <WorkTile key={work.id} data={work} />
                     ))}
-                </HStack>
+                </Flex>
             </Center>
 
             <Center>
