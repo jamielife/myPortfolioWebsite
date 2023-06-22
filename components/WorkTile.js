@@ -7,7 +7,7 @@ function WorkTile({data}) {
     const imageFull = data.imageFull;
     console.log(imageFull);
     return ( 
-        <VStack flex={1} shadow="2" rounded="lg" w={{ base: "120px", md: 50, lg: 48 }} _light={{ bg: "coolGray.50" }} _dark={{ bg: "gray.700" }} overflow={"hidden"}>
+        <Pressable flex={1} shadow="2" rounded="lg" w={{ base: "120px", md: 50, lg: 48 }} _light={{ bg: "coolGray.50" }} _dark={{ bg: "gray.800" }} overflow={"hidden"}>
             <AspectRatio ratio= {{ 
                             base: 16/9,
                             md: 16/9
@@ -32,11 +32,11 @@ function WorkTile({data}) {
                     {data.blurb}
                 </Text>
             </Stack>
-            <Box justifyContent={"sp"} position={"relative"} bottom={5}>
-                <Text _light={{ color : "primary.800" }} _dark={{ color : "primary.300" }}>Find out more</Text>
+            <Box>
+                <Button _light={{ color : "primary.800" }} _dark={{ color : "primary.300" }}>Find out more</Button>
             </Box>
             
-        </VStack>
+        </Pressable>
     );
 }
 

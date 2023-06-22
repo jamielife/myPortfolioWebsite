@@ -32,8 +32,6 @@ const Work = () => {
                 <Image size={640} mt={-125} mb={-175} source={ require('../assets/ramen.png') } alt="Bowl of Ramen" />
             </Box>
 
-
-            {/* Work */}
             <VStack space={2} p={5} pt={0}  justifyContent={"space-between"}>
                 <Heading mt={headings.mt} mb={headings.mb} pb={headings.pb} size={headings.size} borderBottomWidth={headings.bbw} borderBottomColor={headings.bbc} alignSelf={"flex-start"}>
                     Work
@@ -45,6 +43,7 @@ const Work = () => {
                 {/* <Button title="Toggle drawer" onPress={() => navigation.toggleDrawer()}>Toggle</Button> */}
             </VStack>      
 
+            {/* Work Component */}
             <HStack space={3} justifyContent={"space-evenly"}>
                 {works.map(n => ( 
                     <WorkTile key={n.id} data={n} />
@@ -53,7 +52,6 @@ const Work = () => {
 
             <Center mt={8} mb={6}><Text fontSize={12} color={"warmGray.500"}>© {new Date().getFullYear()} Jamie Taylor. All rights reserved.</Text></Center>
 
-            
         </ScrollView>
     );
 }
