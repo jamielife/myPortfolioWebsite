@@ -3,20 +3,20 @@ import {Text, Image, FlatList, View, Pressable, Container, Icon, Flex, Avatar, B
 import supabase from "../supabase";
 import WorkTile from "../components/WorkTile";
 
-const Work = () => {
-    const [works, setWork] = useState([]);
+const Posts = () => {
+    const [posts, setPosts] = useState([]);
     const componentMounted = useRef(true);
     useEffect(() => {
-        const fetchWork = async () => {
-            const {data, error} = await supabase.from('work').select('*').order('featured', {ascending: false}); //.eq('type', '3D')
+        const fetchPosts = async () => {
+            const {data, error} = await supabase.from('posts').select('*').order('featured', {ascending: false}); //.eq('type', '3D')
             if (error) {
                 console.log('error', error);
             } else {
-                setWork(data);
+                setPosts(data);
             }
         };
         if (componentMounted.current) {
-            fetchWork();
+            fetchPosts();
         }
 
         return () => {
@@ -24,7 +24,7 @@ const Work = () => {
         };
     }, []);
 
-    console.log(works);
+    console.log(posts);
 
     return ( 
         <ScrollView flex={1} h={"100%"} w={[400, 480, 640]} style={{ overflowx: "hidden" }}>
@@ -34,16 +34,16 @@ const Work = () => {
 
             <VStack pb={5} pt={0}  justifyContent={"space-between"}>
                 <Heading mt={headings.mt} mb={headings.mb} pb={headings.pb} size={headings.size} borderBottomWidth={headings.bbw} borderBottomColor={headings.bbc} alignSelf={"flex-start"}>
-                    Work
+                    Featured Posts
                 </Heading>
-                <Text fontSize={16} textAlign={"justify"}>Hello! My name is Jamie and I'm full stack web and app developer based outta Richmond, VA. In my years in marketing I've worn a lot of hats, including designer, developer, systems engineer, photographer, videogropher, project manager, product manager, and solutions architect and I love every minute of it! When I'm not online, you can find me on my bike, on my drumset, or making something on the stove top.</Text>            
+                <Text fontSize={16} textAlign={"justify"}>Latest posts & happenings in my life. </Text>            
             </VStack>      
 
-            {/* Work Component */}
+            {/* Posts Component */}
             <Center>
                 <Flex flex={1} flexWrap={"wrap"} flexDirection={"row"} justifyContent={["center", "center", "space-between"]} >
-                    {works.map((work, index) => (  
-                        <WorkTile key={work.id} data={work} />
+                    {posts.map((post, index) => (  
+                        <WorkTile key={post.id} data={post} />
                     ))}
                 </Flex>
             </Center>
@@ -60,7 +60,7 @@ const Work = () => {
     );
 }
  
-export default Work;
+export default Posts;
 
 //Styles
 const headings = { mt: 1, mb: 4, pb: 2, size: "md", bbw: 3, bbc: "warmGray.500" }

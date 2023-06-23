@@ -1,8 +1,9 @@
 import 'react-native-gesture-handler';
 import { StyleSheet, StatusBar, Linking } from 'react-native';
 import {Text, View, Button, Link, HStack, Center, Heading, Switch, useColorMode, NativeBaseProvider, extendTheme, VStack, Box, useColorModeValue } from "native-base";
-import Work from './screens/Work';
 import Home from './screens/Home';
+import Work from './screens/Work';
+import Posts from './screens/Posts';
 //import Appbar from "./components/Appbar";
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem, DrawerToggleButton  } from '@react-navigation/drawer';
@@ -41,7 +42,7 @@ const colors = {
 function HomeDrawer() {
   return (
     <View alignItems="center" _dark={{ bg: "trueGray.900" }} _light={{ bg: "primary.50" }}>
-      <Work />
+      <Home />
     </View>
   );
 }
@@ -57,7 +58,7 @@ function WorkDrawer() {
 function PostsDrawer() {
   return (
     <View alignItems="center" _dark={{ bg: "trueGray.900" }} _light={{ bg: "primary.50" }}>
-      <Text>Posts</Text>
+      <Posts />
     </View>
   );
 }
@@ -83,6 +84,8 @@ function DrawerMenu({colors}) {
     headerLeft: (props)  => ( <LeftNav /> ),
     headerRight: (props) => (<RightNav /> ),
     headerTitle: "",
+    headerBlurEffect: "regular",
+    headerTransparent: true
   }  
 
   return (
