@@ -2,10 +2,76 @@ import {Text, Image, Container, Icon, Flex, Avatar, Button, Link, HStack, Center
 import { useNavigation, CommonActions  } from '@react-navigation/native';
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-function Home() {
+
+import Rreact from "react";
+import Expo from "expo";
+import {Scene, Mesh, MeshBasicMaterial, MeshPhongMaterial, PerspectiveCamera, BoxBufferGeometry, AmbientLight, PointLight, ShadowMaterial } from "three";
+import ExpoTHREE, { Renderer } from "expo-three";
+import {ExpoWebGLRenderingContext, GLView} from "expo-gl";
+import { render } from "react-dom";
+
+const Home = () => {
     const navigation = useNavigation();    
+    
+    const onContextCreate = async (gl) =>{
+
+        const scene = new Scene();
+        const camera = new PerspectiveCamera(
+            75,
+            gl.drawingBufferWidth/gl.drawingBufferHeight,
+            0.1,
+            1000
+        );
+
+        gl.canvas.setSize = {width: gl.drawingBufferWidth, height: gl.drawingBufferHeight}
+        camera.position.z = 2;
+
+        const renderer = new Renderer({gl});
+        renderer.setSize(gl.drawingBufferWidth, gl.drawingBufferHeight)
+
+        const geometry = new BoxBufferGeometry(1,1,1);
+        const material = new MeshPhongMaterial({
+            color: "pink",
+            shininess: 100,
+            specular: 0x888888,
+            emissive: 0x000000
+        });
+
+        const ambientLight = new AmbientLight();
+        scene.add(ambientLight);
+
+        const pointLight = new PointLight();
+        pointLight.position.set(10,10,10);
+        scene.add(pointLight);
+
+        const cube = new Mesh(geometry, material);
+        cube.castShadow = true;
+        scene.add(cube);
+
+        const render = () => {
+            requestAnimationFrame(render);
+            cube.rotation.x += 0.01;
+            cube.rotation.y += 0.01;
+            renderer.render(scene, camera);
+            gl.endFrameEXP();
+        }
+
+        render()
+
+    }
+    
+    
+    
     return (
         <ScrollView w={[400, 480, 640]} style={{ overflowx: "hidden" }}>
+
+            <GLView 
+                
+                onContextCreate={onContextCreate}
+                style={{width: 640, height: 640}}
+            />
+
+
             <Box>                
                 <Image size={640} mt={-125} mb={-175} source={ require('../assets/ramen.png') } alt="Bowl of Ramen" />
             </Box>
