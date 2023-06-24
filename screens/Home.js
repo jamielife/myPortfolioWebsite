@@ -3,18 +3,27 @@ import { useNavigation, CommonActions  } from '@react-navigation/native';
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 
-import Rreact from "react";
+import React, {useState, useEffect} from "react";
 import Expo from "expo";
 import {Scene, Mesh, MeshBasicMaterial, MeshPhongMaterial, PerspectiveCamera, BoxBufferGeometry, AmbientLight, PointLight, ShadowMaterial } from "three";
 import ExpoTHREE, { Renderer } from "expo-three";
 import {ExpoWebGLRenderingContext, GLView} from "expo-gl";
+import OrbitControlsView from 'expo-three-orbit-controls';
 import { render } from "react-dom";
 
 const Home = () => {
     const navigation = useNavigation();    
     
-    const onContextCreate = async (gl) =>{
+    const [camera, setCamera] = useState();
 
+    let timeout;
+  
+    useEffect(() => {
+      // Clear the animation loop when the component unmounts
+      return () => clearTimeout(timeout);
+    }, []);
+  
+    const onContextCreate = async (gl) => {
         const scene = new Scene();
         const camera = new PerspectiveCamera(
             75,
@@ -22,6 +31,8 @@ const Home = () => {
             0.1,
             1000
         );
+        camera.position.set(.5, .5, .5);
+        setCamera(camera);
 
         gl.canvas.setSize = {width: gl.drawingBufferWidth, height: gl.drawingBufferHeight}
         camera.position.z = 2;
@@ -41,7 +52,7 @@ const Home = () => {
         scene.add(ambientLight);
 
         const pointLight = new PointLight();
-        pointLight.position.set(10,10,10);
+        pointLight.position.set(20,2,10);
         scene.add(pointLight);
 
         const cube = new Mesh(geometry, material);
@@ -50,26 +61,23 @@ const Home = () => {
 
         const render = () => {
             requestAnimationFrame(render);
-            cube.rotation.x += 0.01;
-            cube.rotation.y += 0.01;
+            //cube.rotation.x += 0.01;
+            cube.rotation.y += 0.0025;
             renderer.render(scene, camera);
             gl.endFrameEXP();
         }
 
         render()
-
-    }
-    
-    
+    };    
     
     return (
         <ScrollView w={[400, 480, 640]} style={{ overflowx: "hidden" }}>
-
-            <GLView 
-                
+            <OrbitControlsView style={{ flex: 1 }} camera={camera}>
+            <GLView                 
                 onContextCreate={onContextCreate}
-                style={{width: 640, height: 640}}
+                style={{width: 640, height: 640, backgroundColor: "transparent" }}
             />
+            </OrbitControlsView>
 
 
             <Box>                
