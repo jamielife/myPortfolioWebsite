@@ -27,7 +27,7 @@ const Posts = () => {
     console.log(posts);
 
     return ( 
-        <ScrollView flex={1} h={"100%"} w={[400, 480, 640]} style={{ overflowx: "hidden" }}>
+        <ScrollView h={"100%"} w={[400, 480, 640]} style={{ overflowx: "hidden" }}>
             <Box>                
                 <Image size={640} mt={-125} mb={-175} source={ require('../assets/ramen.png') } alt="Bowl of Ramen" />
             </Box>
