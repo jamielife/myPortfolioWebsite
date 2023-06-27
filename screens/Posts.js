@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import {Text, Image, FlatList, View, Pressable, Container, Icon, Flex, Avatar, Button, Link, HStack, Center, Heading, VStack, Box, ScrollView, Divider  } from "native-base";
 import supabase from "../supabase";
 import WorkTile from "../components/WorkTile";
+import Bowl from "../components/Bowl";
 
 const Posts = () => {
     const [posts, setPosts] = useState([]);
@@ -28,11 +29,9 @@ const Posts = () => {
 
     return ( 
         <ScrollView h={"100%"} w={[400, 480, 640]} style={{ overflowx: "hidden" }}>
-            <Box>                
-                <Image size={640} mt={-125} mb={-175} source={ require('../assets/ramen.png') } alt="Bowl of Ramen" />
-            </Box>
+            <Bowl />
 
-            <VStack pb={5} pt={0}  justifyContent={"space-between"}>
+            <VStack pb={5} pt={0} mt={-200} justifyContent={"space-between"}>
                 <Heading mt={headings.mt} mb={headings.mb} pb={headings.pb} size={headings.size} borderBottomWidth={headings.bbw} borderBottomColor={headings.bbc} alignSelf={"flex-start"}>
                     Featured Posts
                 </Heading>
