@@ -10,11 +10,13 @@ import ExpoTHREE, { Renderer } from "expo-three";
 import {ExpoWebGLRenderingContext, GLView} from "expo-gl";
 import OrbitControlsView from 'expo-three-orbit-controls';
 import { render } from "react-dom";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 const Home = () => {
     const navigation = useNavigation();    
     
     const [camera, setCamera] = useState();
+    const model = null;
 
     let timeout;
   
@@ -26,16 +28,16 @@ const Home = () => {
     const onContextCreate = async (gl) => {
         const scene = new Scene();
         const camera = new PerspectiveCamera(
-            75,
+            50,
             gl.drawingBufferWidth/gl.drawingBufferHeight,
-            0.1,
+            .1,
             1000
         );
-        camera.position.set(.5, .5, .5);
+        const quickSetPosition = 7;
+        camera.position.set(quickSetPosition, quickSetPosition, 8.5);
         setCamera(camera);
 
         gl.canvas.setSize = {width: gl.drawingBufferWidth, height: gl.drawingBufferHeight}
-        camera.position.z = 2;
 
         const renderer = new Renderer({gl});
         renderer.setSize(gl.drawingBufferWidth, gl.drawingBufferHeight)
@@ -47,6 +49,16 @@ const Home = () => {
             specular: 0x888888,
             emissive: 0x000000
         });
+        
+        var model;
+        const loader = new GLTFLoader();
+        loader.load(require('../assets/ramen.glb'), function (gltf) { 
+            model = gltf.scene;
+            model.castShadow = true;
+            scene.add (model);
+        }, undefined, function(error){
+            console.log(error);
+        });
 
         const ambientLight = new AmbientLight();
         scene.add(ambientLight);
@@ -55,14 +67,13 @@ const Home = () => {
         pointLight.position.set(20,2,10);
         scene.add(pointLight);
 
-        const cube = new Mesh(geometry, material);
-        cube.castShadow = true;
-        scene.add(cube);
-
         const render = () => {
             requestAnimationFrame(render);
             //cube.rotation.x += 0.01;
-            cube.rotation.y += 0.0025;
+            if(model){
+                model.position.y = -2;
+                model.rotation.y += 0.0025;
+            }         
             renderer.render(scene, camera);
             gl.endFrameEXP();
         }
@@ -73,18 +84,14 @@ const Home = () => {
     return (
         <ScrollView w={[400, 480, 640]} style={{ overflowx: "hidden" }}>
             <OrbitControlsView style={{ flex: 1 }} camera={camera}>
-            <GLView                 
+            <GLView               
                 onContextCreate={onContextCreate}
                 style={{width: 640, height: 640, backgroundColor: "transparent" }}
             />
             </OrbitControlsView>
-
-
-            <Box>                
-                <Image size={640} mt={-125} mb={-175} source={ require('../assets/ramen.png') } alt="Bowl of Ramen" />
-            </Box>
-            <Flex alignItems="center">
-                <Center m={4} p={4} px={6} bg={"warmGray.700:alpha.30"} rounded="md">Hello! I'm am app developer based in Richmond, VA!</Center>
+            <Flex alignItems="center" mt={-225}>
+                <Center m={4} p={4} px={6} rounded="md" _dark={{ bg: "coolGray.700:alpha.70" }} _light={{ bg: "primary.50:alpha.50" }}
+                >Hello! I'm am app developer based in Richmond, VA!</Center>
             </Flex>
 
             {/* Header */}
