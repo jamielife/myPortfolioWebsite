@@ -17,6 +17,8 @@ npm install @supabase/supabase-react-native
 ```
 
  - Inverse to Invert fix...
+ - - https://github.com/EvanBacon/expo-three-orbit-controls/commit/1a67021c391da2da462cce6dfeb05829f0956c20
+ - - C:\Users\jamie\OneDrive\Desktop\porttest\node_modules\expo-three-orbit-controls\build\OrbitControls.js
 
  - https://docs.expo.dev/versions/latest/sdk/reanimated/#installation
  \react-native-reanimated\lib\reanimated1\core\AnimatedNode.js code change for web (https://github.com/software-mansion/react-native-reanimated/issues/3156)
