@@ -15,4 +15,8 @@ npm install @supabase/supabase-react-native
 6: const name = packageObj.name;
 7: const version = packageObj.version;
 ```
+
+ - Inverse to Invert fix...
+
  - https://docs.expo.dev/versions/latest/sdk/reanimated/#installation
+ \react-native-reanimated\lib\reanimated1\core\AnimatedNode.js code change for web (https://github.com/software-mansion/react-native-reanimated/issues/3156)

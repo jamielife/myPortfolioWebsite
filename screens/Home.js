@@ -8,7 +8,7 @@ const Home = () => {
         
     return (
         <ScrollView w={[400, 480, 640]} style={{ overflowx: "hidden" }}>
-            <Bowl />
+            <Bowl  sharedTransitionTag="tag" />
             <Flex alignItems="center" mt={-225}>
                 <Center m={4} p={4} px={6} rounded="md" _dark={{ bg: "coolGray.700:alpha.70" }} _light={{ bg: "primary.50:alpha.50" }}
                 >Hello! I'm am app developer based in Richmond, VA!</Center>

@@ -1,15 +1,64 @@
 import 'react-native-gesture-handler';
-import { StyleSheet, StatusBar, Linking } from 'react-native';
+import { StyleSheet, StatusBar, Linking, Animated } from 'react-native';
+import * as React from 'react';
 import {Text, View, Button, Link, HStack, Center, Heading, Switch, useColorMode, NativeBaseProvider, extendTheme, VStack, Box, useColorModeValue } from "native-base";
-import Home from './screens/Home';
-import Work from './screens/Work';
-import Posts from './screens/Posts';
-//import Appbar from "./components/Appbar";
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useFocusEffect } from '@react-navigation/native';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem, DrawerToggleButton  } from '@react-navigation/drawer';
 import { BlurView } from 'expo-blur';
-import LeftNav from './components/NavigationLeft';
+
+import Home     from './screens/Home';
+import Work     from './screens/Work';
+import Posts    from './screens/Posts';
+import LeftNav  from './components/NavigationLeft';
 import RightNav from './components/NavigationRight';
+
+
+const FadeInView = (props, { navigation }) => {
+  const fadeAnim = React.useRef(new Animated.Value(0)).current; // Initial value for opacity: 0
+
+  useFocusEffect(() => {
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 2000,
+      useNativeDriver: true,
+    }).start();
+    return () => {
+      Animated.timing(fadeAnim, {
+        toValue: 0,
+        duration: 2000,
+        useNativeDriver: true,
+      }).start();
+    };
+  });
+
+  return (
+    <Animated.View // Special animatable View
+      style={{
+        flex: 1,
+        opacity: fadeAnim, // Bind opacity to animated value
+      }}>
+      {props.children}
+    </Animated.View>
+  );
+};
+
+
+const forFade = ({ current, next }) => {
+  const opacity = Animated.add(
+    current.progress,
+    next ? next.progress : 0
+  ).interpolate({
+    inputRange: [0, 1, 2],
+    outputRange: [0, 1, 0],
+  });
+
+  return {
+    leftButtonStyle: { opacity },
+    rightButtonStyle: { opacity },
+    titleStyle: { opacity },
+    backgroundStyle: { opacity },
+  };
+};
 
 //global.intro = "Hello! I'm am app developer based in Richmond, VA!";
 global.navMargins = { base: 2, sm: 8,  md: 12, lg: 32, xl: 64 };
@@ -39,10 +88,11 @@ const colors = {
    }
 }
 
+
 function HomeDrawer() {
   return (
     <View alignItems="center" _dark={{ bg: "trueGray.900" }} _light={{ bg: "primary.50" }}>
-      <Home />
+      <FadeInView><Home /></FadeInView>
     </View>
   );
 }
@@ -50,7 +100,7 @@ function HomeDrawer() {
 function WorkDrawer() {
   return (
     <View alignItems="center" _dark={{ bg: "trueGray.900" }} _light={{ bg: "primary.50" }}>
-      <Work />
+      <FadeInView><Work /></FadeInView>      
     </View>
   );
 }
@@ -58,7 +108,7 @@ function WorkDrawer() {
 function PostsDrawer() {
   return (
     <View alignItems="center" _dark={{ bg: "trueGray.900" }} _light={{ bg: "primary.50" }}>
-      <Posts />
+      <FadeInView><Posts /></FadeInView>
     </View>
   );
 }
@@ -85,19 +135,20 @@ function DrawerMenu({colors}) {
     headerRight: (props) => (<RightNav /> ),
     headerTitle: "",
     headerBlurEffect: "regular",
-    headerTransparent: true
+    headerTransparent: true,
+    headerStyleInterpolator: forFade
   }  
 
   return (
     <Drawer.Navigator bg={bg} 
       useLegacyImplementation 
       screenOptions={{
-        headerShown: true,
+        headerShown: true,        
         //drawerActiveBackgroundColor: bg,
         //drawerInactiveBackgroundColor: bg,
         overlayColor: 'transparent',              
         drawerPosition: 'right',
-        drawerStyle: { backgroundColor: bg, },
+        drawerStyle: { backgroundColor: bg, },        
       }}      
       drawerContent={(props) => <CustomDrawerContent {...props} />} 
       _dark={{ bg: "blueGray.800" }}
