@@ -72,7 +72,6 @@ const config = {
 
 export const theme = extendTheme({ config, colors });
 
-
 const colors = {
   primary: {
     50: '#ddf8ff',
@@ -87,7 +86,6 @@ const colors = {
     900: '#00131d',
    }
 }
-
 
 function HomeDrawer() {
   return (

@@ -33,14 +33,6 @@ const Bowl = () => {
 
         const renderer = new Renderer({gl});
         renderer.setSize(gl.drawingBufferWidth, gl.drawingBufferHeight)
-
-        const geometry = new BoxBufferGeometry(1,1,1);
-        const material = new MeshPhongMaterial({
-            color: "pink",
-            shininess: 100,
-            specular: 0x888888,
-            emissive: 0x000000
-        });
         
         var model;
         const loader = new GLTFLoader();
