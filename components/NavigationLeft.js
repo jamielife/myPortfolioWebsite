@@ -1,50 +1,55 @@
 import React from "react";
 import { Linking } from "react-native";
-import { HStack, Flex, Pressable, Button, Icon, IconButton, Text, Hidden, useBreakpointValue, Link } from "native-base";
+import { useTheme, useColorMode, useColorModeValue, HStack, Flex, Pressable, Button, Icon, IconButton, Text, Hidden, useBreakpointValue, Link } from "native-base";
 import { useNavigation, CommonActions  } from '@react-navigation/native';
 import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
 
 function LeftNav() {
     const flexMargin = useBreakpointValue(navMargins);
     const navigation = useNavigation(); 
+    const { colors } = useTheme();    
+    const iconColor = useColorModeValue("black", "white");
+
+    //Styles
+    const menuItem = {
+        btn:{
+            m:0, mt:1, p:0, h:0, fontSize: "",
+        },
+        hover: {
+            bg: 'none', 
+            _text: { underline: true,
+                _dark:  { color: colors.primary[600] }, 
+                _light: { color: colors.primary[300] } 
+            },
+            _icon: { 
+                _dark:  { color: colors.primary[600] }, 
+                _light: { color: colors.primary[300] }         
+            }
+        },
+        pressed: { 
+            bg:'none', _text: { underline: false }, opacity: .5, isUnderlined:false
+        }
+    };    
 
     return <>     
         <HStack alignItems="center" ml={flexMargin}>   
-            <Pressable justifyContent="center" alignItems="center" _hover={{ opacity: .5 }} onPress={() => navigation.dispatch( CommonActions.navigate({ name: 'Home' }))}>
-                <Flex direction="row" py={1} px={2} m={0}>
-                    <Icon as={MaterialIcons} name="ramen-dining" color="white" size="xl"  mt={.5} mr={1} />
-                    <Text color="white" fontSize="xl"> Jamie Taylor </Text>
-                </Flex>
-            </Pressable>
+            <Link mt={1} _text={{ fontSize: "xl" }} _hover={ menuItem.hover } isUnderlined={false} onPress={() => navigation.dispatch( CommonActions.navigate({ name: 'Home' }))}>
+                    <Icon as={MaterialIcons} name="ramen-dining" color={iconColor} size="xl"  mt={.5} mr={1} />
+                     Jamie Taylor 
+            </Link>
             <Hidden from="sm" till="lg" platform={['android','ios']}>
                 <HStack space={4} ml={6} justifyContent="center" alignItems="center">
-                    <Button m={0} mt={1} p={0} h={0} size={"lg"} bg="none" _hover={ menuItem.hover } _pressed={menuItem.pressed} onPress={() => navigation.dispatch( CommonActions.navigate({ name: 'Work' }))}>Work</Button>
-                    <Button m={0} mt={1} p={0} h={0} size={"lg"} bg="none" _hover={ menuItem.hover } _pressed={menuItem.pressed} onPress={() => navigation.dispatch( CommonActions.navigate({ name: 'Posts' }))}>Posts</Button>
-                    <Button m={0} mt={1} p={0} h={0} size={"lg"} bg="none" _hover={ menuItem.hover } _pressed={menuItem.pressed} onPress={ ()=>{ Linking.openURL(require('../assets/me.jpg'))}}>Resume</Button>
-                    <IconButton borderRadius="none" 
-                        _hover={{ bg: "primary.700" }} 
-                        icon={<Icon as={MaterialCommunityIcons} 
-                            name="github" size="xl" color="white" />} 
-                        onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
-                    />
+                    <Link mt={1} _text={{ fontSize: "md" }} _hover={ menuItem.hover } isUnderlined={false} onPress={() => navigation.dispatch( CommonActions.navigate({ name: 'Work' }))}>Work</Link>
+                    <Link mt={1} _text={{ fontSize: "md" }} _hover={ menuItem.hover } isUnderlined={false} onPress={() => navigation.dispatch( CommonActions.navigate({ name: 'Posts' }))}>Posts</Link>
+                    <Link mt={1} _text={{ fontSize: "md" }} _hover={ menuItem.hover } isUnderlined={false} onPress={() => { Linking.openURL(require('../assets/me.jpg'))}}>Resume</Link>
+                    <IconButton mt={2} borderRadius="none" 
+                        _hover={ menuItem.hover } _pressed={menuItem.pressed} 
+                        icon={<Icon as={MaterialCommunityIcons} name="github" size="xl" color={iconColor} />} 
+                        onPress={() => { Linking.openURL("https://github.com/jamielife/portfolio")}} />
                 </HStack>
             </Hidden>
         </HStack>
     </>;
 }
-  
-export default LeftNav;
 
-//Styles
-const menuItem = {
-    hover: {
-        bg: 'none', 
-        _text: { underline: true, 
-            _dark:  { color: "primary.400" }, 
-            _light: { color: "primary.900" } 
-        }
-    },
-    pressed: { 
-        bg:'none', _text: { underline: false } 
-    }
-};
+export default LeftNav;

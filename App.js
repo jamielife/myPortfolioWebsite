@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
 import { StyleSheet, StatusBar, Linking, Animated } from 'react-native';
 import * as React from 'react';
-import {Text, View, Button, Link, HStack, Center, Heading, Switch, useColorMode, NativeBaseProvider, extendTheme, VStack, Box, useColorModeValue } from "native-base";
+import {Text, View, Button, Link, HStack, Center, Heading, Switch, useColorMode, NativeBaseProvider, extendTheme, useContrastText, useColorModeValue } from "native-base";
 import { NavigationContainer, useFocusEffect } from '@react-navigation/native';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem, DrawerToggleButton  } from '@react-navigation/drawer';
 import { BlurView } from 'expo-blur';
@@ -42,7 +42,6 @@ const FadeInView = (props, { navigation }) => {
   );
 };
 
-
 const forFade = ({ current, next }) => {
   const opacity = Animated.add(
     current.progress,
@@ -70,8 +69,6 @@ const config = {
   background: 'transparent'
 };
 
-export const theme = extendTheme({ config, colors });
-
 const colors = {
   primary: {
     50: '#ddf8ff',
@@ -83,9 +80,23 @@ const colors = {
     600: '#1176a2',
     700: '#045475',
     800: '#003448',
-    900: '#00131d',
+    900: '#171717',
    }
 }
+export const theme = extendTheme({ config, colors });
+/* Fix
+{
+  50: '#ffe2e7',
+  100: '#ffb3bb',
+  200: '#fc8393',
+  300: '#f9526d',
+  400: '#f6224b',
+  500: '#dd0939',
+  600: '#ad0320',
+  700: '#7c000e',
+  800: '#4d0002',
+  900: '#200400',
+} */
 
 function HomeDrawer() {
   return (
@@ -115,8 +126,9 @@ function CustomDrawerContent(props) {
   return (
     <DrawerContentScrollView {...props}>
       <DrawerItemList {...props} />
-      <DrawerItem label="Resume" onPress={ ()=>{ Linking.openURL('https://htmyell.com')}} />      
-      <DrawerItem label="Close drawer"  onPress={() => props.navigation.closeDrawer()} />
+      <DrawerItem label="Resume" inactiveTintColor={ colors.primary[50] } onPress={ ()=>{ Linking.openURL('https://htmyell.com')} } />
+      <DrawerItem label="Close drawer" inactiveTintColor={ colors.primary[50] } onPress={() => props.navigation.closeDrawer()} />
+      <DrawerItem label="Icon={({ focused, color, size }) => <Icon color={color} size={size} name={focused ? 'heart' : 'heart-outline'} />}"  inactiveTintColor={ colors.primary[50] } onPress={() => props.navigation.closeDrawer()} />
     </DrawerContentScrollView>
   );
 }
@@ -124,11 +136,12 @@ function CustomDrawerContent(props) {
 const Drawer = createDrawerNavigator();
 
 function DrawerMenu({colors}) {
-  const bg = useColorModeValue("#fdead4", "#045475");  
+  const bg = useColorModeValue(colors.primary[50], colors.primary[900]);
+  const text = useColorModeValue(colors.primary[900], colors.primary[50]);
 
   const customDrawOptions = {
     headerTransparent: true,
-    headerBackground: () => ( <BlurView tint="dark" intensity={30} style={StyleSheet.absoluteFill} /> ),
+    headerBackground: () => ( <BlurView tint={useColorModeValue("light", "dark")} intensity={30} style={StyleSheet.absoluteFill} /> ),
     headerLeft: (props)  => ( <LeftNav /> ),
     headerRight: (props) => (<RightNav /> ),
     headerTitle: "",
@@ -136,21 +149,19 @@ function DrawerMenu({colors}) {
     headerTransparent: true,
     headerStyleInterpolator: forFade
   }  
-
+  
   return (
-    <Drawer.Navigator bg={bg} 
+    <Drawer.Navigator 
       useLegacyImplementation 
       screenOptions={{
-        headerShown: true,        
-        //drawerActiveBackgroundColor: bg,
-        //drawerInactiveBackgroundColor: bg,
-        overlayColor: 'transparent',              
+        headerShown: true, 
         drawerPosition: 'right',
+        overlayColor: 'rgba(0,0,0,.5)',              
+        drawerActiveTintColor: text,
+        drawerInactiveTintColor: text,
         drawerStyle: { backgroundColor: bg, },        
       }}      
-      drawerContent={(props) => <CustomDrawerContent {...props} />} 
-      _dark={{ bg: "blueGray.800" }}
-      _light={{ bg: "blueGray.200" }} >
+      drawerContent={(props) => <CustomDrawerContent {...props} />} >
         <Drawer.Screen name="Home"  component={HomeDrawer}  options={customDrawOptions} />
         <Drawer.Screen name="Work"  component={WorkDrawer}  options={customDrawOptions} />
         <Drawer.Screen name="Posts" component={PostsDrawer} options={customDrawOptions} />        
@@ -163,7 +174,7 @@ export default function App() {
     <NativeBaseProvider theme={theme}>
       <NavigationContainer>
         <StatusBar backgroundColor="rgb(0, 52, 72)" barStyle="light-csontent" hidden={false} />
-        <DrawerMenu />
+        <DrawerMenu colors={colors} />
       </NavigationContainer>
     </NativeBaseProvider>
   );

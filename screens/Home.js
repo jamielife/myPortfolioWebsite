@@ -11,14 +11,14 @@ const Home = () => {
             <Bowl />
             <Flex alignItems="center" mt={-225}>
                 <Center m={4} p={4} px={6} rounded="md" _dark={{ bg: "coolGray.700:alpha.70" }} _light={{ bg: "primary.50:alpha.50" }}
-                >Hello! I'm am app developer based in Richmond, VA!</Center>
+                >Hello, I'm a web & app developer based in Richmond, VA!</Center>
             </Flex>
 
             {/* Header */}
             <HStack p={5} justifyContent={"space-between"}>
                 <Container alignSelf={"flex-start"}>
                     <Heading size={"xl"}>Jamie Taylor</Heading>
-                    <Text fontSize={"md"}>Solution Architect / Artist / Musician / Cyclist</Text>
+                    <Text fontSize={"md"}>Solution Architect / Developer / Designer </Text>
                 </Container>
                 <Link href={require('../assets/me.jpg')} isExternal>
                     <Avatar borderWidth={2} mt={0} alignSelf="center" size={[20, 110]} source={ require("../assets/me.jpg")} > Jamie </Avatar>
