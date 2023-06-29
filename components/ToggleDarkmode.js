@@ -11,6 +11,7 @@ function App() {
     const positionInterPol2   = positionButton.interpolate({inputRange:[0, 1],outputRange:[50, 0]});    
     const initialOpacityOn    = positionButton.interpolate({inputRange:[0, 1],outputRange:[0, 1]});
     const initialOpacityOff   = positionButton.interpolate({inputRange:[0, 1],outputRange:[1, 0]});    
+    const initialOpacityOff2  = positionButton.interpolate({inputRange:[0, 1],outputRange:[.5, 0]});    
     const backgroundColorAnim = positionButton.interpolate({inputRange:[0, 1],outputRange:["#000", "#81b0ff"]});    
 
     const {
@@ -21,7 +22,7 @@ function App() {
     const startAnimToOff = () => {
         Animated.timing(positionButton,{
             toValue:0,
-            duration:500,
+            duration:600,
             easing:Easing.ease,
             useNativeDriver:false
         }).start()
@@ -30,7 +31,7 @@ function App() {
     const startAnimToOn = () => {
         Animated.timing(positionButton,{
             toValue:1,
-            duration:500,
+            duration:600,
             easing:Easing.ease,
             useNativeDriver:false
         }).start()
@@ -55,16 +56,20 @@ function App() {
                     
                     <Animated.View style={[styles.celestialObjects, { transform:[{ translateY: positionInterPol }], opacity: initialOpacityOff }]}>                        
                         <Icon as={MaterialIcons}  name="nightlight-round" size="xl" color="white" />
-                        <Box  style={styles.glow}>.</Box>  
-                        <Box style={styles.glow}>.</Box>                                                
+                        <Box ml={-1} mt={1} w={1} h={3} style={styles.glow}> </Box>  
+                        <Box ml={-1} mt={1} w={1} h={3} style={styles.glow}> </Box>                                                
+                        <Box ml={-1} mt={1} w={1} h={3} style={styles.glow}> </Box>  
                     </Animated.View>
 
                     <Animated.View style={[styles.celestialObjects, { transform:[{ translateY: positionInterPol2 }], opacity: initialOpacityOn }]}>
                         <Icon as={MaterialIcons} name="wb-sunny" size="xl" color="rgba(255, 166, 0, 1)" />                                              
                     </Animated.View>
 
-                    <Animated.View style={[styles.mainStyes, { opacity: initialOpacityOff }]}><Text style={{color: "white"}}>.</Text></Animated.View> 
-                    <Animated.View style={[styles.celestialObjects, { opacity: initialOpacityOff }]}><Text style={{color: "white"}}>.</Text></Animated.View> 
+                    <Animated.View style={[{opacity: initialOpacityOff2 }]}><Text style={{color: "rgba(255, 217, 0, 1)", fontSize: "10px" }}>.</Text></Animated.View> 
+                    <Animated.View style={[{position: "absolute", top: 9,    left: -2  }, { opacity: initialOpacityOff2 }]}><Text style={{color: "rgba(255,255,255,1)"}}>.</Text></Animated.View>
+                    <Animated.View style={[{position: "absolute", bottom: 4, left: 10 }, { opacity: initialOpacityOff2 }]}><Text style={{color: "rgba(255,255,255,1)", fontSize: "10px"}}>.</Text></Animated.View>
+                    <Animated.View style={[{position: "absolute", bottom: 2, right: 9 }, { opacity: initialOpacityOff2 }]}><Text style={{color: "rgba(255,217,0,.75)"}}>.</Text></Animated.View> 
+                    <Animated.View style={[{position: "absolute", top: 2,    right: 9 }, { opacity: initialOpacityOff2 }]}><Text style={{color: "rgba(255,255,255,.75)", fontSize: "10px"}}>.</Text></Animated.View> 
 
                 </Animated.View>
 
@@ -90,14 +95,14 @@ const styles = StyleSheet.create({
         position: "absolute",
         left: 12,
         top: 5,   
-
+        color: "#ffffff",
         shadowColor: "#fff000",
         shadowOffset: {
             width: 0,
             height: 0,
         },
         shadowOpacity: 1,
-        shadowRadius: 10,
+        shadowRadius: 12,
 
         elevation: 15,        
     }

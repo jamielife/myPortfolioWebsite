@@ -1,6 +1,7 @@
-import {Text, Image, Container, Icon, Flex, Avatar, Button, Link, HStack, Center, Heading, VStack, Box, ScrollView, Divider  } from "native-base";
+import {Text, Container, Icon, Flex, Avatar, Button, Link, HStack, Center, Heading, VStack, ScrollView  } from "native-base";
 import { useNavigation, CommonActions  } from '@react-navigation/native';
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Linking } from "react-native";
 import Bowl from "../components/Bowl";
 
 const Home = () => {
@@ -79,9 +80,14 @@ const Home = () => {
                 <Heading mt={headings.mt} mb={headings.mb} pb={headings.pb} size={headings.size} borderBottomWidth={headings.bbw} borderBottomColor={headings.bbc} alignSelf={"flex-start"} >
                     Socials
                 </Heading>
-                <HStack justifyContent={"space-evenly"}><Button fontSize={18} px={4} alignSelf={"flex-start"}><Text><Icon as={MaterialCommunityIcons } name="github"    color="white" size="md"  mt={.5} mr={1} /> @jamielife</Text></Button>
-                <Button fontSize={18} px={4} alignSelf={"flex-start"}><Text><Icon as={MaterialCommunityIcons } name="instagram" color="white" size="md"  mt={.5} mr={1} /> @jamielife</Text></Button>
-                <Button fontSize={18} px={4} alignSelf={"flex-start"}><Text><Icon as={MaterialCommunityIcons } name="linkedin"  color="white" size="md"  mt={.5} mr={1} /> @jvptaylor</Text></Button></HStack>
+                <HStack justifyContent={"space-evenly"}>
+                    <Button onPress={() => { Linking.openURL("https://github.com/jamielife/")}}
+                            fontSize={18} px={4} alignSelf={"flex-start"}><Text><Icon as={MaterialCommunityIcons } name="github"    color="white" size="md"  mt={.5} mr={1} /> @jamielife</Text></Button>
+                    <Button onPress={() => { Linking.openURL("https://instagram.com/jamielife/")}}
+                            fontSize={18} px={4} alignSelf={"flex-start"}><Text><Icon as={MaterialCommunityIcons } name="instagram" color="white" size="md"  mt={.5} mr={1} /> @jamielife</Text></Button>
+                    <Button onPress={() => { Linking.openURL("https://www.linkedin.com/in/jvptaylor/")}}
+                            fontSize={18} px={4} alignSelf={"flex-start"}><Text><Icon as={MaterialCommunityIcons } name="linkedin"  color="white" size="md"  mt={.5} mr={1} /> @jvptaylor</Text></Button>
+                </HStack>
             </VStack>
 
             {/* Site */}

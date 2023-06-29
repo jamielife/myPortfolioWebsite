@@ -123,12 +123,16 @@ function PostsDrawer() {
 }
 
 function CustomDrawerContent(props) {
+  const bg = useColorModeValue(colors.primary[50], colors.primary[900]);
+  const text = useColorModeValue(colors.primary[900], colors.primary[50]);  
+
   return (
     <DrawerContentScrollView {...props}>
       <DrawerItemList {...props} />
-      <DrawerItem label="Resume" inactiveTintColor={ colors.primary[50] } onPress={ ()=>{ Linking.openURL('https://htmyell.com')} } />
-      <DrawerItem label="Close drawer" inactiveTintColor={ colors.primary[50] } onPress={() => props.navigation.closeDrawer()} />
-      <DrawerItem label="Icon={({ focused, color, size }) => <Icon color={color} size={size} name={focused ? 'heart' : 'heart-outline'} />}"  inactiveTintColor={ colors.primary[50] } onPress={() => props.navigation.closeDrawer()} />
+      <DrawerItem label="Resume" inactiveTintColor={ text } onPress={ ()=>{ Linking.openURL('https://htmyell.com')} } />
+      <DrawerItem label="Close drawer" inactiveTintColor={ text } onPress={() => props.navigation.closeDrawer()} />
+      <DrawerItem label="Icon={({ focused, color, size }) => <Icon color={color} size={size} name={focused ? 'heart' : 'heart-outline'} />}"  
+                  inactiveTintColor={ text } onPress={() => props.navigation.closeDrawer()} />
     </DrawerContentScrollView>
   );
 }
