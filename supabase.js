@@ -8,7 +8,7 @@ export const API_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmF
 const supabase = createClient(API_URL, API_KEY, { 
     storage: AsyncStorage, 
     autoRefreshToken: true, 
-    persistSession: false, 
+    persistSession: true, 
     detectSessionInUrl: false, 
 } );
 

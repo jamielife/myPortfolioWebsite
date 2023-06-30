@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import {Text, Image, FlatList, View, Pressable, Container, Icon, Flex, Avatar, Button, Link, HStack, Center, Heading, VStack, Box, ScrollView, Divider  } from "native-base";
+import {Text, Flex, Button, Center, Heading, VStack, ScrollView } from "native-base";
 import supabase from "../supabase";
 import WorkTile from "../components/WorkTile";
 import Bowl from "../components/Bowl";
@@ -7,9 +7,11 @@ import Bowl from "../components/Bowl";
 const Work = () => {
     const [works, setWork] = useState([]);
     const componentMounted = useRef(true);
+    
     useEffect(() => {
         const fetchWork = async () => {
             const {data, error} = await supabase.from('work').select('*').order('featured', {ascending: false}); //.eq('type', '3D')
+            
             if (error) {
                 console.log('error', error);
             } else {
@@ -22,10 +24,9 @@ const Work = () => {
 
         return () => {
             componentMounted.current = false; 
+
         };
     }, []);
-
-    console.log(works);
 
     return ( 
         <ScrollView h={"100%"} w={[400, 480, 640]} style={{ overflowx: "hidden" }}>
