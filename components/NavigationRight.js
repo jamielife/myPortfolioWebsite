@@ -4,7 +4,6 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation, DrawerActions } from '@react-navigation/native';
 import ToggleDarkmode from './ToggleDarkmode';
 import ToggleLanguage from "./ToggleLanguage";
-import Bowl from "./Bowl";
 
 function RightNav() {
     const flexMargin = useBreakpointValue(navMargins);

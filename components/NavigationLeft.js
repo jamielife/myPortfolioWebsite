@@ -13,7 +13,7 @@ function LeftNav() {
     //Styles
     const menuItem = {
         btn:{
-            m:0, mt:1, p:0, h:0, fontSize: "",
+            m:0, mt:1, p:0, h:0,
         },
         hover: {
             bg: 'none', 

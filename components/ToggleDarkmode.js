@@ -65,11 +65,11 @@ function App() {
                         <Icon as={MaterialIcons} name="wb-sunny" size="xl" color="rgba(255, 166, 0, 1)" />                                              
                     </Animated.View>
 
-                    <Animated.View style={[{opacity: initialOpacityOff2 }]}><Text style={{color: "rgba(255, 217, 0, 1)", fontSize: "10px" }}>.</Text></Animated.View> 
+                    <Animated.View style={[{opacity: initialOpacityOff2 }]}><Text style={{color: "rgba(255, 217, 0, 1)", fontSize: 10 }}>.</Text></Animated.View> 
                     <Animated.View style={[{position: "absolute", top: 9,    left: -2  }, { opacity: initialOpacityOff2 }]}><Text style={{color: "rgba(255,255,255,1)"}}>.</Text></Animated.View>
-                    <Animated.View style={[{position: "absolute", bottom: 4, left: 10 }, { opacity: initialOpacityOff2 }]}><Text style={{color: "rgba(255,255,255,1)", fontSize: "10px"}}>.</Text></Animated.View>
+                    <Animated.View style={[{position: "absolute", bottom: 4, left: 10 }, { opacity: initialOpacityOff2 }]}><Text style={{color: "rgba(255,255,255,1)", fontSize: 10 }}>.</Text></Animated.View>
                     <Animated.View style={[{position: "absolute", bottom: 2, right: 9 }, { opacity: initialOpacityOff2 }]}><Text style={{color: "rgba(255,217,0,.75)"}}>.</Text></Animated.View> 
-                    <Animated.View style={[{position: "absolute", top: 2,    right: 9 }, { opacity: initialOpacityOff2 }]}><Text style={{color: "rgba(255,255,255,.75)", fontSize: "10px"}}>.</Text></Animated.View> 
+                    <Animated.View style={[{position: "absolute", top: 2,    right: 9 }, { opacity: initialOpacityOff2 }]}><Text style={{color: "rgba(255,255,255,.75)", fontSize: 10 }}>.</Text></Animated.View> 
 
                 </Animated.View>
 

@@ -32,13 +32,13 @@ const Bowl = () => {
         gl.canvas.setSize = {width: gl.drawingBufferWidth, height: gl.drawingBufferHeight}
 
         const renderer = new Renderer({gl});
-        //renderer.setSize(gl.drawingBufferWidth, gl.drawingBufferHeight)
+        renderer.setSize(gl.drawingBufferWidth, gl.drawingBufferHeight)
         
         var model;
         const loader = new GLTFLoader();
         loader.load(require('../assets/ramen.glb'), function (gltf) { 
             model = gltf.scene;
-            //model.castShadow = true;
+            model.castShadow = true;
             scene.add (model);
         }, undefined, function(error){
             console.log(error);
@@ -47,12 +47,12 @@ const Bowl = () => {
         const ambientLight = new AmbientLight();
         scene.add(ambientLight);
 
-        //const pointLight = new PointLight();
-        //pointLight.position.set(20,2,10);
-        //scene.add(pointLight);
+        const pointLight = new PointLight();
+        pointLight.position.set(20,2,10);
+        scene.add(pointLight);
 
-        const render = () => {
-            requestAnimationFrame(render);
+        const renderScene = () => {
+            requestAnimationFrame(renderScene);
             //cube.rotation.x += 0.01;
             if(model){
                 model.position.y = -2;
@@ -62,7 +62,7 @@ const Bowl = () => {
             gl.endFrameEXP();
         }
 
-        render();
+        renderScene();
     };    
     
     return (
