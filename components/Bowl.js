@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from "react";
-import {Scene, MeshPhongMaterial, PerspectiveCamera, BoxBufferGeometry, AmbientLight, PointLight } from "three";
-import ExpoTHREE, { Renderer } from "expo-three";
-import {GLView} from "expo-gl";
+import {Scene, PerspectiveCamera, AmbientLight, PointLight } from "three";
+import { Renderer } from "expo-three";
+delete global.WebGLRenderingContex;
+delete global._WORKLET_RUNTIME;
+import { GLView } from "expo-gl";
 import OrbitControlsView from 'expo-three-orbit-controls';
-import { render } from "react-dom";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 const Bowl = () => {    
@@ -29,6 +30,7 @@ const Bowl = () => {
         camera.position.set(quickSetPosition, quickSetPosition, 8.5);
         setCamera(camera);
 
+        console.log(gl.canvas)
         gl.canvas.setSize = {width: gl.drawingBufferWidth, height: gl.drawingBufferHeight}
 
         const renderer = new Renderer({gl});
@@ -51,26 +53,23 @@ const Bowl = () => {
         pointLight.position.set(20,2,10);
         scene.add(pointLight);
 
-        const renderScene = () => {
-            requestAnimationFrame(renderScene);
-            //cube.rotation.x += 0.01;
+        const render = () => {
+            requestAnimationFrame(render);
             if(model){
                 model.position.y = -2;
                 model.rotation.y += 0.0025;
+                //zoom in? z+= 1?
             }         
             renderer.render(scene, camera);
             gl.endFrameEXP();
         }
 
-        renderScene();
+        render();
     };    
-    
+
     return (
             <OrbitControlsView style={{ flex: 1 }} camera={camera}>
-            <GLView               
-                onContextCreate={onContextCreate}
-                style={{width: 640, height: 640, backgroundColor: "transparent" }}
-            />
+                <GLView onContextCreate={onContextCreate} style={{width: 640, height: 640 }} />
             </OrbitControlsView>    
     );
 }
