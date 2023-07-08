@@ -3,6 +3,7 @@ import {Text, Flex, Button, Center, Heading, VStack, ScrollView } from "native-b
 import supabase from "../supabase";
 import WorkTile from "../components/WorkTile";
 import Bowl from "../components/Bowl";
+import Footer from "../components/Footer";
 
 const Work = () => {
     const [works, setWork] = useState([]);
@@ -48,12 +49,12 @@ const Work = () => {
             </Center>
 
             <Center>
-                <Button mt={12} alignSelf="center" onPress={() => navigation.dispatch( CommonActions.navigate({ name: 'Work',  params: { cameFrom: 'Home' } } ) ) } >
+                <Button mt={12} alignSelf="center" onPress={() => navigation.dispatch( CommonActions.navigate({ name: 'Work',  params: { cameFrom: 'Work' } } ) ) } >
                     Check out my resume ---
                 </Button>
             </Center>
 
-            <Center mt={8} mb={6}><Text fontSize={12} color={"warmGray.500"}>© {new Date().getFullYear()} Jamie Taylor. All rights reserved.</Text></Center>
+            <Footer />
 
         </ScrollView>
     );

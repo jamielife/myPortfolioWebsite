@@ -3,6 +3,7 @@ import { useNavigation, CommonActions  } from '@react-navigation/native';
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Linking } from "react-native";
 import Bowl from "../components/Bowl";
+import Footer from "../components/Footer";
 
 const Home = () => {
     const navigation = useNavigation(); 
@@ -98,8 +99,7 @@ const Home = () => {
                 <Text fontSize={16}>This website was lovingly built using React Native, NativeBase, Threejs, Expo, Supabase, and a few other technologies. You can see the entire source at <Link href="https://github.com/jamielife/portfolio" isExternal>Github</Link></Text>
             </VStack>            
 
-            <Center mt={8} mb={6}><Text fontSize={12} color={"warmGray.500"}>© {new Date().getFullYear()} Jamie Taylor. All rights reserved.</Text></Center>
-
+            <Footer />
             
         </ScrollView>
     );

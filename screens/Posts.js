@@ -3,6 +3,7 @@ import {Text, Image, FlatList, View, Pressable, Container, Icon, Flex, Avatar, B
 import supabase from "../supabase";
 import WorkTile from "../components/WorkTile";
 import Bowl from "../components/Bowl";
+import Footer from "../components/Footer";
 
 const Posts = () => {
     const [posts, setPosts] = useState([]);
@@ -52,7 +53,7 @@ const Posts = () => {
                 </Button>
             </Center>
 
-            <Center mt={8} mb={6}><Text fontSize={12} color={"warmGray.500"}>© {new Date().getFullYear()} Jamie Taylor. All rights reserved.</Text></Center>
+            <Footer />
 
         </ScrollView>
     );

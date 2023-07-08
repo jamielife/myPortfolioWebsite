@@ -3,6 +3,7 @@ import { StyleSheet, StatusBar, Linking, Animated } from 'react-native';
 import * as React from 'react';
 import { View, NativeBaseProvider, extendTheme, useColorModeValue } from "native-base";
 import { NavigationContainer, useFocusEffect } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem  } from '@react-navigation/drawer';
 import { BlurView } from 'expo-blur';
 
@@ -11,6 +12,7 @@ import Work     from './screens/Work';
 import Posts    from './screens/Posts';
 import LeftNav  from './components/NavigationLeft';
 import RightNav from './components/NavigationRight';
+import WorkDetail from './screens/WorkDetail';
 
 //global.intro = "Hello! I'm am app developer based in Richmond, VA!";
 global.navMargins = { base: 2, sm: 8,  md: 12, lg: 32, xl: 64 };
@@ -67,6 +69,14 @@ function WorkDrawer() {
   );
 }
 
+function WorkDetailDrawer() {
+  return (
+    <View alignItems="center" _dark={{ bg: "trueGray.900" }} _light={{ bg: "primary.50" }}>
+      <WorkDetail />   
+    </View>
+  );
+}
+
 function PostsDrawer() {
   return (
     <View alignItems="center" _dark={{ bg: "trueGray.900" }} _light={{ bg: "primary.50" }}>
@@ -91,21 +101,21 @@ function CustomDrawerContent(props) {
 }
 
 const Drawer = createDrawerNavigator();
+const Stack = createNativeStackNavigator();
+
+const customDrawOptions = {
+  headerTransparent: true,
+  headerBackground: () => ( <BlurView tint={useColorModeValue("light", "dark")} intensity={30} style={StyleSheet.absoluteFill} /> ),
+  headerLeft: (props)  => ( <LeftNav /> ),
+  headerRight: (props) => (<RightNav /> ),
+  headerTitle: "",
+  headerBlurEffect: "regular",
+  headerTransparent: true
+}  
 
 function DrawerMenu({colors}) {
-  const bg = useColorModeValue(colors.primary[50], colors.primary[900]);
-  const text = useColorModeValue(colors.primary[900], colors.primary[50]);
-
-  const customDrawOptions = {
-    headerTransparent: true,
-    headerBackground: () => ( <BlurView tint={useColorModeValue("light", "dark")} intensity={30} style={StyleSheet.absoluteFill} /> ),
-    headerLeft: (props)  => ( <LeftNav /> ),
-    headerRight: (props) => (<RightNav /> ),
-    headerTitle: "",
-    headerBlurEffect: "regular",
-    headerTransparent: true
-  }  
-  
+const bg = useColorModeValue(colors.primary[50], colors.primary[900]);
+const text = useColorModeValue(colors.primary[900], colors.primary[50]);
   return (
     <Drawer.Navigator 
       useLegacyImplementation 
@@ -119,9 +129,28 @@ function DrawerMenu({colors}) {
       }}      
       drawerContent={(props) => <CustomDrawerContent {...props} />} >
         <Drawer.Screen name="Home"  component={HomeDrawer}  options={customDrawOptions} />
-        <Drawer.Screen name="Work"  component={WorkDrawer}  options={customDrawOptions} />
-        <Drawer.Screen name="Posts" component={PostsDrawer} options={customDrawOptions} />        
+        <Drawer.Screen name="Work"  component={WorkMenu}    options={customDrawOptions} />
+        <Drawer.Screen name="Posts" component={PostsDrawer} options={customDrawOptions} />         
     </Drawer.Navigator>
+  );
+}
+
+function WorkMenu(){
+  const bg = useColorModeValue(colors.primary[50], colors.primary[900]);
+  const text = useColorModeValue(colors.primary[900], colors.primary[50]);
+  return (
+    <Stack.Navigator useLegacyImplementation 
+      screenOptions={{
+        headerShown: true, 
+        drawerPosition: 'right',
+        overlayColor: 'rgba(0,0,0,.5)',              
+        drawerActiveTintColor: text,
+        drawerInactiveTintColor: text,
+        drawerStyle: { backgroundColor: bg, },        
+      }} >
+      <Stack.Screen name="Work"  component={WorkDrawer} options={{ headerShown: false }}  />
+      <Stack.Screen name="WorkDetail" component={WorkDetailDrawer} options={{ headerShown: false }}  />
+    </Stack.Navigator>  
   );
 }
 
