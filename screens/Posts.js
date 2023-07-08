@@ -26,8 +26,6 @@ const Posts = () => {
         };
     }, []);
 
-    console.log(posts);
-
     return ( 
         <ScrollView h={"100%"} w={[400, 480, 640]} style={{ overflowx: "hidden" }}>
             <Bowl />

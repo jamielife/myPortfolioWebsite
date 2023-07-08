@@ -30,7 +30,6 @@ const Bowl = () => {
         camera.position.set(quickSetPosition, quickSetPosition, 8.5);
         setCamera(camera);
 
-        console.log(gl.canvas)
         gl.canvas.setSize = {width: gl.drawingBufferWidth, height: gl.drawingBufferHeight}
 
         const renderer = new Renderer({gl});
