@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import {Text, Image, FlatList, View, Pressable, Container, Icon, Flex, Avatar, Button, Link, HStack, Center, Heading, VStack, Box, ScrollView, Divider  } from "native-base";
+import { Text, Flex, Button, Center, Heading, VStack, ScrollView, ChevronRightIcon } from "native-base";
 import supabase from "../supabase";
 import WorkTile from "../components/WorkTile";
 import Bowl from "../components/Bowl";
@@ -8,9 +8,11 @@ import Footer from "../components/Footer";
 const Posts = () => {
     const [posts, setPosts] = useState([]);
     const componentMounted = useRef(true);
+
     useEffect(() => {
         const fetchPosts = async () => {
             const {data, error} = await supabase.from('posts').select('*').order('featured', {ascending: false}); //.eq('type', '3D')
+
             if (error) {
                 console.log('error', error);
             } else {
@@ -29,9 +31,9 @@ const Posts = () => {
     return ( 
         <ScrollView h={"100%"} w={[400, 480, 640]} style={{ overflowx: "hidden" }}>
             <Bowl />
-            <VStack pb={5} pt={0} mt={-225} justifyContent={"space-between"}>
+            <VStack pb={5} pt={0} mt={-200} justifyContent={"space-between"}>
                 <Heading mt={headings.mt} mb={headings.mb} pb={headings.pb} size={headings.size} borderBottomWidth={headings.bbw} borderBottomColor={headings.bbc} alignSelf={"flex-start"}>
-                    Featured Posts
+                    Posts
                 </Heading>
                 <Text fontSize={16} textAlign={"justify"}>Latest posts & happenings in my life. </Text>            
             </VStack>      
@@ -40,14 +42,14 @@ const Posts = () => {
             <Center>
                 <Flex flex={1} flexWrap={"wrap"} flexDirection={"row"} justifyContent={["center", "center", "space-between"]} >
                     {posts.map((post, index) => (  
-                        <WorkTile key={post.id} data={post} />
+                        <WorkTile key={post.id} data={post} cameFrom="Posts" />
                     ))}
                 </Flex>
             </Center>
 
             <Center>
                 <Button mt={12} alignSelf="center" onPress={() => navigation.dispatch( CommonActions.navigate({ name: 'Work',  params: { cameFrom: 'Home' } } ) ) } >
-                    Check out my resume ---
+                    <Text>Check out my resume <ChevronRightIcon size="xs" color="white" /></Text>
                 </Button>
             </Center>
 

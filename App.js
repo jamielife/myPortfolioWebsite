@@ -38,6 +38,7 @@ const colors = {
     900: '#171717',
    }
 }
+
 export const theme = extendTheme({ config, colors });
 /* Fix
 {
@@ -69,10 +70,10 @@ function WorkDrawer() {
   );
 }
 
-function WorkDetailDrawer() {
+function WorkDetailDrawer({route}) {
   return (
     <View alignItems="center" _dark={{ bg: "trueGray.900" }} _light={{ bg: "primary.50" }}>
-      <WorkDetail />   
+      <WorkDetail data={route} key={route.key} />   
     </View>
   );
 }
@@ -82,21 +83,6 @@ function PostsDrawer() {
     <View alignItems="center" _dark={{ bg: "trueGray.900" }} _light={{ bg: "primary.50" }}>
       <Posts />
     </View>
-  );
-}
-
-function CustomDrawerContent(props) {
-  const bg = useColorModeValue(colors.primary[50], colors.primary[900]);
-  const text = useColorModeValue(colors.primary[900], colors.primary[50]);  
-
-  return (
-    <DrawerContentScrollView {...props}>
-      <DrawerItemList {...props} />
-      <DrawerItem label="Resume" inactiveTintColor={ text } onPress={ ()=>{ Linking.openURL('https://htmyell.com')} } />
-      <DrawerItem label="Close drawer" inactiveTintColor={ text } onPress={() => props.navigation.closeDrawer()} />
-      <DrawerItem label="Icon={({ focused, color, size }) => <Icon color={color} size={size} name={focused ? 'heart' : 'heart-outline'} />}"  
-                  inactiveTintColor={ text } onPress={() => props.navigation.closeDrawer()} />
-    </DrawerContentScrollView>
   );
 }
 
@@ -112,6 +98,21 @@ const customDrawOptions = {
   headerBlurEffect: "regular",
   headerTransparent: true
 }  
+
+function CustomDrawerContent(props) {
+  const bg = useColorModeValue(colors.primary[50], colors.primary[900]);
+  const text = useColorModeValue(colors.primary[900], colors.primary[50]);  
+
+  return (
+    <DrawerContentScrollView {...props}>
+      <DrawerItemList {...props} />
+      <DrawerItem label="Resume" inactiveTintColor={ text } onPress={ ()=>{ Linking.openURL('https://htmyell.com')} } />
+      <DrawerItem label="Close drawer" inactiveTintColor={ text } onPress={() => props.navigation.closeDrawer()} />
+      <DrawerItem label="Icon={({ focused, color, size }) => <Icon color={color} size={size} name={focused ? 'heart' : 'heart-outline'} />}"  
+                  inactiveTintColor={ text } onPress={() => props.navigation.closeDrawer()} />
+    </DrawerContentScrollView>
+  );
+}
 
 function DrawerMenu({colors}) {
 const bg = useColorModeValue(colors.primary[50], colors.primary[900]);
@@ -139,7 +140,8 @@ function WorkMenu(){
   const bg = useColorModeValue(colors.primary[50], colors.primary[900]);
   const text = useColorModeValue(colors.primary[900], colors.primary[50]);
   return (
-    <Stack.Navigator useLegacyImplementation 
+    <Stack.Navigator initialRouteName="WorkOverview" 
+      useLegacyImplementation
       screenOptions={{
         headerShown: true, 
         drawerPosition: 'right',
@@ -148,11 +150,13 @@ function WorkMenu(){
         drawerInactiveTintColor: text,
         drawerStyle: { backgroundColor: bg, },        
       }} >
-      <Stack.Screen name="Work"  component={WorkDrawer} options={{ headerShown: false }}  />
-      <Stack.Screen name="WorkDetail" component={WorkDetailDrawer} options={{ headerShown: false }}  />
+      <Stack.Screen name="WorkOverview" component={WorkDrawer}       options={{ headerShown: false }} />
+      <Stack.Screen name="WorkDetail"   component={WorkDetailDrawer} options={{ headerShown: false }} />
     </Stack.Navigator>  
   );
 }
+
+//onStateChange={(state) => console.log('New state is', state)}
 
 export default function App() {
   return (

@@ -1,6 +1,6 @@
-import {Text, Container, Icon, Flex, Avatar, Button, Link, HStack, Center, Heading, VStack, ScrollView  } from "native-base";
+import { Text, Container, Icon, Flex, Avatar, Button, Link, HStack, Center, Heading, VStack, ScrollView, ChevronRightIcon } from "native-base";
 import { useNavigation, CommonActions  } from '@react-navigation/native';
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import { Linking } from "react-native";
 import Bowl from "../components/Bowl";
 import Footer from "../components/Footer";
@@ -35,7 +35,7 @@ const Home = () => {
 
                 <Text fontSize={16} textAlign={"justify"}>Hello! My name is Jamie and I'm full stack web and app developer based outta Richmond, VA. In my years in marketing I've worn a lot of hats, including designer, developer, systems engineer, photographer, videogropher, project manager, product manager, and solutions architect and I love every minute of it! When I'm not online, you can find me on my bike, on my drumset, or making something on the stove top.</Text>
                 <Button my={3} alignSelf="center" onPress={() => navigation.dispatch( CommonActions.navigate({ name: 'Work',  params: { cameFrom: 'Home' } } ) ) } >
-                    Check out my work ---
+                    <Text>Check out my work <ChevronRightIcon size="xs" color="white" /></Text>
                 </Button>
                 {/* <Button title="Toggle drawer" onPress={() => navigation.toggleDrawer()}>Toggle</Button> */}
             </VStack>

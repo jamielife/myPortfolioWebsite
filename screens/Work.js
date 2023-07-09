@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import {Text, Flex, Button, Center, Heading, VStack, ScrollView } from "native-base";
+import { Text, Flex, Button, Center, Heading, VStack, ScrollView, ChevronRightIcon } from "native-base";
 import supabase from "../supabase";
 import WorkTile from "../components/WorkTile";
 import Bowl from "../components/Bowl";
@@ -25,7 +25,6 @@ const Work = () => {
 
         return () => {
             componentMounted.current = false; 
-
         };
     }, []);
 
@@ -36,21 +35,21 @@ const Work = () => {
                 <Heading mt={headings.mt} mb={headings.mb} pb={headings.pb} size={headings.size} borderBottomWidth={headings.bbw} borderBottomColor={headings.bbc} alignSelf={"flex-start"}>
                     Work
                 </Heading>
-                <Text fontSize={16} textAlign={"justify"}>Hello! My name is Jamie and I'm full stack web and app developer based outta Richmond, VA. In my years in marketing I've worn a lot of hats, including designer, developer, systems engineer, photographer, videogropher, project manager, product manager, and solutions architect and I love every minute of it! When I'm not online, you can find me on my bike, on my drumset, or making something on the stove top.</Text>            
+                <Text fontSize={16} textAlign={"justify"}>Featured work, personal projects, and other such spectacles.</Text>
             </VStack>      
 
             {/* Work Component */}
             <Center>
                 <Flex flex={1} flexWrap={"wrap"} flexDirection={"row"} justifyContent={["center", "center", "space-between"]} >
                     {works.map((work, index) => (  
-                        <WorkTile key={work.id} data={work} />
+                        <WorkTile key={work.id} data={work} cameFrom="Work" />
                     ))}
                 </Flex>
             </Center>
 
             <Center>
                 <Button mt={12} alignSelf="center" onPress={() => navigation.dispatch( CommonActions.navigate({ name: 'Work',  params: { cameFrom: 'Work' } } ) ) } >
-                    Check out my resume ---
+                    <Text>Check out my resume <ChevronRightIcon size="xs" color="white" /></Text>
                 </Button>
             </Center>
 

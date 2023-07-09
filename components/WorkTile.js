@@ -1,12 +1,21 @@
-import {Text, Image, AspectRatio, Stack, Pressable, Heading } from "native-base";
+import { Linking } from "react-native";
+import {Text, Image, Stack, Pressable, Heading } from "native-base";
 import { useNavigation, CommonActions  } from '@react-navigation/native';
 
-function WorkTile({data}) {
+function WorkTile({data, cameFrom}) {
     const navigation = useNavigation(); 
+    console.log(cameFrom);
+
     return ( 
         <Pressable mt={5} shadow="2" rounded="lg" w={{ base: 96, md: 72, lg: 48 }} 
-            _light={{ bg: "coolGray.50" }} _dark={{ bg: "gray.800" }} overflow={"hidden"}
-            onPress={() => navigation.dispatch( CommonActions.navigate({ name: 'WorkDetail',  params: { cameFrom: 'Work' } } ) ) } >
+            _light={{ bg: "coolGray.50" }} _dark={{ bg: "gray.800" }} overflow={"hidden"}            
+            onPress={() => {
+                if(cameFrom == "Work") navigation.dispatch( CommonActions.navigate({ name: 'WorkDetail', initial: false,  params: { cameFrom: cameFrom, workDetail: data } } ) ) 
+                else{ Linking.openURL(data.url) }
+            }}
+            //onPress={() => navigation.navigate( "WorkDetail", { initial: false, workDetail: data, cameFrom: 'Work' })} 
+            >              
+              
                 <Image w={200} h={110} key={data.id} resizeMode="cover" source={{
                     uri: data.imageFull
                 }} alt={data.blurb} />

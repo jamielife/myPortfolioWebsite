@@ -1,6 +1,6 @@
 import React from "react";
 import { Linking } from "react-native";
-import { useTheme, useColorMode, useColorModeValue, HStack, Flex, Pressable, Button, Icon, IconButton, Text, Hidden, useBreakpointValue, Link } from "native-base";
+import { useTheme, useColorModeValue, HStack, Icon, IconButton, Hidden, useBreakpointValue, Link } from "native-base";
 import { useNavigation, CommonActions  } from '@react-navigation/native';
 import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
 
@@ -42,7 +42,7 @@ function LeftNav() {
                     <Link mt={1} _text={{ fontSize: "md" }} _hover={ menuItem.hover } isUnderlined={false} onPress={() => navigation.dispatch( CommonActions.navigate({ name: 'Work' }))}>Work</Link>
                     <Link mt={1} _text={{ fontSize: "md" }} _hover={ menuItem.hover } isUnderlined={false} onPress={() => navigation.dispatch( CommonActions.navigate({ name: 'Posts' }))}>Posts</Link>
                     <Link mt={1} _text={{ fontSize: "md" }} _hover={ menuItem.hover } isUnderlined={false} onPress={() => { Linking.openURL(require('../assets/me.jpg'))}}>Resume</Link>
-                    <IconButton mt={2} borderRadius="none" 
+                    <IconButton mt={2} borderRadius="none" zIndex={10}
                         _hover={ menuItem.hover } _pressed={menuItem.pressed} 
                         icon={<Icon as={MaterialCommunityIcons} name="github" size="xl" color={iconColor} />} 
                         onPress={() => { Linking.openURL("https://github.com/jamielife/portfolio")}} />
