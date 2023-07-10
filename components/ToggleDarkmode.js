@@ -23,7 +23,6 @@ function App() {
         try{
             let val = await localStorage.getItem('@color-mode');
             val === 'dark' ? 'dark' : 'light';
-            console.log(val);
             if (val == 'light'){
                 startAnimToOn(0);
                 isOnRef.current = true;
