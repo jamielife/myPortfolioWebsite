@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
 import { StyleSheet, StatusBar, Linking, Animated } from 'react-native';
 import * as React from 'react';
-import { View, NativeBaseProvider, extendTheme, useColorModeValue } from "native-base";
+import { View, NativeBaseProvider, extendTheme, useColorModeValue, ColorMode, StorageManager } from "native-base";
 import { NavigationContainer, useFocusEffect } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem  } from '@react-navigation/drawer';
@@ -40,6 +40,19 @@ const colors = {
 }
 
 export const theme = extendTheme({ config, colors });
+
+const colorModeManager = {
+  get: async () => {
+    let val = localStorage.getItem('@color-mode');
+    if (val === null) val = 'dark'; 
+    return val === 'dark' ? 'dark' : 'light';
+  },
+  set: async (value) => {
+    let strValue = value ? value.toString() : '';
+    localStorage.setItem('@color-mode', strValue);
+  },
+};
+
 /* Fix
 {
   50: '#ffe2e7',
@@ -160,7 +173,7 @@ function WorkMenu(){
 
 export default function App() {
   return (
-    <NativeBaseProvider theme={theme}>
+    <NativeBaseProvider colorModeManager={colorModeManager} theme={theme}>
       <NavigationContainer>
         <StatusBar backgroundColor="rgb(0, 52, 72)" barStyle="light-csontent" hidden={false} />
         <DrawerMenu colors={colors} />
