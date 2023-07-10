@@ -49,7 +49,7 @@ const Posts = () => {
 
             <Center>
                 <Button mt={12} alignSelf="center" onPress={() => navigation.dispatch( CommonActions.navigate({ name: 'Work',  params: { cameFrom: 'Home' } } ) ) } >
-                    <Text>Check out my resume <ChevronRightIcon size="xs" color="white" /></Text>
+                    <Text color={"white"}>Check out my resume <ChevronRightIcon size="xs" color="white" /></Text>
                 </Button>
             </Center>
 

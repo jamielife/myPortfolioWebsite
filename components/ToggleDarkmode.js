@@ -1,6 +1,6 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Text, StyleSheet, Animated, TouchableOpacity, Easing } from 'react-native';
-import { Box, Icon, useColorMode, NativeBaseProvider, StorageManager } from "native-base";
+import { Box, Icon, useColorMode, StorageManager } from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
 
 function App() {
@@ -24,10 +24,10 @@ function App() {
             let val = await localStorage.getItem('@color-mode');
             val === 'dark' ? 'dark' : 'light';
             if (val == 'light'){
-                startAnimToOn(0);
+                startAnimToOn();
                 isOnRef.current = true;
             } else {
-                startAnimToOff(0);
+                startAnimToOff();
                 isOnRef.current = false;
             }
         } catch (error){
@@ -59,11 +59,11 @@ function App() {
 
     const onPress = () => {
         if (isOnRef.current) {                 
-            startAnimToOff(600);
+            startAnimToOff();
             isOnRef.current = false;
             toggleColorMode();
         } else {
-            startAnimToOn(600);
+            startAnimToOn();
             isOnRef.current = true;
             toggleColorMode();
         }

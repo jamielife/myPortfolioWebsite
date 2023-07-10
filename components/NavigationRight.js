@@ -1,5 +1,5 @@
 import React from "react";
-import { IconButton, Icon, Hidden, HStack, useBreakpointValue, useTheme, useColorModeValue } from "native-base";
+import { IconButton, Icon, Hidden, HStack, useBreakpointValue, useColorModeValue } from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation, DrawerActions } from '@react-navigation/native';
 import ToggleDarkmode from './ToggleDarkmode';
@@ -8,7 +8,6 @@ import ToggleLanguage from "./ToggleLanguage";
 function RightNav() {
     const flexMargin = useBreakpointValue(navMargins);
     const navigation = useNavigation();
-    const { colors } = useTheme();    
     const iconColor = useColorModeValue("black", "white");
 
     return <>
