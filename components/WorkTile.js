@@ -4,8 +4,7 @@ import { useNavigation, CommonActions  } from '@react-navigation/native';
 
 function WorkTile({data, cameFrom}) {
     const navigation = useNavigation(); 
-    console.log(cameFrom);
-
+    
     return ( 
         <Pressable mt={5} shadow="2" rounded="lg" w={{ base: 96, md: 72, lg: 48 }} 
             _light={{ bg: "coolGray.50" }} _dark={{ bg: "gray.800" }} overflow={"hidden"}            

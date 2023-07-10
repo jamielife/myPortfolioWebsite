@@ -1,7 +1,7 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Linking } from "react-native";
 import { useTheme, useColorModeValue, HStack, Icon, IconButton, Hidden, useBreakpointValue, Link } from "native-base";
-import { useNavigation, CommonActions  } from '@react-navigation/native';
+import { useNavigation, CommonActions, NavigationState, useNavigationContainerRef  } from '@react-navigation/native';
 import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
 
 function LeftNav() {
