@@ -69,7 +69,7 @@ const colorModeManager = {
 
 function HomeDrawer() {
   return (
-    <View alignItems="center" _dark={{ bg: "trueGray.900" }} _light={{ bg: "primary.50" }}>
+    <View alignItems="center" _dark={{ bg: "trueGray.900" }} _light={{ bg: "primary.50" }} flex={1}>
       <Home />
     </View>
   );
@@ -77,7 +77,7 @@ function HomeDrawer() {
 
 function WorkDrawer() {
   return (
-    <View alignItems="center" _dark={{ bg: "trueGray.900" }} _light={{ bg: "primary.50" }}>
+    <View alignItems="center" _dark={{ bg: "trueGray.900" }} _light={{ bg: "primary.50" }} flex={1}>
       <Work />   
     </View>
   );
@@ -85,7 +85,7 @@ function WorkDrawer() {
 
 function WorkDetailDrawer({route}) {
   return (
-    <View alignItems="center" _dark={{ bg: "trueGray.900" }} _light={{ bg: "primary.50" }}>
+    <View alignItems="center" _dark={{ bg: "trueGray.900" }} _light={{ bg: "primary.50" }} flex={1}>
       <WorkDetail data={route} key={route.key} />   
     </View>
   );
@@ -93,7 +93,7 @@ function WorkDetailDrawer({route}) {
 
 function PostsDrawer() {
   return (
-    <View alignItems="center" _dark={{ bg: "trueGray.900" }} _light={{ bg: "primary.50" }}>
+    <View alignItems="center" _dark={{ bg: "trueGray.900" }} _light={{ bg: "primary.50" }} flex={1}>
       <Posts />
     </View>
   );
@@ -173,8 +173,8 @@ function WorkMenu(){
 
 export default function App() {
   return (
-    <NativeBaseProvider colorModeManager={colorModeManager} theme={theme}>
-      <NavigationContainer>
+    <NativeBaseProvider colorModeManager={colorModeManager} theme={theme} flex={1} >
+      <NavigationContainer flex={1}>
         <StatusBar backgroundColor="rgb(0, 52, 72)" barStyle="light-csontent" hidden={false} />
         <DrawerMenu colors={colors} />
       </NavigationContainer>
