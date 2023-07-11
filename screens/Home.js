@@ -18,7 +18,7 @@ const Home = () => {
 
                 <Flex alignItems="center" mt={-225}>
                     <Center m={4} p={4} px={6} rounded="md" _dark={{ bg: "coolGray.700:alpha.70" }} _light={{ bg: "primary.50:alpha.50" }}>
-                        {i18n.t('welcomeBar')}
+                        {i18n.t('homePage.welcomeBar')}
                     </Center>
                 </Flex>
 
@@ -26,7 +26,7 @@ const Home = () => {
                 <HStack p={5} justifyContent={"space-between"}>
                     <Container alignSelf={"flex-start"}>
                         <Heading size={"xl"}>{i18n.t('name')}</Heading>
-                        <Text fontSize={"md"}>Solution Architect / Developer / Designer </Text>
+                        <Text fontSize={"md"}>{i18n.t('homePage.titles')}</Text>
                     </Container>
                     <Link href={require('../assets/me.jpg')} isExternal>
                         <Avatar borderWidth={2} mt={0} alignSelf="center" size={[20, 110]} source={ require("../assets/me.jpg")} > Jamie </Avatar>
@@ -36,16 +36,13 @@ const Home = () => {
                 {/* Work */}
                 <VStack space={2} p={5} pt={0}  justifyContent={"space-between"}>
                     <Heading mt={headings.mt} mb={headings.mb} pb={headings.pb} size={headings.size} borderBottomWidth={headings.bbw} borderBottomColor={headings.bbc} alignSelf={"flex-start"} >
-                        About
+                    {i18n.t('homePage.aboutTitle')}
                     </Heading>
 
-                    <Text fontSize={16} textAlign={"justify"}>Hello! My name is Jamie and I'm full stack web and app developer based outta Richmond, VA. In my years in marketing I've worn a lot of hats, including designer, developer, systems engineer, photographer, videogropher, project manager, product manager, and solutions architect and I love every minute of it! When I'm not online, you can find me on my bike, on my drumset, or making something on the stove top.</Text>                    
+                    <Text fontSize={16} textAlign={"justify"}>{i18n.t('homePage.about')}</Text>                    
                     <Button my={3} alignSelf="center" onPress={() => navigation.dispatch( CommonActions.navigate({ name: 'Work',  params: { cameFrom: 'Home' } } ) ) } >
-                        <Text color={"white"}>Check out my work <ChevronRightIcon size="xs" color="white" /></Text>
+                        <Text color={"white"}>{i18n.t('homePage.workCTA')} <ChevronRightIcon size="xs" color="white" /></Text>
                     </Button>
-
-                    {/* { locale.startsWith("en") !== true ? <Button title="Switch to English" onPress={() => setLocale("en")}>English</Button> : undefined }
-                    { locale !== "ja" ? <Button title="Switch to Japanese" onPress={() => setLocale("ja")}>Japanese</Button> : undefined } */}
 
                 </VStack>
                 
@@ -53,24 +50,23 @@ const Home = () => {
                 {/* Bio */}
                 <VStack p={5} pt={0}>
                     <Heading mt={headings.mt} mb={headings.mb} pb={headings.pb} size={headings.size} borderBottomWidth={headings.bbw} borderBottomColor={headings.bbc} alignSelf={"flex-start"} >
-                        Bio
+                        {i18n.t('homePage.timeLineTitle')}
                     </Heading>
                     <VStack>
                         <HStack alignItems={"baseline"} mb={timeline.mb}>
-                            <Heading size={"md"}>1982</Heading><Text fontSize={16} ml={timeline.ml}>Born & Raised</Text>
+                            <Heading size={"md"}>1982</Heading><Text fontSize={16} ml={timeline.ml}>{i18n.t('homePage.y1982')}</Text>
                         </HStack>
 
                         <HStack alignItems={"baseline"} mb={timeline.mb}>
-                            <Heading size={"md"}>1998</Heading><Text fontSize={16} ml={timeline.ml}>Built my first website (RIP Geocities.com)</Text>
+                            <Heading size={"md"}>1998</Heading><Text fontSize={16} ml={timeline.ml}>{i18n.t('homePage.y1998')}</Text>
                         </HStack>                    
 
                         <HStack alignItems={"baseline"} mb={timeline.mb}>
-                            <Heading size={"md"}>2000</Heading><Text fontSize={16} ml={timeline.ml}>Started first job as we web designer in Portsmouth, VA at a company called SuiteSites.com</Text>
+                            <Heading size={"md"}>2000</Heading><Text fontSize={16} ml={timeline.ml}>{i18n.t('homePage.y2000')}</Text>
                         </HStack>
-
-
+                        
                         <HStack alignItems={"baseline"} mb={timeline.mb}>
-                            <Heading size={"md"}>2008</Heading><Text fontSize={16} ml={timeline.ml}>Created <Link href="https://htmyell.com" isExternal>Htmyell Design and Development</Link> freelance company</Text>
+                            <Heading size={"md"}>2008</Heading><Text fontSize={16} ml={timeline.ml}>{i18n.t('homePage.y2008.part1')}<Link href='https://htmyell.com' isExternal>{i18n.t('homePage.y2008.part2')}</Link>{i18n.t('homePage.y2008.part3')}</Text>
                         </HStack>                    
                     </VStack>            
                 </VStack>
@@ -79,16 +75,16 @@ const Home = () => {
                 {/* I Love */}
                 <VStack space={2} p={5} pt={0}  justifyContent={"space-between"}>
                     <Heading mt={headings.mt} mb={headings.mb} pb={headings.pb} size={headings.size} borderBottomWidth={headings.bbw} borderBottomColor={headings.bbc} alignSelf={"flex-start"} >
-                        I <Icon as={MaterialCommunityIcons } name="cards-heart" color={iconColor} size="md"  mt={.5} mr={1} />
+                        {i18n.t('homePage.iHeartTitle')} <Icon as={MaterialCommunityIcons } name="cards-heart" color={iconColor} size="md"  mt={.5} mr={1} />
                     </Heading>            
-                    <Text fontSize={16}>Design, Cooking, Development, Music, <Link href="https://open.spotify.com/album/6ZsEY7hIq4av7P5MzHnXv6" isExternal>Drumming</Link>, Cycling, Language Learning, Photography</Text>
+                    <Text fontSize={16}>{i18n.t('homePage.iHeart.part1')}<Link href='https://open.spotify.com/album/6ZsEY7hIq4av7P5MzHnXv6' isExternal>{i18n.t('homePage.iHeart.part2')}</Link>{i18n.t('homePage.iHeart.part3')}</Text>                    
                 </VStack>
 
 
                 {/* Socials */}
                 <VStack space={2} p={5} pt={0}  justifyContent={"space-between"}>
                     <Heading mt={headings.mt} mb={headings.mb} pb={headings.pb} size={headings.size} borderBottomWidth={headings.bbw} borderBottomColor={headings.bbc} alignSelf={"flex-start"} >
-                        Socials
+                        {i18n.t('homePage.socialMediaTitle')}
                     </Heading>
                     <HStack justifyContent={"space-evenly"}>
                         <Button onPress={() => { Linking.openURL("https://github.com/jamielife/")}}
@@ -103,9 +99,9 @@ const Home = () => {
                 {/* Site */}
                 <VStack space={2} p={5} pt={0}  justifyContent={"space-between"}>
                     <Heading mt={headings.mt} mb={headings.mb} pb={headings.pb} size={headings.size} borderBottomWidth={headings.bbw} borderBottomColor={headings.bbc} alignSelf={"flex-start"} >
-                        Site
+                        {i18n.t('homePage.siteTitle')}
                     </Heading>            
-                    <Text fontSize={16}>This website was lovingly built using React Native, NativeBase, Threejs, Expo, Supabase, and a few other technologies. You can see the entire source at <Link href="https://github.com/jamielife/portfolio" isExternal>Github</Link></Text>
+                    <Text fontSize={16}>{i18n.t('homePage.siteInfo.part1')}<Link href='https://github.com/jamielife/portfolio' isExternal>{i18n.t('homePage.siteInfo.part2')}</Link>{i18n.t('homePage.siteInfo.part3')}</Text>
                 </VStack>            
 
                 <Footer />

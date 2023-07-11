@@ -4,10 +4,12 @@ import supabase from "../supabase";
 import WorkTile from "../components/WorkTile";
 import Bowl from "../components/Bowl";
 import Footer from "../components/Footer";
+import { useI18n } from '../components/LangContext';
 
 const Posts = () => {
     const [posts, setPosts] = useState([]);
     const componentMounted = useRef(true);
+    const i18n = useI18n();
 
     useEffect(() => {
         const fetchPosts = async () => {
@@ -34,9 +36,9 @@ const Posts = () => {
                 <Bowl />
                 <VStack pb={5} pt={0} mt={-200} justifyContent={"space-between"}>
                     <Heading mt={headings.mt} mb={headings.mb} pb={headings.pb} size={headings.size} borderBottomWidth={headings.bbw} borderBottomColor={headings.bbc} alignSelf={"flex-start"}>
-                        Posts
+                        {i18n.t('posts')}
                     </Heading>
-                    <Text fontSize={16} textAlign={"justify"}>Latest posts & happenings in my life. </Text>            
+                    <Text fontSize={16} textAlign={"justify"}>{i18n.t('postsPage.postsIntro')}</Text>            
                 </VStack>      
 
                 {/* Posts Component */}
@@ -50,7 +52,7 @@ const Posts = () => {
 
                 <Center>
                     <Button mt={12} alignSelf="center" onPress={() => navigation.dispatch( CommonActions.navigate({ name: 'Work',  params: { cameFrom: 'Home' } } ) ) } >
-                        <Text color={"white"}>Check out my resume <ChevronRightIcon size="xs" color="white" /></Text>
+                        <Text color={"white"}>{i18n.t('postsPage.resumeCTA')} <ChevronRightIcon size="xs" color="white" /></Text>
                     </Button>
                 </Center>
 
