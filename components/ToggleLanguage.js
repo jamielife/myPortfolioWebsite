@@ -1,11 +1,13 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useContext } from 'react';
 import { StyleSheet, Animated, TouchableOpacity, Easing } from 'react-native';
 import { useColorMode } from "native-base";
 import { IconFlagJapan, IconFlagUnitedStates} from '../assets/icon-flags';
+import { useLang, useLangUpdate } from './LangContext';
 
 function ToggleLanguage() {
     const positionButton = useRef(new Animated.Value(0)).current;
     const isOnRef= useRef(false);
+    const toggleLocale = useLangUpdate();
 
     const positionInterPol    = positionButton.interpolate({inputRange:[0, 1],outputRange:[0, -50]});
     const positionInterPol2   = positionButton.interpolate({inputRange:[0, 1],outputRange:[50, 0]});    
@@ -39,12 +41,14 @@ function ToggleLanguage() {
     const onPress = () => {
         if (isOnRef.current) {
             startAnimToOff();
-            isOnRef.current = false;
+            isOnRef.current = false;            
             //toggleColorMode();
+            toggleLocale("en")
         } else {
             startAnimToOn();
             isOnRef.current = true;
             //toggleColorMode();
+            toggleLocale("ja")
         }
     };
 

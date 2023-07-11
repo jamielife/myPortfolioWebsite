@@ -1,27 +1,31 @@
 import { Text, Container, Icon, Flex, Avatar, Button, Link, HStack, Center, Heading, VStack, ScrollView, ChevronRightIcon, useColorModeValue, View } from "native-base";
 import { useNavigation, CommonActions  } from '@react-navigation/native';
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
-import { Linking } from "react-native";
+import { Linking, } from "react-native";
 import Bowl from "../components/Bowl";
 import Footer from "../components/Footer";
+import { useI18n } from '../components/LangContext';
 
 const Home = () => {
     const navigation = useNavigation(); 
     const iconColor = useColorModeValue("black", "white");
-        
+    const i18n = useI18n();
+
     return (        
         <ScrollView w={"100%"}>
             <View w={[400, 480, 640]} alignSelf={"center"}>
                 <Bowl />
+
                 <Flex alignItems="center" mt={-225}>
-                    <Center m={4} p={4} px={6} rounded="md" _dark={{ bg: "coolGray.700:alpha.70" }} _light={{ bg: "primary.50:alpha.50" }}
-                    >Hello, I'm a web & app developer based in Richmond, VA!</Center>
+                    <Center m={4} p={4} px={6} rounded="md" _dark={{ bg: "coolGray.700:alpha.70" }} _light={{ bg: "primary.50:alpha.50" }}>
+                        {i18n.t('welcomeBar')}
+                    </Center>
                 </Flex>
 
                 {/* Header */}
                 <HStack p={5} justifyContent={"space-between"}>
                     <Container alignSelf={"flex-start"}>
-                        <Heading size={"xl"}>Jamie Taylor</Heading>
+                        <Heading size={"xl"}>{i18n.t('name')}</Heading>
                         <Text fontSize={"md"}>Solution Architect / Developer / Designer </Text>
                     </Container>
                     <Link href={require('../assets/me.jpg')} isExternal>
@@ -35,11 +39,14 @@ const Home = () => {
                         About
                     </Heading>
 
-                    <Text fontSize={16} textAlign={"justify"}>Hello! My name is Jamie and I'm full stack web and app developer based outta Richmond, VA. In my years in marketing I've worn a lot of hats, including designer, developer, systems engineer, photographer, videogropher, project manager, product manager, and solutions architect and I love every minute of it! When I'm not online, you can find me on my bike, on my drumset, or making something on the stove top.</Text>
+                    <Text fontSize={16} textAlign={"justify"}>Hello! My name is Jamie and I'm full stack web and app developer based outta Richmond, VA. In my years in marketing I've worn a lot of hats, including designer, developer, systems engineer, photographer, videogropher, project manager, product manager, and solutions architect and I love every minute of it! When I'm not online, you can find me on my bike, on my drumset, or making something on the stove top.</Text>                    
                     <Button my={3} alignSelf="center" onPress={() => navigation.dispatch( CommonActions.navigate({ name: 'Work',  params: { cameFrom: 'Home' } } ) ) } >
                         <Text color={"white"}>Check out my work <ChevronRightIcon size="xs" color="white" /></Text>
                     </Button>
-                    {/* <Button title="Toggle drawer" onPress={() => navigation.toggleDrawer()}>Toggle</Button> */}
+
+                    {/* { locale.startsWith("en") !== true ? <Button title="Switch to English" onPress={() => setLocale("en")}>English</Button> : undefined }
+                    { locale !== "ja" ? <Button title="Switch to Japanese" onPress={() => setLocale("ja")}>Japanese</Button> : undefined } */}
+
                 </VStack>
                 
 

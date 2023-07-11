@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import { StyleSheet, StatusBar, Linking, Animated } from 'react-native';
-import * as React from 'react';
+import React, {useState } from 'react';
 import { View, NativeBaseProvider, extendTheme, useColorModeValue, ColorMode, StorageManager } from "native-base";
 import { NavigationContainer, useFocusEffect } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -13,6 +13,8 @@ import Posts    from './screens/Posts';
 import LeftNav  from './components/NavigationLeft';
 import RightNav from './components/NavigationRight';
 import WorkDetail from './screens/WorkDetail';
+
+import { LangProvider } from './components/LangContext';
 
 //global.intro = "Hello! I'm am app developer based in Richmond, VA!";
 global.navMargins = { base: 2, sm: 8,  md: 12, lg: 32, xl: 64 };
@@ -169,15 +171,16 @@ function WorkMenu(){
   );
 }
 
-//onStateChange={(state) => console.log('New state is', state)}
-
 export default function App() {
+  
   return (
-    <NativeBaseProvider colorModeManager={colorModeManager} theme={theme} flex={1} >
-      <NavigationContainer flex={1}>
-        <StatusBar backgroundColor="rgb(0, 52, 72)" barStyle="light-csontent" hidden={false} />
-        <DrawerMenu colors={colors} />
-      </NavigationContainer>
+    <NativeBaseProvider colorModeManager={colorModeManager} theme={theme} flex={1}>
+      <LangProvider>
+         <NavigationContainer flex={1}>
+          <StatusBar backgroundColor="rgb(0, 52, 72)" barStyle="light-csontent" hidden={false} />
+          <DrawerMenu colors={colors} />
+        </NavigationContainer>
+      </LangProvider>
     </NativeBaseProvider>
   );
 }

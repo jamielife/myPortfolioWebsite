@@ -10,9 +10,7 @@ function LeftNav() {
     const { colors } = useTheme();    
     const iconColor  = useColorModeValue("black", "white");
     const hoverColor = useColorModeValue(colors.primary[300], colors.primary[600]);
-
-    console.log(hoverColor);
-
+    
     //Styles
     const menuItem = {
         hover: {
