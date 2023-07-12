@@ -1,8 +1,8 @@
-import React, { useRef, useState, useContext } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { StyleSheet, Animated, TouchableOpacity, Easing } from 'react-native';
 import { useColorMode } from "native-base";
 import { IconFlagJapan, IconFlagUnitedStates} from '../assets/icon-flags';
-import { useLang, useLangUpdate } from './LangContext';
+import { useLangUpdate } from './LangContext';
 
 function ToggleLanguage() {
     const positionButton = useRef(new Animated.Value(0)).current;
@@ -14,6 +14,28 @@ function ToggleLanguage() {
     const initialOpacityOn    = positionButton.interpolate({inputRange:[0, 1],outputRange:[0, 1]});
     const initialOpacityOff   = positionButton.interpolate({inputRange:[0, 1],outputRange:[1, 0]});    
     const backgroundColorAnim = positionButton.interpolate({inputRange:[0, 1],outputRange:["#000", "#81b0ff"]});    
+
+    //check for previous cached selection and overwrite if necessary
+    async function isLocaleSet(){
+        try{
+            let locale = await localStorage.getItem('@locale');
+            console.log(locale);
+            if(locale.startsWith("en")) locale = "en";            
+
+            if (locale == 'ja'){
+                startAnimToOn();
+                isOnRef.current = true;
+            } else {
+                startAnimToOff();
+                isOnRef.current = false;
+            } 
+        } catch (error){
+            console.log(error);
+        }
+    }    
+    useEffect(() => {  
+        isLocaleSet();
+    });  
 
     const {
         colorMode,

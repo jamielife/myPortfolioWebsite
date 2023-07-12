@@ -22,7 +22,6 @@ function App() {
     async function getColorMode(){
         try{
             let val = await localStorage.getItem('@color-mode');
-            
             val === 'dark' ? 'dark' : 'light';
             if (val == 'light'){
                 startAnimToOn();
