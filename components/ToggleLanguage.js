@@ -19,7 +19,6 @@ function ToggleLanguage() {
     async function isLocaleSet(){
         try{
             let locale = await localStorage.getItem('@locale');
-            console.log(locale);
             if(locale.startsWith("en")) locale = "en";            
 
             if (locale == 'ja'){

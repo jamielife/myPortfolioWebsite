@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Text, Flex, Button, Center, Heading, VStack, ScrollView, ChevronRightIcon, View } from "native-base";
+import { Linking } from "react-native";
 import supabase from "../supabase";
 import WorkTile from "../components/WorkTile";
 import Bowl from "../components/Bowl";
@@ -51,7 +52,7 @@ const Work = () => {
                 </Center>
 
                 <Center>
-                    <Button mt={12} alignSelf="center" onPress={() => navigation.dispatch( CommonActions.navigate({ name: 'Work',  params: { cameFrom: 'Work' } } ) ) } >
+                    <Button mt={12} alignSelf="center" onPress={ () => { Linking.openURL(require('../assets/resume-jamie-taylor.pdf')) } } >
                         <Text color={"white"}>{i18n.t('workPage.resumeCTA')} <ChevronRightIcon size="xs" color="white" /></Text>
                     </Button>
                 </Center>
