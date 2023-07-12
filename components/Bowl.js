@@ -6,6 +6,7 @@ delete global._WORKLET_RUNTIME;
 import { GLView } from "expo-gl";
 import OrbitControlsView from 'expo-three-orbit-controls';
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { Center, useBreakpointValue } from "native-base";
 
 const Bowl = () => {    
     const [camera, setCamera] = useState();
@@ -66,10 +67,18 @@ const Bowl = () => {
         render();
     };    
 
+    const widthAndHeight = useBreakpointValue({
+        base: 400,
+        sm: 480,
+        md: 640,
+      });    
+
     return (
+        <Center style={{ margin: "0 auto", width: "100%"}}>
             <OrbitControlsView style={{ flex: 1 }} camera={camera}>
-                <GLView onContextCreate={onContextCreate} style={{width: 640, height: 640 }} />
+                <GLView onContextCreate={onContextCreate} style={{ width: widthAndHeight, height: widthAndHeight }}  />
             </OrbitControlsView>    
+        </Center>
     );
 }
 

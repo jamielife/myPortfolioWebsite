@@ -1,11 +1,12 @@
 import 'react-native-gesture-handler';
 import { StyleSheet, StatusBar, Linking, Animated } from 'react-native';
-import React, {useState } from 'react';
-import { View, NativeBaseProvider, extendTheme, useColorModeValue, ColorMode, StorageManager } from "native-base";
-import { NavigationContainer, useFocusEffect } from '@react-navigation/native';
+import React from 'react';
+import { View, NativeBaseProvider, extendTheme, useColorModeValue, IconButton, Icon } from "native-base";
+import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem  } from '@react-navigation/drawer';
 import { BlurView } from 'expo-blur';
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import Home     from './screens/Home';
 import Work     from './screens/Work';
@@ -121,10 +122,10 @@ function CustomDrawerContent(props) {
   return (
     <DrawerContentScrollView {...props}>
       <DrawerItemList {...props} />
-      <DrawerItem label="Resume" inactiveTintColor={ text } onPress={ ()=>{ Linking.openURL('https://htmyell.com')} } />
-      <DrawerItem label="Close drawer" inactiveTintColor={ text } onPress={() => props.navigation.closeDrawer()} />
-      <DrawerItem label="Icon={({ focused, color, size }) => <Icon color={color} size={size} name={focused ? 'heart' : 'heart-outline'} />}"  
-                  inactiveTintColor={ text } onPress={() => props.navigation.closeDrawer()} />
+      <DrawerItem label="Resume" inactiveTintColor={ text } onPress={ ()=>{ Linking.openURL('https://jamietaylor.me/resume-jamie-taylor.pdf')} } />
+      <DrawerItem label="Source Code" inactiveTintColor={ text } //icon={() => <Icon as={MaterialCommunityIcons} name="github" size="xl"  />}
+        onPress={() => { Linking.openURL("https://github.com/jamielife/")}}>      
+      </DrawerItem>
     </DrawerContentScrollView>
   );
 }

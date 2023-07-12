@@ -32,9 +32,9 @@ const Posts = () => {
 
     return ( 
         <ScrollView w={"100%"}>
-            <View w={[400, 480, 640]} alignSelf={"center"}>
+            <View w={[400, "100%", 640]} alignSelf={"center"}>
                 <Bowl />
-                <VStack pb={5} pt={0} mt={-200} justifyContent={"space-between"}>
+                <VStack p={5} pb={5} pt={0} mt={[-130, -130, -200]} justifyContent={"space-between"}>
                     <Heading mt={headings.mt} mb={headings.mb} pb={headings.pb} size={headings.size} borderBottomWidth={headings.bbw} borderBottomColor={headings.bbc} alignSelf={"flex-start"}>
                         {i18n.t('posts')}
                     </Heading>

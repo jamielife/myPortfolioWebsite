@@ -24,7 +24,7 @@ function WorkTile({data, cameFrom}) {
             //onPress={() => navigation.navigate( "WorkDetail", { initial: false, workDetail: data, cameFrom: 'Work' })} 
             >              
               
-                <Image w={200} h={110} key={data.id} resizeMode="cover" source={{
+                <Image w={"100%"} h={110} key={data.id} resizeMode="cover" source={{
                     uri: data.imageFull
                 }} alt={data.blurb} />
             <Text bold position="absolute" color="coolGray.50" top="0" m={3} mt={2}>

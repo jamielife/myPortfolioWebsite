@@ -32,12 +32,13 @@ function LeftNav() {
     };    
 
     return <>     
-        <HStack alignItems="center" ml={flexMargin}>   
+        <HStack alignItems="center" ml={flexMargin}> 
+            { /* Logo Icon & Name */ } 
             <Link mt={1} _text={{ fontSize: "xl" }} _hover={ menuItem.hover } isUnderlined={false} onPress={() => navigation.dispatch( CommonActions.navigate({ name: 'Home' }))}>
                     <Icon as={MaterialIcons} name="ramen-dining" color={iconColor} size="xl"  mt={.5} mr={1} />
                     {i18n.t('name')}
             </Link>
-            <Hidden from="sm" till="lg" platform={['android','ios']}>
+            <Hidden from="base" till="lg" platform={['android','ios']}>
                 <HStack space={4} ml={6} justifyContent="center" alignItems="center">
                     <Link mt={1} _text={{ fontSize: "md" }} _hover={ menuItem.hover } isUnderlined={false} onPress={() => navigation.dispatch( CommonActions.navigate({ name: 'Work' }))}>{i18n.t('work')}</Link>
                     <Link mt={1} _text={{ fontSize: "md" }} _hover={ menuItem.hover } isUnderlined={false} onPress={() => navigation.dispatch( CommonActions.navigate({ name: 'Posts' }))}>{i18n.t('posts')}</Link>

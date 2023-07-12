@@ -13,12 +13,12 @@ const Home = () => {
 
     return (        
         <ScrollView w={"100%"}>
-            <View w={[400, 480, 640]} alignSelf={"center"}>
+            <View w={[400, "100%", 640]} alignSelf={"center"}>
                 <Bowl />
 
-                <Flex alignItems="center" mt={-225}>
-                    <Center m={4} p={4} px={6} rounded="md" _dark={{ bg: "coolGray.700:alpha.70" }} _light={{ bg: "primary.50:alpha.50" }}>
-                        {i18n.t('homePage.welcomeBar')}
+                <Flex alignItems="center" mt={[-180, -200, -225]}>
+                    <Center m={4} p={4} px={[2,4,6]} rounded="md" textAlign="center" _dark={{ bg: "coolGray.700:alpha.70" }} _light={{ bg: "primary.50:alpha.50" }}>
+                        <Text fontSize={["xs", "sm",]}>{i18n.t('homePage.welcomeBar')}</Text>
                     </Center>
                 </Flex>
 
@@ -86,13 +86,13 @@ const Home = () => {
                     <Heading mt={headings.mt} mb={headings.mb} pb={headings.pb} size={headings.size} borderBottomWidth={headings.bbw} borderBottomColor={headings.bbc} alignSelf={"flex-start"} >
                         {i18n.t('homePage.socialMediaTitle')}
                     </Heading>
-                    <HStack justifyContent={"space-evenly"}>
-                        <Button onPress={() => { Linking.openURL("https://github.com/jamielife/")}}
-                                fontSize={18} px={4} alignSelf={"flex-start"}><Text color={"white"}><Icon as={MaterialCommunityIcons } name="github"    color="white" size="md"  mt={.5} mr={1} /> @jamielife</Text></Button>
-                        <Button onPress={() => { Linking.openURL("https://instagram.com/jamielife/")}}
-                                fontSize={18} px={4} alignSelf={"flex-start"}><Text color={"white"}><Icon as={MaterialCommunityIcons } name="instagram" color="white" size="md"  mt={.5} mr={1} /> @jamielife</Text></Button>
-                        <Button onPress={() => { Linking.openURL("https://www.linkedin.com/in/jvptaylor/")}}
-                                fontSize={18} px={4} alignSelf={"flex-start"}><Text color={"white"}><Icon as={MaterialCommunityIcons } name="linkedin"  color="white" size="md"  mt={.5} mr={1} /> @jvptaylor</Text></Button>
+                    <HStack justifyContent={"space-evenly"} direction={["column", "row", "row"]}>
+                        <Button onPress={() => { Linking.openURL("https://github.com/jamielife/")}} w={["100%", "auto", "auto"]} 
+                                my={[2,0,0]} fontSize={18} px={4} alignSelf={"flex-start"}><Text color={"white"}><Icon as={MaterialCommunityIcons } name="github"    color="white" size="md"  mt={.5} mr={1} /> @jamielife</Text></Button>
+                        <Button onPress={() => { Linking.openURL("https://instagram.com/jamielife/")}} w={["100%", "auto", "auto"]}
+                                my={[2,0,0]} fontSize={18} px={4} alignSelf={"flex-start"}><Text color={"white"}><Icon as={MaterialCommunityIcons } name="instagram" color="white" size="md"  mt={.5} mr={1} /> @jamielife</Text></Button>
+                        <Button onPress={() => { Linking.openURL("https://www.linkedin.com/in/jvptaylor/")}} w={["100%", "auto", "auto"]}
+                                my={[2,0,0]} fontSize={18} px={4} alignSelf={"flex-start"}><Text color={"white"}><Icon as={MaterialCommunityIcons } name="linkedin"  color="white" size="md"  mt={.5} mr={1} /> @jvptaylor</Text></Button>
                     </HStack>
                 </VStack>
 

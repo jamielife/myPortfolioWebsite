@@ -20,9 +20,9 @@ function WorkDetail({data}) {
 
     return ( 
         <ScrollView w={"100%"}>
-            <View w={[400, 480, 640]} alignSelf={"center"}>
+            <View w={[400, "100%", 640]} alignSelf={"center"}>
                 <Bowl />
-                <VStack pb={5} pt={0} mt={-200}  justifyContent={"space-between"}>
+                <VStack p={5} pb={5} pt={0} mt={[-130, -130, -200]} justifyContent={"space-between"}>
                     <Heading mt={headings.mt} mb={headings.mb} pb={headings.pb} size={headings.size} borderBottomWidth={headings.bbw} borderBottomColor={headings.bbc} alignSelf={"flex-start"}>
                         {/* <Link to={{ screen: cameFrom }}>{cameFrom}</Link>  */}
                         <Link isUnderlined={false} onPress={() => navigation.dispatch( CommonActions.goBack() )}>
@@ -33,11 +33,11 @@ function WorkDetail({data}) {
                     <Text fontSize={12} textAlign={"justify"}>{i18n.t('workDetailsPage.dateTitle')}: {dateCreated}</Text>              
                 </VStack>  
 
-                <VStack pb={5} pt={0}   justifyContent={"space-between"}>                
+                <VStack  p={5} pb={5} pt={0}   justifyContent={"space-between"}>                
                     <Text fontSize={16} textAlign={"justify"}>{i18n.t("dyna" + cameFrom + workDetail.id+"description")}</Text>         
                 </VStack>  
 
-                <VStack pb={5} pt={0}  justifyContent={"space-between"}>
+                <VStack  p={5} pb={5} pt={0}  justifyContent={"space-between"}>
                     <Text fontSize={16} textAlign={"justify"}>
                         <Image w={640} height={200} source={{
                             uri: workDetail.imageFull
@@ -45,8 +45,7 @@ function WorkDetail({data}) {
                     </Text>   
                 </VStack>  
 
-
-                <VStack pb={5} pt={0}  justifyContent={"space-between"}>
+                <VStack  p={5} pb={5} pt={0}  justifyContent={"space-between"}>
                     
                     {workDetail.url !== null ? <Text fontSize={16} textAlign={"justify"}>{i18n.t('workDetailsPage.openURLCTA')} - <Link href={workDetail.url} isExternal>{workDetail.url}</Link></Text> : null }
 
