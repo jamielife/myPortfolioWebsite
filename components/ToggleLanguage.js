@@ -3,6 +3,7 @@ import { StyleSheet, Animated, TouchableOpacity, Easing } from 'react-native';
 import { useColorMode } from "native-base";
 import { IconFlagJapan, IconFlagUnitedStates} from '../assets/icon-flags';
 import { useLangUpdate } from './LangContext';
+import { locale } from 'expo-localization';
 
 function ToggleLanguage() {
     const positionButton = useRef(new Animated.Value(0)).current;
@@ -16,25 +17,9 @@ function ToggleLanguage() {
     const backgroundColorAnim = positionButton.interpolate({inputRange:[0, 1],outputRange:["#000", "#81b0ff"]});    
 
     //check for previous cached selection and overwrite if necessary
-    async function isLocaleSet(){
-        try{
-            let locale = await localStorage.getItem('@locale');
-            if(locale.startsWith("en")) locale = "en";            
 
-            if (locale == 'ja'){
-                startAnimToOn();
-                isOnRef.current = true;
-            } else {
-                startAnimToOff();
-                isOnRef.current = false;
-            } 
-        } catch (error){
-            console.log(error);
-        }
-    }    
-    useEffect(() => {  
-        isLocaleSet();
-    });  
+    let locale = localStorage.getItem('locale');
+    console.log(`1 - Locale val at ToggleLanguage:25: ${locale}`);
 
     const {
         colorMode,
@@ -59,17 +44,25 @@ function ToggleLanguage() {
         }).start()
     };
 
+    if (locale == 'ja'){
+        startAnimToOn();
+        isOnRef.current = true;
+    } else {
+        startAnimToOff();
+        isOnRef.current = false;
+    }     
+
     const onPress = () => {
         if (isOnRef.current) {
             startAnimToOff();
             isOnRef.current = false;            
             toggleLocale("en");
-            localStorage.setItem('@locale', "en");
+            localStorage.setItem('locale', "en");
         } else {
             startAnimToOn();
             isOnRef.current = true;
             toggleLocale("ja");
-            localStorage.setItem('@locale', "ja");
+            localStorage.setItem('locale', "ja");
         }
     };
 

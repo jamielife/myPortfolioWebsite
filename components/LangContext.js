@@ -21,20 +21,25 @@ export function useI18n(){
 
 export function LangProvider({ children }){
     //set to default browser/os language
-    const [locale, setLocale] = useState(Localization.locale);
 
-    //check for previous cached selection and overwrite if necessary
-    async function isLocaleSet(){
-        try{
-            let locale = await localStorage.getItem('@locale');
-            setLocale(locale);
-        } catch (error){
-            console.log(error);
+    function setInitialLanguage(){    
+        //check for cookie
+        if(localStorage.getItem('locale') !== null) { 
+            console.log('used case 1');
+            return localStorage.getItem('locale');
+        } else if(Localization.locale !== null){
+            console.log('used case 2');
+            return Localization.locale;
+        } else {
+            console.log('used case 3');
+            return "en";
         }
-    }    
-    useEffect(() => {  
-        isLocaleSet();
-    });
+    }
+
+    const initLocale = setInitialLanguage();
+    const [locale, setLocale] = useState(initLocale);
+    localStorage.setItem('locale', initLocale);
+
 
     const i18n = new I18n();
     i18n.enableFallback = true;
@@ -42,6 +47,7 @@ export function LangProvider({ children }){
     i18n.locale = locale;
 
     function toggleLang(newLang){
+        console.log(`newLange val at LangContext:47: ${newLang}`);
         setLocale(newLang);
     }
 

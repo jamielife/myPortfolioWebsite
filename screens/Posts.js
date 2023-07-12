@@ -51,7 +51,7 @@ const Posts = () => {
                 </Center>
 
                 <Center>
-                    <Button mt={12} alignSelf="center" onPress={ () => { Linking.openURL(require('../assets/resume-jamie-taylor.pdf')) } } >
+                    <Button mt={12} alignSelf="center" onPress={ () => { Linking.openURL('https://jamietaylor.me/resume-jamie-taylor.pdf') } } >
                         <Text color={"white"}>{i18n.t('postsPage.resumeCTA')} <ChevronRightIcon size="xs" color="white" /></Text>
                     </Button>
                 </Center>

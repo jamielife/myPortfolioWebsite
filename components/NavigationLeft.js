@@ -41,7 +41,7 @@ function LeftNav() {
                 <HStack space={4} ml={6} justifyContent="center" alignItems="center">
                     <Link mt={1} _text={{ fontSize: "md" }} _hover={ menuItem.hover } isUnderlined={false} onPress={() => navigation.dispatch( CommonActions.navigate({ name: 'Work' }))}>{i18n.t('work')}</Link>
                     <Link mt={1} _text={{ fontSize: "md" }} _hover={ menuItem.hover } isUnderlined={false} onPress={() => navigation.dispatch( CommonActions.navigate({ name: 'Posts' }))}>{i18n.t('posts')}</Link>
-                    <Link mt={1} _text={{ fontSize: "md" }} _hover={ menuItem.hover } isUnderlined={false} onPress={() => { Linking.openURL(require('../assets/resume-jamie-taylor.pdf'))}}>{i18n.t('resume')}</Link>
+                    <Link mt={1} _text={{ fontSize: "md" }} _hover={ menuItem.hover } isUnderlined={false} onPress={() => { Linking.openURL('https://jamietaylor.me/resume-jamie-taylor.pdf')}}>{i18n.t('resume')}</Link>
                     <IconButton mt={2} borderRadius="none" _hover={menuItem.hover} _pressed={menuItem.pressed} 
                         icon={<Icon as={MaterialCommunityIcons} name="github" size="xl" color={iconColor} />} 
                         onPress={() => { Linking.openURL("https://github.com/jamielife/")}} />
