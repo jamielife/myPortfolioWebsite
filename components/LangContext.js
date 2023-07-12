@@ -1,4 +1,4 @@
-import React, { useContext, useState} from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { en, ja } from '../localizations'
 import * as Localization from 'expo-localization';
 import { I18n } from "i18n-js";
@@ -20,12 +20,26 @@ export function useI18n(){
 }
 
 export function LangProvider({ children }){
+    //set to default browser/os language
     const [locale, setLocale] = useState(Localization.locale);
+
+    //check for previous cached selection and overwrite if necessary
+    async function isLocaleSet(){
+        try{
+            let locale = await localStorage.getItem('@locale');
+            setLocale(locale);
+        } catch (error){
+            console.log(error);
+        }
+    }    
+    useEffect(() => {  
+        isLocaleSet();
+    });
+
     const i18n = new I18n();
     i18n.enableFallback = true;
     i18n.translations = { en, ja };
     i18n.locale = locale;
-    console.log("Language is: " + locale);
 
     function toggleLang(newLang){
         setLocale(newLang);

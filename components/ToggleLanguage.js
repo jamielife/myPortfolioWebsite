@@ -42,13 +42,13 @@ function ToggleLanguage() {
         if (isOnRef.current) {
             startAnimToOff();
             isOnRef.current = false;            
-            //toggleColorMode();
-            toggleLocale("en")
+            toggleLocale("en");
+            localStorage.setItem('@locale', "en");
         } else {
             startAnimToOn();
             isOnRef.current = true;
-            //toggleColorMode();
-            toggleLocale("ja")
+            toggleLocale("ja");
+            localStorage.setItem('@locale', "ja");
         }
     };
 

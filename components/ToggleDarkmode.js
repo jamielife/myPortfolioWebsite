@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { Text, StyleSheet, Animated, TouchableOpacity, Easing } from 'react-native';
-import { Box, Icon, useColorMode, StorageManager } from "native-base";
+import { Box, Icon, useColorMode } from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
 
 function App() {
@@ -22,6 +22,7 @@ function App() {
     async function getColorMode(){
         try{
             let val = await localStorage.getItem('@color-mode');
+            
             val === 'dark' ? 'dark' : 'light';
             if (val == 'light'){
                 startAnimToOn();
