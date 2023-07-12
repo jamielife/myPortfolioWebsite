@@ -8,13 +8,12 @@ import { useI18n } from '../components/LangContext';
 
 const Posts = () => {
     const [posts, setPosts] = useState([]);
-    const componentMounted = useRef(true);
+    const componentMounted = useRef(true);    
     const i18n = useI18n();
 
     useEffect(() => {
         const fetchPosts = async () => {
-            const {data, error} = await supabase.from('posts').select('*').order('featured', {ascending: false}); //.eq('type', '3D')
-
+            const {data, error} = await supabase.from('posts').select('*').order('featured', {ascending: false}); //.eq('type', '3D'
             if (error) {
                 console.log('error', error);
             } else {

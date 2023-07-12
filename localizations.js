@@ -42,6 +42,11 @@ const en = {
         postsIntro: "Latest posts & happenings in my life.",
         resumeCTA: "Check out my resume",
     },
+    workDetailsPage: {
+        dateTitle: "Date",
+        openURLCTA: "Check it out",
+        backCTA: "Back to Work",
+    },
     e404: {
         welcomeBar: "Something went wrong ",
         pageTitle: "Error",
@@ -91,7 +96,12 @@ const ja = {
     postsPage: {
         postsIntro: "最新のブログ記事と、私の人生で起きているその他のことです。",
         resumeCTA: "履歴書を見てください",
-    },   
+    },
+    workDetailsPage: {
+        dateTitle: "日付",
+        openURLCTA: "ウェブサイトをご覧ください",
+        backCTA: "戻ります",
+    },
     e404: {
         welcomeBar: "何かが間違ってしまった！",
         pageTitle: "エラー",

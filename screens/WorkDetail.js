@@ -2,51 +2,56 @@ import {Text, VStack, Link, Image, Button, ChevronRightIcon, ChevronLeftIcon, He
 import { useNavigation, CommonActions } from '@react-navigation/native';
 import Bowl from "../components/Bowl";
 import Footer from "../components/Footer";
+import { useI18n } from '../components/LangContext';
 
 function WorkDetail({data}) { 
     const { cameFrom, workDetail } = data.params;
     const navigation = useNavigation(); 
-    const iconColor = useColorModeValue("black", "white");    
-    console.log(cameFrom);
-    console.log(workDetail);
+    const iconColor = useColorModeValue("black", "white");
+    const i18n = useI18n();
 
     let date = new Date(workDetail.created_at);    
     let dateCreated = new Intl.DateTimeFormat('en-US', { dateStyle: 'long' }).format(date); 
+
+    i18n.translations.en["dyna" + cameFrom + workDetail.id + "description"] = workDetail.description;    
+    i18n.translations.ja["dyna" + cameFrom + workDetail.id + "description"] = workDetail.description_ja;    
+
+    console.log(i18n.translations);
 
     return ( 
         <ScrollView w={"100%"}>
             <View w={[400, 480, 640]} alignSelf={"center"}>
                 <Bowl />
-
                 <VStack pb={5} pt={0} mt={-200}  justifyContent={"space-between"}>
                     <Heading mt={headings.mt} mb={headings.mb} pb={headings.pb} size={headings.size} borderBottomWidth={headings.bbw} borderBottomColor={headings.bbc} alignSelf={"flex-start"}>
                         {/* <Link to={{ screen: cameFrom }}>{cameFrom}</Link>  */}
                         <Link isUnderlined={false} onPress={() => navigation.dispatch( CommonActions.goBack() )}>
-                            <Text fontSize={16} fontWeight={500}>{cameFrom}  <ChevronRightIcon size="xs" color={iconColor} /> </Text> {workDetail.name}
+                            <Text fontSize={16} fontWeight={500}>
+                            {cameFrom !== 'work' ? ( i18n.t('work') ) : i18n.t('posts')} <ChevronRightIcon size="xs" color={iconColor} /> </Text> {i18n.t("dyna" + cameFrom + workDetail.id+"name")}
                         </Link>
                     </Heading>
-                    <Text fontSize={12} textAlign={"justify"}>Date: {dateCreated}</Text>              
+                    <Text fontSize={12} textAlign={"justify"}>{i18n.t('workDetailsPage.dateTitle')}: {dateCreated}</Text>              
                 </VStack>  
 
                 <VStack pb={5} pt={0}   justifyContent={"space-between"}>                
-                    <Text fontSize={16} textAlign={"justify"}>{workDetail.description}</Text>         
+                    <Text fontSize={16} textAlign={"justify"}>{i18n.t("dyna" + cameFrom + workDetail.id+"description")}</Text>         
                 </VStack>  
 
                 <VStack pb={5} pt={0}  justifyContent={"space-between"}>
                     <Text fontSize={16} textAlign={"justify"}>
                         <Image w={640} height={200} source={{
                             uri: workDetail.imageFull
-                        }} alt={workDetail.blurb} />    
+                        }} alt={i18n.t("dyna" + cameFrom + workDetail.id)} />    
                     </Text>   
                 </VStack>  
 
 
                 <VStack pb={5} pt={0}  justifyContent={"space-between"}>
                     
-                    {workDetail.url !== null ? <Text fontSize={16} textAlign={"justify"}>Check it out - <Link href={workDetail.url} isExternal>{workDetail.url}</Link></Text> : null }
+                    {workDetail.url !== null ? <Text fontSize={16} textAlign={"justify"}>{i18n.t('workDetailsPage.openURLCTA')} - <Link href={workDetail.url} isExternal>{workDetail.url}</Link></Text> : null }
 
                     <Button my={3} alignSelf="center"  onPress={() => navigation.dispatch( CommonActions.goBack() )} >
-                        <Text><ChevronLeftIcon size="xs" color="white" /> Back to {cameFrom} </Text>
+                        <Text><ChevronLeftIcon size="xs" color="white" /> {i18n.t('workDetailsPage.backCTA')}</Text>                        
                     </Button>
 
                 </VStack>  
