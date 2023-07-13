@@ -146,7 +146,8 @@ document.body.style.overflowX = "hidden";
         overlayColor: 'rgba(0,0,0,.5)',              
         drawerActiveTintColor: text,
         drawerInactiveTintColor: text,
-        drawerStyle: { backgroundColor: bg, },        
+        drawerStyle: { backgroundColor: bg, },   
+        unmountOnBlur: true,          
       }}      
       drawerContent={(props) => <CustomDrawerContent {...props} />} >
         <Drawer.Screen name="Home"  component={HomeDrawer}  options={customDrawOptions} />
@@ -168,7 +169,8 @@ function WorkMenu(){
         overlayColor: 'rgba(0,0,0,.5)',              
         drawerActiveTintColor: text,
         drawerInactiveTintColor: text,
-        drawerStyle: { backgroundColor: bg, },        
+        drawerStyle: { backgroundColor: bg, },   
+        unmountOnBlur: true,      
       }} >
       <Stack.Screen name="WorkOverview" component={WorkDrawer}       options={{ headerShown: false }} />
       <Stack.Screen name="WorkDetail"   component={WorkDetailDrawer} options={{ headerShown: false }} />

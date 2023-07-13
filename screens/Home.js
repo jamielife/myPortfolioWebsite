@@ -1,15 +1,17 @@
-import { Text, Container, Icon, Flex, Avatar, Button, Link, HStack, Center, Heading, VStack, ScrollView, ChevronRightIcon, useColorModeValue, View } from "native-base";
+import { Text, Container, Icon, Flex, Avatar, Button, Link, HStack, Center, Heading, VStack, ScrollView, ChevronRightIcon, useColorModeValue, View, Modal, Image } from "native-base";
 import { useNavigation, CommonActions  } from '@react-navigation/native';
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import { Linking, } from "react-native";
 import Bowl from "../components/Bowl";
 import Footer from "../components/Footer";
 import { useI18n } from '../components/LangContext';
+import { useState } from "react";
 
 const Home = () => {
     const navigation = useNavigation(); 
     const iconColor = useColorModeValue("black", "white");
     const i18n = useI18n();
+    const [showModal, setShowModal] = useState(false);
 
     return (        
         <ScrollView w={"100%"}>
@@ -28,9 +30,22 @@ const Home = () => {
                         <Heading size={"xl"}>{i18n.t('name')}</Heading>
                         <Text fontSize={"md"}>{i18n.t('homePage.titles')}</Text>
                     </Container>
-                    <Link href={require('../assets/me.jpg')} isExternal>
+                    <Link onPress={() => setShowModal(true)}>
                         <Avatar borderWidth={2} mt={0} alignSelf="center" size={[20, 110]} source={ require("../assets/me.jpg")} > Jamie </Avatar>
-                    </Link>
+                    </Link>                        
+                    <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
+                        <Modal.Content maxWidth="600px">
+                            <Modal.CloseButton />
+                            <Image w={600} height={600} source={{
+                                uri: require("../assets/me.jpg")
+                                }} alt={i18n.t('homePage.profileDesc')} />    
+                            <Modal.Body>
+                                <Center>
+                                    {i18n.t('homePage.profileDesc')}
+                                </Center>
+                            </Modal.Body>
+                        </Modal.Content>
+                    </Modal>
                 </HStack>
 
                 {/* Work */}

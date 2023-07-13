@@ -36,7 +36,7 @@ function WorkTile({data, cameFrom}) {
 
             {/* External Tooltip & Icon */}
             { cameFrom == "Posts" ? 
-                    <Tooltip label="Opens offsite in new tab" openDelay={250}  placement={"right top"} >
+                    <Tooltip label={i18n.t('postsPage.externalToolTip')} openDelay={250}  placement={"right top"} >
                         
                         <Box position="absolute" w={8} h={8} color="white" top={-5} right={-5} bgColor={"primary.500"} justifyContent={"center"}  borderRadius="full" shadow={"4"}>
                             <Icon pl={"2px"} as={MaterialIcons} name="open-in-new" size="sm" color={"white"} alignSelf={"center"} />
