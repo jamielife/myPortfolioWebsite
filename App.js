@@ -1,12 +1,11 @@
 import 'react-native-gesture-handler';
-import { StyleSheet, StatusBar, Linking, Animated } from 'react-native';
+import { StyleSheet, StatusBar, Linking } from 'react-native';
 import React from 'react';
-import { View, NativeBaseProvider, extendTheme, useColorModeValue, IconButton, Icon } from "native-base";
-import { NavigationContainer, useNavigationContainerRef  } from '@react-navigation/native';
+import { View, NativeBaseProvider, extendTheme, useColorModeValue } from "native-base";
+import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem  } from '@react-navigation/drawer';
 import { BlurView } from 'expo-blur';
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import Home     from './screens/Home';
 import Work     from './screens/Work';
