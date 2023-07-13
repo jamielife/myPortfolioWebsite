@@ -124,7 +124,7 @@ function CustomDrawerContent(props) {
       <DrawerItemList {...props} />
       <DrawerItem label="Resume" inactiveTintColor={ text } onPress={ ()=>{ Linking.openURL('https://jamietaylor.me/resume-jamie-taylor.pdf')} } />
       <DrawerItem label="Source Code" inactiveTintColor={ text } //icon={() => <Icon as={MaterialCommunityIcons} name="github" size="xl"  />}
-        onPress={() => { Linking.openURL("https://github.com/jamielife/")}}>      
+        onPress={() => { Linking.openURL("https://github.com/jamielife/portfolio")}}>      
       </DrawerItem>
     </DrawerContentScrollView>
   );
@@ -133,6 +133,10 @@ function CustomDrawerContent(props) {
 function DrawerMenu({colors}) {
 const bg = useColorModeValue(colors.primary[50], colors.primary[900]);
 const text = useColorModeValue(colors.primary[900], colors.primary[50]);
+//known React Navigation issues manual fixes
+document.body.style.backgroundColor = bg;
+document.body.style.overflowX = "hidden";
+
   return (
     <Drawer.Navigator 
       useLegacyImplementation 

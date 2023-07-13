@@ -47,10 +47,13 @@ function WorkDetail({data}) {
 
                 <VStack  p={5} pb={5} pt={0}  justifyContent={"space-between"}>
                     
-                    {workDetail.url !== null ? <Text fontSize={16} textAlign={"justify"}>{i18n.t('workDetailsPage.openURLCTA')} - <Link href={workDetail.url} isExternal>{workDetail.url}</Link></Text> : null }
+                    {workDetail.url !== null ? <Text fontSize={16} textAlign={"justify"}>{i18n.t('workDetailsPage.openURLCTA')} - <Link 
+                            _text={{ _light:{ color: "primary.600" }, _dark: { color: "primary.300" }}}
+                            _hover={{ _text:{ _light: { color: "primary.400" }, _dark: { color: "primary.100" }, textDecoration: "none" } }}
+                            href={workDetail.url} isExternal>{workDetail.url}</Link></Text> : null }
 
-                    <Button my={3} alignSelf="center"  onPress={() => navigation.dispatch( CommonActions.goBack() )} >
-                        <Text><ChevronLeftIcon size="xs" color="white" /> {i18n.t('workDetailsPage.backCTA')}</Text>                        
+                    <Button my={3} alignSelf="center" color="white" onPress={() => navigation.dispatch( CommonActions.goBack() )} >
+                        <Text color="white" ><ChevronLeftIcon size="xs" color="white" /> {i18n.t('workDetailsPage.backCTA')}</Text>                        
                     </Button>
 
                 </VStack>  

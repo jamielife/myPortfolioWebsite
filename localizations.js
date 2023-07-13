@@ -41,6 +41,7 @@ const en = {
     postsPage: {
         postsIntro: "Latest posts & happenings in my life.",
         resumeCTA: "Check out my resume",
+        externalToolTip: "Opens offsite in new tab",
     },
     workDetailsPage: {
         dateTitle: "Date",

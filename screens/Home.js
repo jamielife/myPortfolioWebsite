@@ -66,7 +66,11 @@ const Home = () => {
                         </HStack>
                         
                         <HStack alignItems={"baseline"} mb={timeline.mb}>
-                            <Heading size={"md"}>2008</Heading><Text fontSize={16} ml={timeline.ml}>{i18n.t('homePage.y2008.part1')}<Link href='https://htmyell.com' isExternal>{i18n.t('homePage.y2008.part2')}</Link>{i18n.t('homePage.y2008.part3')}</Text>
+                            <Heading size={"md"}>2008</Heading><Text fontSize={16} ml={timeline.ml}>{i18n.t('homePage.y2008.part1')}
+                                <Link 
+                                _text={{ _light:{ color: "primary.600" }, _dark: { color: "primary.300" }}}
+                                _hover={{ _text:{ _light: { color: "primary.400" }, _dark: { color: "primary.100" }, textDecoration: "none" } }}
+                               href='https://htmyell.com' isExternal>{i18n.t('homePage.y2008.part2')}</Link>{i18n.t('homePage.y2008.part3')}</Text>
                         </HStack>                    
                     </VStack>            
                 </VStack>
@@ -77,7 +81,12 @@ const Home = () => {
                     <Heading mt={headings.mt} mb={headings.mb} pb={headings.pb} size={headings.size} borderBottomWidth={headings.bbw} borderBottomColor={headings.bbc} alignSelf={"flex-start"} >
                         {i18n.t('homePage.iHeartTitle')} <Icon as={MaterialCommunityIcons } name="cards-heart" color={iconColor} size="md"  mt={.5} mr={1} />
                     </Heading>            
-                    <Text fontSize={16}>{i18n.t('homePage.iHeart.part1')}<Link href='https://open.spotify.com/album/6ZsEY7hIq4av7P5MzHnXv6' isExternal>{i18n.t('homePage.iHeart.part2')}</Link>{i18n.t('homePage.iHeart.part3')}</Text>                    
+                    <Text fontSize={16}>{i18n.t('homePage.iHeart.part1')}
+                        <Link
+                            _text={{ _light:{ color: "primary.600" }, _dark: { color: "primary.300" }}}
+                            _hover={{ _text:{ _light: { color: "primary.400" }, _dark: { color: "primary.100" }, textDecoration: "none" } }}
+                        href='https://open.spotify.com/album/6ZsEY7hIq4av7P5MzHnXv6' isExternal>{i18n.t('homePage.iHeart.part2')}</Link>
+                        {i18n.t('homePage.iHeart.part3')}</Text>                    
                 </VStack>
 
 
@@ -101,7 +110,11 @@ const Home = () => {
                     <Heading mt={headings.mt} mb={headings.mb} pb={headings.pb} size={headings.size} borderBottomWidth={headings.bbw} borderBottomColor={headings.bbc} alignSelf={"flex-start"} >
                         {i18n.t('homePage.siteTitle')}
                     </Heading>            
-                    <Text fontSize={16}>{i18n.t('homePage.siteInfo.part1')}<Link href='https://github.com/jamielife/portfolio' isExternal>{i18n.t('homePage.siteInfo.part2')}</Link>{i18n.t('homePage.siteInfo.part3')}</Text>
+                    <Text fontSize={16}>{i18n.t('homePage.siteInfo.part1')}
+                        <Link 
+                            _text={{ _light:{ color: "primary.600" }, _dark: { color: "primary.300" }}}
+                            _hover={{ _text:{ _light: { color: "primary.400" }, _dark: { color: "primary.100" }, textDecoration: "none" } }} 
+                            href='https://github.com/jamielife/portfolio' isExternal>{i18n.t('homePage.siteInfo.part2')}</Link>{i18n.t('homePage.siteInfo.part3')}</Text>
                 </VStack>            
 
                 <Footer />

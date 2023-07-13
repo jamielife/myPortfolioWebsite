@@ -1,7 +1,8 @@
 import { Linking } from "react-native";
-import {Text, Image, Stack, Pressable, Heading } from "native-base";
+import {Text, Image, Stack, Pressable, Heading, Icon, Tooltip, Box } from "native-base";
 import { useNavigation, CommonActions  } from '@react-navigation/native';
 import { useI18n } from '../components/LangContext';
+import { MaterialIcons } from "@expo/vector-icons";
 
 function WorkTile({data, cameFrom}) {
     const navigation = useNavigation(); 
@@ -13,10 +14,10 @@ function WorkTile({data, cameFrom}) {
     i18n.translations.ja["dyna" + cameFrom + data.id] = data.blurb_ja;
     i18n.translations.ja["dyna" + cameFrom + data.id + "name"] = data.name_ja;
     i18n.translations.ja["dyna" + cameFrom + data.id + "type"] = data.type_ja;
-    
+
     return ( 
         <Pressable mt={5} shadow="2" rounded="lg" w={{ base: 96, md: 72, lg: 48 }} 
-            _light={{ bg: "coolGray.50" }} _dark={{ bg: "gray.800" }} overflow={"hidden"}            
+            _light={{ bg: "coolGray.50" }} _dark={{ bg: "gray.800" }}           
             onPress={() => {
                 if(cameFrom == "Work") navigation.dispatch( CommonActions.navigate({ name: 'WorkDetail', initial: false,  params: { cameFrom: cameFrom, workDetail: data } } ) ) 
                 else{ Linking.openURL(data.url) }
@@ -27,15 +28,29 @@ function WorkTile({data, cameFrom}) {
                 <Image w={"100%"} h={110} key={data.id} resizeMode="cover" source={{
                     uri: data.imageFull
                 }} alt={data.blurb} />
-            <Text bold position="absolute" color="coolGray.50" top="0" m={3} mt={2}>
+
+            {/* Category */}
+            <Text bold position="absolute" color="coolGray.50" top="0" m={3} mt={2} >
                 {i18n.t("dyna" + cameFrom + data.id + "type").toUpperCase()}
-            </Text>                       
+            </Text>
+
+            {/* External Tooltip & Icon */}
+            { cameFrom == "Posts" ? 
+                    <Tooltip label="Opens offsite in new tab" openDelay={250}  placement={"right top"} >
+                        
+                        <Box position="absolute" w={8} h={8} color="white" top={-5} right={-5} bgColor={"primary.500"} justifyContent={"center"}  borderRadius="full" shadow={"4"}>
+                            <Icon pl={"2px"} as={MaterialIcons} name="open-in-new" size="sm" color={"white"} alignSelf={"center"} />
+                        </Box>
+                        
+                    </Tooltip>
+                : null
+            }
+
             <Stack space="2" p="4">
-                {/* <Text color="gray.400">{data.created_at}</Text> */}
                 <Heading size={"md"} fontWeight="medium" isTruncated>
                     {i18n.t("dyna" + cameFrom + data.id + "name")}
                 </Heading>
-                <Text isTruncated color={"coolGray.300"} noOfLines={[2,4,4]}>
+                <Text isTruncated noOfLines={[2,4,4]} _light={{ color: "coolGray.600" }} _dark={{ color: "coolGray.300" }}>
                     {i18n.t("dyna" + cameFrom + data.id)}
                 </Text>
             </Stack>
