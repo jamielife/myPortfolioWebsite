@@ -28,7 +28,6 @@ jobs:
       - name: "Deploy"
         uses: milanmk/actions-file-deployer@master
         with:
-          local-path: "./web-build"
           remote-protocol: "sftp"
           remote-host:      ${{ secrets.ftp_host }}
           remote-user:      ${{ secrets.ftp_user }}
