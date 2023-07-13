@@ -105,16 +105,6 @@ function PostsDrawer() {
 const Drawer = createDrawerNavigator();
 const Stack = createNativeStackNavigator();
 
-const customDrawOptions = {
-  headerTransparent: true,
-  headerBackground: () => ( <BlurView tint={useColorModeValue("light", "dark")} intensity={30} style={StyleSheet.absoluteFill} /> ),
-  headerLeft: (props)  => ( <LeftNav /> ),
-  headerRight: (props) => (<RightNav /> ),
-  headerTitle: "",
-  headerBlurEffect: "regular",
-  headerTransparent: true,
-}  
-
 function CustomDrawerContent(props) {
   const bg = useColorModeValue(colors.primary[50], colors.primary[900]);
   const text = useColorModeValue(colors.primary[900], colors.primary[50]);  
