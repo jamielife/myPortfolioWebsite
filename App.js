@@ -2,7 +2,7 @@ import 'react-native-gesture-handler';
 import { StyleSheet, StatusBar, Linking, Animated } from 'react-native';
 import React from 'react';
 import { View, NativeBaseProvider, extendTheme, useColorModeValue, IconButton, Icon } from "native-base";
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigationContainerRef  } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem  } from '@react-navigation/drawer';
 import { BlurView } from 'expo-blur';
@@ -15,7 +15,7 @@ import LeftNav  from './components/NavigationLeft';
 import RightNav from './components/NavigationRight';
 import WorkDetail from './screens/WorkDetail';
 
-import { LangProvider } from './components/LangContext';
+import { LangProvider, useI18n } from './components/LangContext';
 
 //global.intro = "Hello! I'm am app developer based in Richmond, VA!";
 global.navMargins = { base: 2, sm: 8,  md: 12, lg: 32, xl: 64 };
@@ -112,7 +112,7 @@ const customDrawOptions = {
   headerRight: (props) => (<RightNav /> ),
   headerTitle: "",
   headerBlurEffect: "regular",
-  headerTransparent: true
+  headerTransparent: true,
 }  
 
 function CustomDrawerContent(props) {
@@ -131,11 +131,13 @@ function CustomDrawerContent(props) {
 }
 
 function DrawerMenu({colors}) {
-const bg = useColorModeValue(colors.primary[50], colors.primary[900]);
-const text = useColorModeValue(colors.primary[900], colors.primary[50]);
-//known React Navigation issues manual fixes
-document.body.style.backgroundColor = bg;
-document.body.style.overflowX = "hidden";
+  const bg = useColorModeValue(colors.primary[50], colors.primary[900]);
+  const text = useColorModeValue(colors.primary[900], colors.primary[50]);
+  //known React Navigation issues manual fixes
+  document.body.style.backgroundColor = bg;
+  document.body.style.overflowX = "hidden";
+  const i18n = useI18n();
+  let siteName = i18n.t('name'); 
 
   return (
     <Drawer.Navigator 
@@ -146,13 +148,45 @@ document.body.style.overflowX = "hidden";
         overlayColor: 'rgba(0,0,0,.5)',              
         drawerActiveTintColor: text,
         drawerInactiveTintColor: text,
-        drawerStyle: { backgroundColor: bg, },   
+        drawerStyle: { backgroundColor: bg, },
         unmountOnBlur: true,          
       }}      
       drawerContent={(props) => <CustomDrawerContent {...props} />} >
-        <Drawer.Screen name="Home"  component={HomeDrawer}  options={customDrawOptions} />
-        <Drawer.Screen name="Work"  component={WorkMenu}    options={customDrawOptions} />
-        <Drawer.Screen name="Posts" component={PostsDrawer} options={customDrawOptions} />         
+        {console.log(Drawer)}
+        <Drawer.Screen name="Home" 
+          component={HomeDrawer}  
+          options={{
+            headerTransparent: true,
+            headerBackground: () => ( <BlurView tint={useColorModeValue("light", "dark")} intensity={30} style={StyleSheet.absoluteFill} /> ),
+            headerLeft: (props)  => ( <LeftNav /> ),
+            headerRight: (props) => (<RightNav /> ),
+            headerTitle: "",
+            headerBlurEffect: "regular",
+            headerTransparent: true,
+            title: `${i18n.t('home')} : ${i18n.t('name')}`,
+          }} />
+        <Drawer.Screen name="Work"  component={WorkMenu}
+          options={{
+            headerTransparent: true,
+            headerBackground: () => ( <BlurView tint={useColorModeValue("light", "dark")} intensity={30} style={StyleSheet.absoluteFill} /> ),
+            headerLeft: (props)  => ( <LeftNav /> ),
+            headerRight: (props) => (<RightNav /> ),
+            headerTitle: "",
+            headerBlurEffect: "regular",
+            headerTransparent: true,
+            title: `${i18n.t('work')} : ${i18n.t('name')}`,
+          }} />        
+        <Drawer.Screen name="Posts" component={PostsDrawer} 
+            options={{
+            headerTransparent: true,
+            headerBackground: () => ( <BlurView tint={useColorModeValue("light", "dark")} intensity={30} style={StyleSheet.absoluteFill} /> ),
+            headerLeft: (props)  => ( <LeftNav /> ),
+            headerRight: (props) => (<RightNav /> ),
+            headerTitle: "",
+            headerBlurEffect: "regular",
+            headerTransparent: true,
+            title: `${i18n.t('posts')} : ${i18n.t('name')}`,
+          }} />    
     </Drawer.Navigator>
   );
 }
@@ -160,6 +194,8 @@ document.body.style.overflowX = "hidden";
 function WorkMenu(){
   const bg = useColorModeValue(colors.primary[50], colors.primary[900]);
   const text = useColorModeValue(colors.primary[900], colors.primary[50]);
+  const i18n = useI18n();
+
   return (
     <Stack.Navigator initialRouteName="WorkOverview" 
       useLegacyImplementation
@@ -169,8 +205,9 @@ function WorkMenu(){
         overlayColor: 'rgba(0,0,0,.5)',              
         drawerActiveTintColor: text,
         drawerInactiveTintColor: text,
-        drawerStyle: { backgroundColor: bg, },   
-        unmountOnBlur: true,      
+        drawerStyle: { backgroundColor: bg, },
+        title: `${i18n.t('work')} : ${i18n.t('name')}`,
+        unmountOnBlur: true,
       }} >
       <Stack.Screen name="WorkOverview" component={WorkDrawer}       options={{ headerShown: false }} />
       <Stack.Screen name="WorkDetail"   component={WorkDetailDrawer} options={{ headerShown: false }} />
@@ -179,11 +216,10 @@ function WorkMenu(){
 }
 
 export default function App() {
-  
   return (
     <NativeBaseProvider colorModeManager={colorModeManager} theme={theme} flex={1}>
-      <LangProvider>
-         <NavigationContainer flex={1}>
+      <LangProvider>        
+          <NavigationContainer flex={1} >
           <StatusBar backgroundColor="rgb(0, 52, 72)" barStyle="light-csontent" hidden={false} />
           <DrawerMenu colors={colors} />
         </NavigationContainer>
