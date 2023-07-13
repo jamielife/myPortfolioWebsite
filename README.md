@@ -1,6 +1,6 @@
 # myPortfolioWebsite
 
-## Prokect URL
+## Project URL
  - https://jamietaylor.me/
 
 ## Install
