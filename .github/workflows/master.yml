@@ -8,12 +8,14 @@ jobs:
     steps:
     - name: 🚚 Get latest code
       uses: actions/checkout@v3
-    - name: 📂 Sync files
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
-      with:
-        server:     ${{ secrets.ftp_host }}
-        username:   ${{ secrets.ftp_user }}
-        password:   ${{ secrets.ftp_pass }}
-        server-dir: ${{ secrets.ftp_path }}
-        protocol:   ftps
-        local-dir:  ./web-build/
+    - name: 📂 FTP files
+      uses: SamKirkland/FTP-Deploy-Action@2.0.0
+      env:
+        FTP_SERVER: ${{ secrets.ftp_host }}
+        FTP_USERNAME: ${{ secrets.ftp_user }}
+        FTP_PASSWORD: ${{ secrets.ftp_pass }}
+        LOCAL_DIR: web-build/
+        REMOTE_DIR: ${{ secrets.ftp_path }}
+        METHOD: sftp
+        PORT: 22
+        ARGS: --verbose
