@@ -14,7 +14,8 @@ const Posts = () => {
 
     useEffect(() => {
         const fetchPosts = async () => {
-            const {data, error} = await supabase.from('posts').select('*').order('featured', {ascending: false}); //.eq('type', '3D'
+            const {data, error} = await supabase.from('posts').select('*').order('featured', {ascending: false}).eq('hidden', false);
+            
             if (error) {
                 console.log('error', error);
             } else {

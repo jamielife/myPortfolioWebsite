@@ -25,13 +25,13 @@ export function LangProvider({ children }){
     function setInitialLanguage(){    
         //check for cookie
         if(localStorage.getItem('locale') !== null) { 
-            console.log('used case 1');
+            //console.log('used case 1');
             return localStorage.getItem('locale');
         } else if(Localization.locale !== null){
-            console.log('used case 2');
+            //console.log('used case 2');
             return Localization.locale;
         } else {
-            console.log('used case 3');
+            //console.log('used case 3');
             return "en";
         }
     }
@@ -40,14 +40,13 @@ export function LangProvider({ children }){
     const [locale, setLocale] = useState(initLocale);
     localStorage.setItem('locale', initLocale);
 
-
     const i18n = new I18n();
     i18n.enableFallback = true;
     i18n.translations = { en, ja };
     i18n.locale = locale;
 
     function toggleLang(newLang){
-        console.log(`newLange val at LangContext:47: ${newLang}`);
+        //console.log(`newLange val at LangContext:47: ${newLang}`);
         setLocale(newLang);
     }
 

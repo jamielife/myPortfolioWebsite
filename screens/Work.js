@@ -14,7 +14,7 @@ const Work = () => {
     
     useEffect(() => {
         const fetchWork = async () => {
-            const {data, error} = await supabase.from('work').select('*').order('featured', {ascending: false}); //.eq('type', '3D')
+            const {data, error} = await supabase.from('work').select('*').order('featured', {ascending: false}).eq('hidden', false);
             
             if (error) {
                 console.log('error', error);
@@ -37,7 +37,7 @@ const Work = () => {
                 <Bowl />
                 <VStack p={5} pb={5} pt={0} mt={[-130, -130, -200]} justifyContent={"space-between"}>
                     <Heading mt={headings.mt} mb={headings.mb} pb={headings.pb} size={headings.size} borderBottomWidth={headings.bbw} borderBottomColor={headings.bbc} alignSelf={"flex-start"}>
-                    {i18n.t('work')}
+                        {i18n.t('work')}
                     </Heading>
                     <Text fontSize={16} textAlign={"justify"}>{i18n.t('workPage.workIntro')}</Text>
                 </VStack>      
@@ -46,7 +46,9 @@ const Work = () => {
                 <Center>
                     <Flex flex={1} flexWrap={"wrap"} flexDirection={"row"} justifyContent={["center", "center", "space-between"]} >
                         {works.map((work, index) => (  
+                            //work.hidden !== true?
                             <WorkTile key={work.id} data={work} cameFrom="Work" />
+                            //:null
                         ))}
                     </Flex>
                 </Center>

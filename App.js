@@ -120,6 +120,17 @@ function CustomDrawerContent(props) {
   );
 }
 
+const customScreenOptions = {
+  headerTransparent: true,
+  headerBackground: () => ( <BlurView tint={useColorModeValue("light", "dark")} intensity={30} style={StyleSheet.absoluteFill} /> ),
+  headerLeft: (props)  => ( <LeftNav /> ),
+  headerRight: (props) => (<RightNav /> ),
+  headerTitle: "",
+  headerBlurEffect: "regular",
+  headerTransparent: true,
+  //title: `${i18n.t('posts')} : ${i18n.t('name')}`,    
+}
+
 function DrawerMenu({colors}) {
   const bg = useColorModeValue(colors.primary[50], colors.primary[900]);
   const text = useColorModeValue(colors.primary[900], colors.primary[50]);
@@ -142,41 +153,9 @@ function DrawerMenu({colors}) {
         unmountOnBlur: true,          
       }}      
       drawerContent={(props) => <CustomDrawerContent {...props} />} >
-        {console.log(Drawer)}
-        <Drawer.Screen name="Home" 
-          component={HomeDrawer}  
-          options={{
-            headerTransparent: true,
-            headerBackground: () => ( <BlurView tint={useColorModeValue("light", "dark")} intensity={30} style={StyleSheet.absoluteFill} /> ),
-            headerLeft: (props)  => ( <LeftNav /> ),
-            headerRight: (props) => (<RightNav /> ),
-            headerTitle: "",
-            headerBlurEffect: "regular",
-            headerTransparent: true,
-            title: `${i18n.t('home')} : ${i18n.t('name')}`,
-          }} />
-        <Drawer.Screen name="Work"  component={WorkMenu}
-          options={{
-            headerTransparent: true,
-            headerBackground: () => ( <BlurView tint={useColorModeValue("light", "dark")} intensity={30} style={StyleSheet.absoluteFill} /> ),
-            headerLeft: (props)  => ( <LeftNav /> ),
-            headerRight: (props) => (<RightNav /> ),
-            headerTitle: "",
-            headerBlurEffect: "regular",
-            headerTransparent: true,
-            title: `${i18n.t('work')} : ${i18n.t('name')}`,
-          }} />        
-        <Drawer.Screen name="Posts" component={PostsDrawer} 
-            options={{
-            headerTransparent: true,
-            headerBackground: () => ( <BlurView tint={useColorModeValue("light", "dark")} intensity={30} style={StyleSheet.absoluteFill} /> ),
-            headerLeft: (props)  => ( <LeftNav /> ),
-            headerRight: (props) => (<RightNav /> ),
-            headerTitle: "",
-            headerBlurEffect: "regular",
-            headerTransparent: true,
-            title: `${i18n.t('posts')} : ${i18n.t('name')}`,
-          }} />    
+        <Drawer.Screen name="Home"  component={HomeDrawer}  options={customScreenOptions} />
+        <Drawer.Screen name="Work"  component={WorkMenu}    options={customScreenOptions} />        
+        <Drawer.Screen name="Posts" component={PostsDrawer} options={customScreenOptions} />    
     </Drawer.Navigator>
   );
 }
@@ -196,7 +175,7 @@ function WorkMenu(){
         drawerActiveTintColor: text,
         drawerInactiveTintColor: text,
         drawerStyle: { backgroundColor: bg, },
-        title: `${i18n.t('work')} : ${i18n.t('name')}`,
+        title: "Work",
         unmountOnBlur: true,
       }} >
       <Stack.Screen name="WorkOverview" component={WorkDrawer}       options={{ headerShown: false }} />

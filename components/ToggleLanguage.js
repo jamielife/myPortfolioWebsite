@@ -19,7 +19,7 @@ function ToggleLanguage() {
     //check for previous cached selection and overwrite if necessary
 
     let locale = localStorage.getItem('locale');
-    console.log(`1 - Locale val at ToggleLanguage:25: ${locale}`);
+    //console.log(`1 - Locale val at ToggleLanguage:25: ${locale}`);
 
     const {
         colorMode,
