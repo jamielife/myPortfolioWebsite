@@ -9,7 +9,7 @@ const en = {
         titles: "Solution Architect / Developer / Designer",
         aboutTitle: "About",
         profileDesc: "Me and a bear",
-        about: "Hello! My name is Jamie and I'm full stack web and app developer based outta Richmond, VA. In my years in marketing I've worn a lot of hats, including designer, developer, systems engineer, photographer, videogropher, project manager, product manager, and solutions architect and I love every minute of it! When I'm not online, you can find me on my bike, on my drumset, or making something on the stove top.",
+        about: "Hello! My name is Jamie and I'm a full stack web and app developer based outta Richmond, VA. In my years in marketing I've worn a lot of hats, including designer, developer, systems engineer, photographer, videographer, project manager, product manager, and solutions architect and I love every minute of it! When I'm not online, you can find me on my bike, on my drumset, or making something on the stove top.",
         workCTA: "Check out my work",
         timeLineTitle: "Bio",
         y1982: "Born & Raised",
