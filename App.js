@@ -6,6 +6,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem  } from '@react-navigation/drawer';
 import { BlurView } from 'expo-blur';
+import { FBAalytics } from './firebaseConfig';
 
 import Home     from './screens/Home';
 import Work     from './screens/Work';
