@@ -1,4 +1,7 @@
-on: push
+on:
+  push:
+    paths:
+      - web-build/**
 name: 🚀 Deploy website on push
 jobs:
   web-deploy:
