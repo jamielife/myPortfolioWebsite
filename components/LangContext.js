@@ -21,7 +21,6 @@ export function useI18n(){
 
 export function LangProvider({ children }){
     //set to default browser/os language
-
     function setInitialLanguage(){    
         //check for cookie
         if(localStorage.getItem('locale') !== null) { 
@@ -36,15 +35,43 @@ export function LangProvider({ children }){
         }
     }
 
+    function getRemoteJSON() {
+        const getJson = fetch('https://jamietaylor.me/localization.json', {        
+                            method: 'GET',
+        })
+        .then((response) => response.json())
+        .then((responseData) => {
+                    setLocalizationData(responseData);
+                    //console.log(responseData);
+                    return responseData;
+        }).catch((error) => {
+            console.log(error);
+        });
+    }    
+    useEffect(() => {
+        getRemoteJSON();
+    }, []);    
+
+    // use either preference setting or browser default language
     const initLocale = setInitialLanguage();
     const [locale, setLocale] = useState(initLocale);
     localStorage.setItem('locale', initLocale);
 
+    //init i18n for translation using local json
     const i18n = new I18n();
     i18n.enableFallback = true;
-    i18n.translations = { en, ja };
     i18n.locale = locale;
 
+    //Set with local data, then try to update with remote 
+    const [localizationData, setLocalizationData] = useState(null);  
+    i18n.translations = { en, ja };
+    //update with remote data if available
+    if(localizationData !== null){
+        const en = localizationData.en;
+        const ja = localizationData.ja;
+        i18n.translations = { en, ja };
+    } 
+    
     function toggleLang(newLang){
         //console.log(`newLange val at LangContext:47: ${newLang}`);
         setLocale(newLang);
