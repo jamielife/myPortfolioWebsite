@@ -63,7 +63,7 @@ const ja = {
     posts: "投稿",
     resume: "履歴書",
     homePage: {
-        welcomeBar: "こんにちは、バージニア州リッチモンド在住のウェブ＆アプリ開発者です!",
+        welcomeBar: "こんにちは、バージニア州リッチモンドを拠点とするウェブ・アプリ開発者です!",
         titles: "ソリューション・アーキテクト / エンジニア / デザイナー",
         aboutTitle: "身元", 
         profileDesc: "私とくまさん",
