@@ -37,25 +37,19 @@ function LeftNav() {
             <Pressable mt={1} _text={{ fontSize: "xl" }} isUnderlined={false} _hover={ menuItem.hover } _pressed={ menuItem.pressed } onPress={() => navigation.dispatch( CommonActions.navigate({ name: 'Home' }))}>
                 {({ isHovered, isPressed }) => {
                     return  <HStack alignItems={"center"} alignContent={"center"} justifyContent={"center"}>
-                                {/* <Icon as={MaterialIcons} name="ramen-dining" color={isPressed ? hoverColor: isHovered ? hoverColor : iconColor} size="xl" mt={.5} mr={1} 
-                                    style={{
-                                        transform: [{
-                                            scale: isPressed ? 1.1 : 1
-                                        }]
-                                }} /> */}
-                                <Image size={"32px"} alt={i18n.t('name')}
-                                    _dark={{
-                                        source:{
-                                            uri: isPressed ? require("../assets/ramen-dark-pressed.gif") : isHovered ? require("../assets/ramen-dark-animated.gif") : require("../assets/ramen-dark.gif")
-                                        }
-                                    }}
-                                    _light={{
-                                        source:{
-                                            uri: isPressed ? require("../assets/ramen-light-pressed.gif") :  isHovered ? require("../assets/ramen-light-animated.gif") : require("../assets/ramen-light.gif")
-                                        }                                        
-                                    }} />
-                                <Text pl={1} color={isPressed ? hoverColor: isHovered ? hoverColor : iconColor} fontSize={"xl"}>{i18n.t('name')}</Text>
-                            </HStack>
+                        <Image size={"32px"} alt={i18n.t('logoAlt')}
+                            _dark={{
+                                source:{
+                                    uri: isPressed ? require("../assets/ramen-dark-pressed.gif") : isHovered ? require("../assets/ramen-dark-animated.gif") : require("../assets/ramen-dark.gif")
+                                }
+                            }}
+                            _light={{
+                                source:{
+                                    uri: isPressed ? require("../assets/ramen-light-pressed.gif") :  isHovered ? require("../assets/ramen-light-animated.gif") : require("../assets/ramen-light.gif")
+                                }                                        
+                            }} />
+                        <Text pl={1} color={isPressed ? hoverColor: isHovered ? hoverColor : iconColor} fontSize={"xl"}>{i18n.t('name')}</Text>
+                    </HStack>
                 }}
             </Pressable>
             <Hidden from="base" till="lg" platform={['android','ios']}>

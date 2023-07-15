@@ -4,6 +4,7 @@ const en = {
     work: "Work" ,
     posts: "Posts",
     resume: "Resume",
+    logoAlt: "Jamie Taylor's Ramen Bowl Logo", 
     homePage:{
         welcomeBar: "Hello, I'm a web & app developer based in Richmond, VA!",
         titles: "Solution Architect / Developer / Designer",
@@ -62,6 +63,7 @@ const ja = {
     work: "仕事" ,
     posts: "投稿",
     resume: "履歴書",
+    logoAlt: "ジェイミー・テイラーのラーメンボウルのロゴ",
     homePage: {
         welcomeBar: "こんにちは、バージニア州リッチモンドを拠点とするウェブ・アプリ開発者です!",
         titles: "ソリューション・アーキテクト / エンジニア / デザイナー",
