@@ -36,8 +36,8 @@ export function LangProvider({ children }){
     }
 
     function getRemoteJSON() {
-        const getJson = fetch('https://jamietaylor.me/localization.json', {        
-                            method: 'GET',
+        const getJson = fetch('https://jamietaylor.me/json/localization.json', {        
+            method: 'GET',
         })
         .then((response) => response.json())
         .then((responseData) => {

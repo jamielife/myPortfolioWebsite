@@ -1,6 +1,6 @@
 import React from "react";
 import { Linking } from "react-native";
-import { useTheme, useColorModeValue, HStack, Icon, IconButton, Hidden, useBreakpointValue, Link } from "native-base";
+import { useTheme, useColorModeValue, HStack, Icon, IconButton, Hidden, useBreakpointValue, Text, Button, Pressable, Image } from "native-base";
 import { useNavigation, CommonActions } from '@react-navigation/native';
 import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useI18n } from './LangContext';
@@ -27,22 +27,42 @@ function LeftNav() {
             }            
         },
         pressed: { 
-            bg:'none', color:hoverColor, _text: { underline: false }, opacity: .5, isUnderlined:false
+           bg: "none", _text: { bg: "non", color:hoverColor, underline: false }, opacity: .5, isUnderlined:false
         }
     };    
 
     return <>     
         <HStack alignItems="center" ml={flexMargin}> 
             { /* Logo Icon & Name */ } 
-            <Link mt={1} _text={{ fontSize: "xl" }} _hover={ menuItem.hover } isUnderlined={false} onPress={() => navigation.dispatch( CommonActions.navigate({ name: 'Home' }))}>
-                    <Icon as={MaterialIcons} name="ramen-dining" color={iconColor} size="xl"  mt={.5} mr={1} />
-                    {i18n.t('name')}
-            </Link>
+            <Pressable mt={1} _text={{ fontSize: "xl" }} isUnderlined={false} _hover={ menuItem.hover } _pressed={ menuItem.pressed } onPress={() => navigation.dispatch( CommonActions.navigate({ name: 'Home' }))}>
+                {({ isHovered, isPressed }) => {
+                    return  <HStack alignItems={"center"} alignContent={"center"} justifyContent={"center"}>
+                                {/* <Icon as={MaterialIcons} name="ramen-dining" color={isPressed ? hoverColor: isHovered ? hoverColor : iconColor} size="xl" mt={.5} mr={1} 
+                                    style={{
+                                        transform: [{
+                                            scale: isPressed ? 1.1 : 1
+                                        }]
+                                }} /> */}
+                                <Image size={"32px"} alt={i18n.t('name')}
+                                    _dark={{
+                                        source:{
+                                            uri: isPressed ? require("../assets/ramen-dark-pressed.gif") : isHovered ? require("../assets/ramen-dark-animated.gif") : require("../assets/ramen-dark.gif")
+                                        }
+                                    }}
+                                    _light={{
+                                        source:{
+                                            uri: isPressed ? require("../assets/ramen-light-pressed.gif") :  isHovered ? require("../assets/ramen-light-animated.gif") : require("../assets/ramen-light.gif")
+                                        }                                        
+                                    }} />
+                                <Text pl={1} color={isPressed ? hoverColor: isHovered ? hoverColor : iconColor} fontSize={"xl"}>{i18n.t('name')}</Text>
+                            </HStack>
+                }}
+            </Pressable>
             <Hidden from="base" till="lg" platform={['android','ios']}>
                 <HStack space={4} ml={6} justifyContent="center" alignItems="center">
-                    <Link mt={1} _text={{ fontSize: "md" }} _hover={ menuItem.hover } isUnderlined={false} onPress={() => navigation.dispatch( CommonActions.navigate({ name: 'Work' }))}>{i18n.t('work')}</Link>
-                    <Link mt={1} _text={{ fontSize: "md" }} _hover={ menuItem.hover } isUnderlined={false} onPress={() => navigation.dispatch( CommonActions.navigate({ name: 'Posts' }))}>{i18n.t('posts')}</Link>
-                    <Link mt={1} _text={{ fontSize: "md" }} _hover={ menuItem.hover } isUnderlined={false} onPress={() => { Linking.openURL('https://jamietaylor.me/resume-jamie-taylor.pdf')}}>{i18n.t('resume')}</Link>
+                    <Button bg={"none"} p={0} mt={1} _text={{ fontSize: "md", color: iconColor }} _hover={ menuItem.hover } _pressed={ menuItem.pressed } isUnderlined={false} onPress={() => navigation.dispatch( CommonActions.navigate({ name: 'Work' }))}>{i18n.t('work')}</Button>
+                    <Button bg={"none"} p={0} mt={1} _text={{ fontSize: "md", color: iconColor }} _hover={ menuItem.hover } _pressed={ menuItem.pressed } isUnderlined={false} onPress={() => navigation.dispatch( CommonActions.navigate({ name: 'Posts' }))}>{i18n.t('posts')}</Button>
+                    <Button bg={"none"} p={0} mt={1} _text={{ fontSize: "md", color: iconColor }} _hover={ menuItem.hover } _pressed={ menuItem.pressed } isUnderlined={false} onPress={() => { Linking.openURL('https://jamietaylor.me/resume-jamie-taylor.pdf')}}>{i18n.t('resume')}</Button>
                     <IconButton mt={2} borderRadius="none" _hover={menuItem.hover} _pressed={menuItem.pressed} 
                         icon={<Icon as={MaterialCommunityIcons} name="github" size="xl" color={iconColor} />} 
                         onPress={() => { Linking.openURL("https://github.com/jamielife/")}} />
