@@ -1,8 +1,11 @@
 import {Text, VStack, Link, Image, Button, ChevronRightIcon, ChevronLeftIcon, Heading, ScrollView, useColorModeValue, View } from "native-base";
 import { useNavigation, CommonActions } from '@react-navigation/native';
+import { Linking, } from "react-native";
 import Bowl from "../components/Bowl";
 import Footer from "../components/Footer";
 import { useI18n } from '../components/LangContext';
+import { FBAalytics } from '../firebaseConfig';
+import { logEvent } from "firebase/analytics";
 
 function WorkDetail({data}) { 
     const { cameFrom, workDetail } = data.params;
@@ -16,7 +19,15 @@ function WorkDetail({data}) {
     i18n.translations.en["dyna" + cameFrom + workDetail.id + "description"] = workDetail.description;    
     i18n.translations.ja["dyna" + cameFrom + workDetail.id + "description"] = workDetail.description_ja;    
     i18n.translations.en["dyna" + cameFrom + workDetail.id + "date"] = dateCreated;    
-    i18n.translations.ja["dyna" + cameFrom + workDetail.id + "date"] = i18n.strftime(date, "%Y年%m月%d日");       
+    i18n.translations.ja["dyna" + cameFrom + workDetail.id + "date"] = i18n.strftime(date, "%Y年%m月%d日"); 
+
+    const handleButtonClick = async (url, event_name) => {
+        if(url !== null) Linking.openURL(url); 
+        await logEvent(FBAalytics, event_name, {
+          // event parameters
+          location: "home",
+        });
+    };        
 
     return ( 
         <ScrollView w={"100%"}>
@@ -58,9 +69,10 @@ function WorkDetail({data}) {
                 <VStack  p={5} pb={5} pt={0}  justifyContent={"space-between"}>
                     { workDetail.url !== null && workDetail.url !== "" ? 
                         <Text fontSize={16} textAlign={"justify"}>{i18n.t('workDetailsPage.openURLCTA')} - <Link 
+                            onPress={() => handleButtonClick(workDetail.url, i18n.t("dyna" + cameFrom + workDetail.id+"name") + "_opened") }
                             _text={{ _light:{ color: "primary.600" }, _dark: { color: "primary.300" }}}
                             _hover={{ _text:{ _light: { color: "primary.400" }, _dark: { color: "primary.100" }, textDecoration: "none" } }}
-                            href={workDetail.url} isExternal>{workDetail.url}</Link></Text> : null }
+                            isExternal>{workDetail.url}</Link></Text> : null }
                     <Button my={3} alignSelf="center" color="white" onPress={() => navigation.dispatch( CommonActions.goBack() )} >
                         <Text color="white" ><ChevronLeftIcon size="xs" color="white" /> {i18n.t('workDetailsPage.backCTA')}</Text>                        
                     </Button>

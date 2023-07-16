@@ -2,8 +2,10 @@ import React from "react";
 import { Linking } from "react-native";
 import { useTheme, useColorModeValue, HStack, Icon, IconButton, Hidden, useBreakpointValue, Text, Button, Pressable, Image } from "native-base";
 import { useNavigation, CommonActions } from '@react-navigation/native';
-import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useI18n } from './LangContext';
+import { FBAalytics } from '../firebaseConfig';
+import { logEvent } from "firebase/analytics";
 
 function LeftNav() {
     const flexMargin = useBreakpointValue(navMargins);
@@ -29,7 +31,15 @@ function LeftNav() {
         pressed: { 
            bg: "none", _text: { bg: "non", color:hoverColor, underline: false }, opacity: .5, isUnderlined:false
         }
-    };    
+    }; 
+    
+    const handleButtonClick = async (url, event_name) => {
+        Linking.openURL(url);        
+        await logEvent(FBAalytics, event_name, {
+          // event parameters
+          location: "top nav",
+        });
+    };      
 
     return <>     
         <HStack alignItems="center" ml={flexMargin}> 
@@ -59,7 +69,7 @@ function LeftNav() {
                     <Button bg={"none"} p={0} mt={1} _text={{ fontSize: "md", color: iconColor }} _hover={ menuItem.hover } _pressed={ menuItem.pressed } isUnderlined={false} onPress={() => { Linking.openURL('https://jamietaylor.me/resume-jamie-taylor.pdf')}}>{i18n.t('resume')}</Button>
                     <IconButton mt={2} borderRadius="none" _hover={menuItem.hover} _pressed={menuItem.pressed} 
                         icon={<Icon as={MaterialCommunityIcons} name="github" size="xl" color={iconColor} />} 
-                        onPress={() => { Linking.openURL("https://github.com/jamielife/")}} />
+                        onPress={() => { handleButtonClick("https://github.com/jamielife/", "github_opened")}} />
                 </HStack>
             </Hidden>
         </HStack>

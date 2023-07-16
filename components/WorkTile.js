@@ -3,10 +3,12 @@ import {Text, Image, Stack, Pressable, Heading, Icon, Tooltip, Box } from "nativ
 import { useNavigation, CommonActions  } from '@react-navigation/native';
 import { useI18n } from '../components/LangContext';
 import { MaterialIcons } from "@expo/vector-icons";
+import { FBAalytics } from '../firebaseConfig';
+import { logEvent } from "firebase/analytics";
 
 function WorkTile({data, cameFrom}) {
     const navigation = useNavigation(); 
-    const i18n = useI18n();
+    const i18n = useI18n();  
 
     i18n.translations.en["dyna" + cameFrom + data.id] = data.blurb;
     i18n.translations.en["dyna" + cameFrom + data.id + "name"] = data.name;
@@ -15,12 +17,20 @@ function WorkTile({data, cameFrom}) {
     i18n.translations.ja["dyna" + cameFrom + data.id + "name"] = data.name_ja;
     i18n.translations.ja["dyna" + cameFrom + data.id + "type"] = data.type_ja;
 
+    const handleButtonClick = async (url, event_name) => {
+        Linking.openURL(url);        
+        await logEvent(FBAalytics, event_name, {
+          // event parameters
+          location: "sidebar",
+        });
+    };      
+
     return ( 
         <Pressable m={2} shadow="2" rounded="lg" w={{ base: 96, md: 72, lg: 48 }} 
             _light={{ bg: "coolGray.50" }} _dark={{ bg: "gray.800" }} 
             onPress={() => {
-                if(cameFrom == "Work") navigation.dispatch( CommonActions.navigate({ name: 'WorkDetail', initial: false,  params: { cameFrom: cameFrom, workDetail: data } } ) ) 
-                else{ Linking.openURL(data.url) }
+                if(cameFrom == "Work") navigation.dispatch( CommonActions.navigate({ name: 'WorkDetail', initial: false,  params: { cameFrom: cameFrom, workDetail: data } } ) );
+                else handleButtonClick(data.url, i18n.t("dyna" + cameFrom + data.id + "name") + "__tile_opened");
             }} 
             _hover={{ _light:{ bg: "white" }, _dark:{ bg: "gray.800:alpha.60" }, style:{ transform: [{ scale: 1.025 }] } }}
             _pressed={{ style:{ transform: [{ scale: .965 }] }}}

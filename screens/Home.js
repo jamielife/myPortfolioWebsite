@@ -6,12 +6,22 @@ import Bowl from "../components/Bowl";
 import Footer from "../components/Footer";
 import { useI18n } from '../components/LangContext';
 import { useState } from "react";
+import { FBAalytics } from '../firebaseConfig';
+import { logEvent } from "firebase/analytics";
 
 const Home = () => {
     const navigation = useNavigation(); 
     const iconColor = useColorModeValue("black", "white");
     const i18n = useI18n();
     const [showModal, setShowModal] = useState(false);
+
+    const handleButtonClick = async (url, event_name) => {
+        if(url !== null) Linking.openURL(url); 
+        await logEvent(FBAalytics, event_name, {
+          // event parameters
+          location: "home",
+        });
+    };  
 
     return (        
         <ScrollView w={"100%"}>
@@ -30,7 +40,7 @@ const Home = () => {
                         <Heading size={"xl"}>{i18n.t('name')}</Heading>
                         <Text fontSize={"md"}>{i18n.t('homePage.titles')}</Text>
                     </Container>
-                    <Link onPress={() => setShowModal(true)}>
+                    <Link onPress={() => handleButtonClick(null, "profilePic_opened") && setShowModal(true)}>
                         <Avatar borderWidth={2} mt={0} alignSelf="center" size={[20, 110]} source={ require("../assets/me.jpg")} > Jamie </Avatar>
                     </Link>                        
                     <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
@@ -82,10 +92,10 @@ const Home = () => {
                         
                         <HStack alignItems={"baseline"} mb={timeline.mb}>
                             <Heading size={"md"}>2008</Heading><Text fontSize={16} ml={timeline.ml}>{i18n.t('homePage.y2008.part1')}
-                                <Link 
+                                <Link onPress={() => handleButtonClick('https://htmyell.com', "htmyell_opened") }
                                 _text={{ _light:{ color: "primary.600" }, _dark: { color: "primary.300" }}}
                                 _hover={{ _text:{ _light: { color: "primary.400" }, _dark: { color: "primary.100" }, textDecoration: "none" } }}
-                               href='https://htmyell.com' isExternal>{i18n.t('homePage.y2008.part2')}</Link>{i18n.t('homePage.y2008.part3')}</Text>
+                               isExternal>{i18n.t('homePage.y2008.part2')}</Link>{i18n.t('homePage.y2008.part3')}</Text>
                         </HStack>                    
                     </VStack>            
                 </VStack>
@@ -97,10 +107,10 @@ const Home = () => {
                         {i18n.t('homePage.iHeartTitle')} <Icon as={MaterialCommunityIcons } name="cards-heart" color={iconColor} size="md"  mt={.5} mr={1} />
                     </Heading>            
                     <Text fontSize={16}>{i18n.t('homePage.iHeart.part1')}
-                        <Link
+                        <Link onPress={() => handleButtonClick('https://open.spotify.com/album/6ZsEY7hIq4av7P5MzHnXv6', "spotify_opened") }
                             _text={{ _light:{ color: "primary.600" }, _dark: { color: "primary.300" }}}
                             _hover={{ _text:{ _light: { color: "primary.400" }, _dark: { color: "primary.100" }, textDecoration: "none" } }}
-                        href='https://open.spotify.com/album/6ZsEY7hIq4av7P5MzHnXv6' isExternal>{i18n.t('homePage.iHeart.part2')}</Link>
+                        isExternal>{i18n.t('homePage.iHeart.part2')}</Link>
                         {i18n.t('homePage.iHeart.part3')}</Text>                    
                 </VStack>
 
@@ -111,11 +121,11 @@ const Home = () => {
                         {i18n.t('homePage.socialMediaTitle')}
                     </Heading>
                     <HStack justifyContent={"space-evenly"} direction={["column", "row", "row"]}>
-                        <Button onPress={() => { Linking.openURL("https://github.com/jamielife/")}} w={["100%", "auto", "auto"]} 
+                        <Button onPress={() => { handleButtonClick("https://github.com/jamielife/", "github_opened")}} w={["100%", "auto", "auto"]} 
                                 my={[2,0,0]} fontSize={18} px={4} alignSelf={"flex-start"}><Text color={"white"}><Icon as={MaterialCommunityIcons } name="github"    color="white" size="md"  mt={.5} mr={1} /> @jamielife</Text></Button>
-                        <Button onPress={() => { Linking.openURL("https://instagram.com/jamielife/")}} w={["100%", "auto", "auto"]}
+                        <Button onPress={() => { handleButtonClick("https://instagram.com/jamielife/", "instagram_opened")}} w={["100%", "auto", "auto"]}
                                 my={[2,0,0]} fontSize={18} px={4} alignSelf={"flex-start"}><Text color={"white"}><Icon as={MaterialCommunityIcons } name="instagram" color="white" size="md"  mt={.5} mr={1} /> @jamielife</Text></Button>
-                        <Button onPress={() => { Linking.openURL("https://www.linkedin.com/in/jvptaylor/")}} w={["100%", "auto", "auto"]}
+                        <Button onPress={() => { handleButtonClick("https://www.linkedin.com/in/jvptaylor/", "linkedin_opened")}} w={["100%", "auto", "auto"]}
                                 my={[2,0,0]} fontSize={18} px={4} alignSelf={"flex-start"}><Text color={"white"}><Icon as={MaterialCommunityIcons } name="linkedin"  color="white" size="md"  mt={.5} mr={1} /> @jvptaylor</Text></Button>
                     </HStack>
                 </VStack>
@@ -126,10 +136,10 @@ const Home = () => {
                         {i18n.t('homePage.siteTitle')}
                     </Heading>            
                     <Text fontSize={16}>{i18n.t('homePage.siteInfo.part1')}
-                        <Link 
+                        <Link onPress={() => handleButtonClick('https://github.com/jamielife/portfolio', "github_opened")}
                             _text={{ _light:{ color: "primary.600" }, _dark: { color: "primary.300" }}}
                             _hover={{ _text:{ _light: { color: "primary.400" }, _dark: { color: "primary.100" }, textDecoration: "none" } }} 
-                            href='https://github.com/jamielife/portfolio' isExternal>{i18n.t('homePage.siteInfo.part2')}</Link>{i18n.t('homePage.siteInfo.part3')}</Text>
+                            isExternal>{i18n.t('homePage.siteInfo.part2')}</Link>{i18n.t('homePage.siteInfo.part3')}</Text>
                 </VStack>            
 
                 <Footer />

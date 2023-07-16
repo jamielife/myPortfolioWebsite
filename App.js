@@ -7,6 +7,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem  } from '@react-navigation/drawer';
 import { BlurView } from 'expo-blur';
 import { FBAalytics } from './firebaseConfig';
+import { logEvent } from "firebase/analytics";
 
 import Home     from './screens/Home';
 import Work     from './screens/Work';
@@ -109,12 +110,20 @@ function CustomDrawerContent(props) {
   const bg = useColorModeValue(colors.primary[50], colors.primary[900]);
   const text = useColorModeValue(colors.primary[900], colors.primary[50]);  
 
+  const handleButtonClick = async (url, event_name) => {
+    Linking.openURL(url);        
+    await logEvent(FBAalytics, event_name, {
+      // event parameters
+      location: "sidebar",
+    });
+  };  
+
   return (
     <DrawerContentScrollView {...props}>
       <DrawerItemList {...props} />
-      <DrawerItem label="Resume" inactiveTintColor={ text } onPress={ ()=>{ Linking.openURL('https://jamietaylor.me/resume-jamie-taylor.pdf')} } />
+      <DrawerItem label="Resume" inactiveTintColor={ text } onPress={() => handleButtonClick('https://jamietaylor.me/resume-jamie-taylor.pdf', 'resume_opened')} />
       <DrawerItem label="Source Code" inactiveTintColor={ text } //icon={() => <Icon as={MaterialCommunityIcons} name="github" size="xl"  />}
-        onPress={() => { Linking.openURL("https://github.com/jamielife/portfolio")}}>      
+        onPress={() => { handleButtonClick("https://github.com/jamielife/portfolio", 'github_opened')}}>      
       </DrawerItem>
     </DrawerContentScrollView>
   );

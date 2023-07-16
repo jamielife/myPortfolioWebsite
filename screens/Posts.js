@@ -6,6 +6,8 @@ import WorkTile from "../components/WorkTile";
 import Bowl from "../components/Bowl";
 import Footer from "../components/Footer";
 import { useI18n } from '../components/LangContext';
+import { FBAalytics } from '../firebaseConfig';
+import { logEvent } from "firebase/analytics";
 
 const Posts = () => {
     const [posts, setPosts] = useState([]);
@@ -31,6 +33,14 @@ const Posts = () => {
         };
     }, []);
 
+    const handleButtonClick = async (url, event_name) => {
+        Linking.openURL(url);        
+        await logEvent(FBAalytics, event_name, {
+          // event parameters
+          location: "sidebar",
+        });
+    };    
+
     return ( 
         <ScrollView w={"100%"}>
             <View w={[400, "100%", 640]} alignSelf={"center"}>
@@ -52,7 +62,7 @@ const Posts = () => {
                 </Center>
 
                 <Center>
-                    <Button mt={12} alignSelf="center" onPress={ () => { Linking.openURL('https://jamietaylor.me/resume-jamie-taylor.pdf') } } >
+                    <Button mt={12} alignSelf="center" onPress={() => handleButtonClick('https://jamietaylor.me/resume-jamie-taylor.pdf', "resume_opened") } >
                         <Text color={"white"}>{i18n.t('postsPage.resumeCTA')} <ChevronRightIcon size="xs" color="white" /></Text>
                     </Button>
                 </Center>
