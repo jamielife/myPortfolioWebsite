@@ -14,7 +14,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "@expo/metro-config": "^0.7.1",
@@ -40,6 +41,7 @@
     "i18n-js": "^4.3.0",
     "js-base64": "^3.7.5",
     "native-base": "^3.4.28",
+    "patch-package": "^8.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-native": "0.64.3",

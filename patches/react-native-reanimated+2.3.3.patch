@@ -1,0 +1,28 @@
+diff --git a/node_modules/react-native-reanimated/lib/reanimated1/core/AnimatedNode.js b/node_modules/react-native-reanimated/lib/reanimated1/core/AnimatedNode.js
+index d7892d8..138044a 100644
+--- a/node_modules/react-native-reanimated/lib/reanimated1/core/AnimatedNode.js
++++ b/node_modules/react-native-reanimated/lib/reanimated1/core/AnimatedNode.js
+@@ -61,7 +61,7 @@ function runPropUpdates() {
+     } else {
+       const nodes = node.__getChildren();
+       if (nodes) {
+-        for (let i = 0, l = nodes.length; i < l; i++) {
++        for (let i = 0; i < nodes.length; i++) {
+           findAndUpdateNodes(nodes[i]);
+         }
+       }
+diff --git a/node_modules/react-native-reanimated/lib/reanimated1/core/AnimatedValue.js b/node_modules/react-native-reanimated/lib/reanimated1/core/AnimatedValue.js
+index 8cab95d..bed11dd 100644
+--- a/node_modules/react-native-reanimated/lib/reanimated1/core/AnimatedValue.js
++++ b/node_modules/react-native-reanimated/lib/reanimated1/core/AnimatedValue.js
+@@ -9,7 +9,9 @@ import { val } from '../val';
+ // Animated value wrapped with extra methods for omit cycle of dependencies
+ export default class AnimatedValue extends InternalAnimatedValue {
+   setValue(value) {
+-    this.__detachAnimation(this._animation);
++    if (Platform.OS !== 'web'){
++        this.__detachAnimation(this._animation);
++    }
+     if (
+       Platform.OS === 'web' ||
+       Platform.OS === 'windows' ||

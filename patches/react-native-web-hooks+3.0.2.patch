@@ -1,0 +1,13 @@
+diff --git a/node_modules/react-native-web-hooks/build/createPseudoHook.js b/node_modules/react-native-web-hooks/build/createPseudoHook.js
+index 2c544fb..002cda5 100644
+--- a/node_modules/react-native-web-hooks/build/createPseudoHook.js
++++ b/node_modules/react-native-web-hooks/build/createPseudoHook.js
+@@ -11,7 +11,7 @@ export default function createPseudoHook({ events }) {
+         const [isActive, setActive] = React.useState(false);
+         React.useEffect(() => {
+             const [eventIn, eventOut] = events;
+-            const node = getNode(ref);
++            const node = ref.current;
+             if (!node) {
+                 return;
+             }
