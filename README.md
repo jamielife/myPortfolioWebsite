@@ -10,6 +10,12 @@ npm install @supabase/supabase-js
 npm install @supabase/supabase-react-native
 ```
 
+## Build/Serve
+```bash
+npx expo build:web && mv web-build dist
+npx serve dist
+```
+
 ## Roadmap
  - ~~Localize page titles~~
  - ~~Continuous deployment~~
