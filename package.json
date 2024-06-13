@@ -28,6 +28,7 @@
     "@react-three/fiber": "^8.13.3",
     "@supabase/supabase-js": "^2.25.0",
     "base-64": "^1.0.0",
+    "core-js": "^3.37.1",
     "expo": "^44.0.0",
     "expo-blur": "~11.0.0",
     "expo-cli": "^5.0.2",
