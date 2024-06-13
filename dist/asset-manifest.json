@@ -28,6 +28,8 @@
     "robots.txt": "/robots.txt",
     "serve.json": "/serve.json",
     "static/js/2.e3daaf29.chunk.js.LICENSE.txt": "/static/js/2.e3daaf29.chunk.js.LICENSE.txt",
+    "static/media/htmyell.webp": "/static/media/htmyell.webp",
+    "static/media/jamietaylor-ramen.webp": "/static/media/jamietaylor-ramen.webp",
     "static/media/me.jpg": "/static/media/me.e1ea3c33.jpg",
     "static/media/ramen-dark-animated.gif": "/static/media/ramen-dark-animated.90856c58.gif",
     "static/media/ramen-dark-pressed.gif": "/static/media/ramen-dark-pressed.8426a5b4.gif",
@@ -35,7 +37,9 @@
     "static/media/ramen-light-animated.gif": "/static/media/ramen-light-animated.ded0cc8a.gif",
     "static/media/ramen-light-pressed.gif": "/static/media/ramen-light-pressed.50afba19.gif",
     "static/media/ramen-light.gif": "/static/media/ramen-light.361b7662.gif",
-    "static/media/ramen.glb": "/static/media/ramen.d2fc883a.glb"
+    "static/media/ramen.glb": "/static/media/ramen.d2fc883a.glb",
+    "static/media/ravink.webp": "/static/media/ravink.webp",
+    "static/media/ravink2.webp": "/static/media/ravink2.webp"
   },
   "entrypoints": [
     "static/js/runtime~app.27401809.js",
