@@ -12,7 +12,9 @@ npm install @supabase/supabase-react-native
 
 ## Build/Serve
 ```bash
-npx expo build:web && mv web-build dist
+#remove dist, build for web, rename web-build folder
+rm -r dist && npx expo build:web && mv web-build dist
+#test
 npx serve dist
 ```
 
